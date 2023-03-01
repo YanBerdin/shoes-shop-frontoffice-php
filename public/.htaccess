@@ -1,0 +1,11 @@
+# Activer la réécriture d'url
+RewriteEngine On
+
+# Configuration de base de l'URL
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+RewriteRule ^(.*) - [E=BASE_URI:%1]
+
+# Renvoie tout vers index.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?_url=/$1 [QSA,L]
