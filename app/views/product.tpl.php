@@ -22,7 +22,7 @@
             </div>
             <div class="col-lg-6 col-sm-12">
                 <div class="mb-3">
-                    <h3 class="h3 text-uppercase mb-1">Kissing</h3>
+                    <h3 class="h3 text-uppercase mb-1">Produit n°<?= $viewData['id'] ?></h3>
                     <div class="text-muted">by <em>BOOTstrap</em></div>
                     <div>
                         <i class="fa fa-star"></i>

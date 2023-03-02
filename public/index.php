@@ -1,6 +1,5 @@
 <?php
 
-
 // Chargement des dépendances via autoload.php de composer
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -23,6 +22,7 @@ $router = new AltoRouter();
 // $_SERVER est une variable spéciale qui contient tout un tas d'informations.
 // Attention, entre 2 machines on ne trouvera pas toujours les mêmes clés dans le tableau.
 $router->setBasePath($_SERVER['BASE_URI']);
+// dd($_SERVER['BASE_URI']);
 // Identique à
 // $router->setBasePath("/Formation/Socle-PHP/Radium/S05/S05-projet-oShop-Raginwald/public");
 
@@ -40,12 +40,52 @@ $router->map(
 
 $router->map(
     "GET",
+    "/legal-notice",
+    [
+        'controller' => 'MainController',
+        'method' => 'legalNotice',
+    ],
+    'legalNotice'
+);
+
+$router->map(
+    "GET",
     "/category/[i:id]",
     [
         'controller' => 'CatalogController',
         'method' => 'category',
     ],
     'category'
+);
+
+$router->map(
+    "GET",
+    "/type/[i:id]",
+    [
+        'controller' => 'CatalogController',
+        'method' => 'type',
+    ],
+    'type'
+);
+
+$router->map(
+    "GET",
+    "/brand/[i:id]",
+    [
+        'controller' => 'CatalogController',
+        'method' => 'brand',
+    ],
+    'brand'
+);
+
+$router->map(
+    "GET",
+    "/product/[i:id]",
+    [
+        'controller' => 'CatalogController',
+        'method' => 'product',
+    ],
+    'product'
 );
 
 // En gros $router->match() nous indique sur quelle route on est SI elle a été
@@ -70,7 +110,9 @@ if ($match) {
     // }
 
     // Le dispatcher
-    if ($id) {
+    // 0 === null -> non
+    //donc : 0 !== null -> oui
+    if ($id !== null) {
         $controller->$method($id);
     } else {
         $controller->$method();
@@ -79,46 +121,3 @@ if ($match) {
     $controller = new ErrorController();
     $controller->error404();
 }
-//===============================================================================
-
-// ANCIENNE VERSION AVANT INSTALLATION COMPOSER.JSON
-
-// $routes = [
-//     '/' => [
-//         'controller' => 'MainController',
-//         'method' => 'home',
-//     ],
-//     '/category' => [
-//         'controller' => 'CatalogController',
-//         'method' => 'category',
-//     ],
-// ];
-
-
-
-// partie deja commentée
-//
-// if (isset($_GET['_url'])) {
-//     $currentPage = $_GET['_url'];
-// } else {
-//     $currentPage = '/';
-// }
-// FIN PARTIE DEJA COMMENTEE
-
-
-// ANCIENNE VERSION AVANT INSTALLATION COMPOSER.JSON
-// $currentPage = $_GET['_url'] ?? '/';
-
-// if (isset($routes[$currentPage])) {
-//     $controller = new $routes[$currentPage]['controller']();
-//     $method = $routes[$currentPage]['method'];
-
-//     // Le dispatcher
-//     $controller->$method();
-// } else {
-//     $controller = new ErrorController();
-//     $controller->error404();
-// }
-
-
-
