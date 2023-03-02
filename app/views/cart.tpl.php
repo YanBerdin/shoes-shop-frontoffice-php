@@ -36,7 +36,7 @@
                             <div class="cart-item">
                                 <div class="row d-flex align-items-center text-center">
                                     <div class="col-5">
-                                        <div class="d-flex align-items-center"><a href="detail.html"><img src="assets/images/produits/1-kiss_tn.jpg" alt="..." class="cart-item-img"></a>
+                                        <div class="d-flex align-items-center"><a href="detail.html"><img src="<?= $baseUri ?>assets/images/produits/1-kiss_tn.jpg" alt="..." class="cart-item-img"></a>
                                             <div class="cart-title text-left"><a href="detail.html" class="text-uppercase text-dark"><strong>Kissing</strong></a><br><span class="text-muted text-sm">Taille : Large</span><br>
                                                 <span class="text-muted text-sm">Couleur : Jaune</span>
                                             </div>
@@ -58,7 +58,7 @@
                             <div class="cart-item">
                                 <div class="row d-flex align-items-center text-center">
                                     <div class="col-5">
-                                        <div class="d-flex align-items-center"><a href="detail.html"><img src="assets/images/produits/13-unicorn_tn.jpg" alt="..." class="cart-item-img"></a>
+                                        <div class="d-flex align-items-center"><a href="detail.html"><img src="<?= $baseUri ?>assets/images/produits/13-unicorn_tn.jpg" alt="..." class="cart-item-img"></a>
                                             <div class="cart-title text-left"><a href="detail.html" class="text-uppercase text-dark"><strong>Unicorn</strong></a><br><span class="text-muted text-sm">Taille : Petite</span>
                                             </div>
                                         </div>

@@ -16,7 +16,7 @@
             <div class="col-lg-6 col-sm-12">
                 <div class="product-image">
                     <a href="detail.html" class="product-hover-overlay-link">
-                        <img src="assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid">
+                        <img src="<?= $baseUri ?>assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid">
                     </a>
                 </div>
             </div>
