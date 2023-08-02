@@ -2,7 +2,7 @@
     <div class="container">
         <!-- Breadcrumbs -->
         <ol class="breadcrumb justify-content-center">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= $router->generate('home') ?>" >Home</a></li>
             <li class="breadcrumb-item active">Détente</li>
         </ol>
     </div>
@@ -13,16 +13,21 @@
 
         <div class="row">
             <!-- product-->
+            <!-- <?php var_dump($viewData); ?> -->
+            <!-- Recuperer $product transmis via $viewData par CatalogController -->
+            <?php $product = $viewData['product']; ?>
+            <!-- <?php var_dump($product) ?> -->
+            <!-- <?php var_dump($product->getName()); ?> -->
             <div class="col-lg-6 col-sm-12">
                 <div class="product-image">
                     <a href="detail.html" class="product-hover-overlay-link">
-                        <img src="<?= $baseUri ?>assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid">
+                        <img src="<?= $absoluteURL ?>/assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid">
                     </a>
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12">
                 <div class="mb-3">
-                    <h3 class="h3 text-uppercase mb-1">Produit n°<?= $viewData['id'] ?></h3>
+                    <h3 class="h3 text-uppercase mb-1">Produit n°<?= $product->getId()?></h3>
                     <div class="text-muted">by <em>BOOTstrap</em></div>
                     <div>
                         <i class="fa fa-star"></i>

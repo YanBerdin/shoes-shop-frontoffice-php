@@ -5,6 +5,7 @@
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
             <li class="breadcrumb-item active">Détente</li>
         </ol>
+        <?php  var_dump($viewData); ?>
         <!-- Hero Content-->
         <div class="hero-content pb-5 text-center">
             <h1 class="hero-heading"><?= $viewData['title'] ?> n°<?= $viewData['id'] ?></h1>
