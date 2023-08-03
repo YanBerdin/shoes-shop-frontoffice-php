@@ -47,7 +47,7 @@ class MainController
     }
 }
 
-// VErsion avant connexion à la BDD
+// Version avant connexion à la BDD
 
 
 // class MainController

@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . './../utils/Database.php';
+// require_once __DIR__ . '/CoreModel.php';
 
-class Product
+class Product // extends CoreModel
 {
     private $id;
     private $name;
@@ -26,7 +27,7 @@ class Product
         return $this->id;
     }
 
-
+    // Généralement pas de Setter pour un id auto incrémenté
     // public function setId($id)
     // {
     //     $this->id = $id;

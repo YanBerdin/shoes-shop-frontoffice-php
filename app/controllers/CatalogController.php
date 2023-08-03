@@ -3,8 +3,12 @@ require_once __DIR__ . "./../models/Brand.php";
 require_once __DIR__ . "./../models/Product.php";
 // require_once __DIR__ . "./../models/Type.php";
 require_once __DIR__ . "./../models/Category.php";
+// Heritage mise en place
+require_once __DIR__ . '/CoreController.php';
 
-class CatalogController
+
+
+class CatalogController extends CoreController
 {
     /**
      * Méthode qui affiche une catégorie ciblée avec son id
@@ -111,28 +115,34 @@ class CatalogController
     // Permettant de Retourner tous les produits liés à une catégorie précise
     // Dans le Model Product => Créer une Méthode findAllByCategory($categoryId)
 
-    /**
-     * Affiche la page
-     *
-     * @param Type $viewName
-     * @param array $viewData (Facultatif)
-     */
-    public function show($viewName, $viewData = [])
-    {
-        global $router; // Ca c'est hyper degueulasse mais pour l'instant ça fait le café
 
-        // 1er essai: $baseUri = $_SERVER['BASE_URI'] . '/';
 
-        // Si on veut transmettre aux templates une donnée, on peut le faire ici
-        // $url = 'google.com';
 
-        // Objectif : récupérer proprement tous nos assets (style, images, ...)
-        // On doit utiliser une URL absolue (plutôt que relative) pour cela
-        // On a vu que $_SERVER['BASE_URI'] contenait l'URL dont on a besoin
-        $absoluteURL = $_SERVER['BASE_URI'];
+    // Commenté Depuis mise en place de CoreController qui possede show()
+    // N'est plus utile ici
 
-        require_once __DIR__ . '/../views/header.tpl.php';
-        require_once __DIR__ . '/../views/' . $viewName . '.tpl.php';
-        require_once __DIR__ . '/../views/footer.tpl.php';
-    }
+    //     /**
+    //      * Affiche la page
+    //      *
+    //      * @param Type $viewName
+    //      * @param array $viewData (Facultatif)
+    //      */
+    //     public function show($viewName, $viewData = [])
+    //     {
+    //         global $router; // Ca c'est hyper degueulasse mais pour l'instant ça fait le café
+
+    // 1er essai: $baseUri = $_SERVER['BASE_URI'] . '/';
+
+    // Si on veut transmettre aux templates une donnée, on peut le faire ici
+    // $url = 'google.com';
+
+    // Objectif : récupérer proprement tous nos assets (style, images, ...)
+    // On doit utiliser une URL absolue (plutôt que relative) pour cela
+    // On a vu que $_SERVER['BASE_URI'] contenait l'URL dont on a besoin
+    //         $absoluteURL = $_SERVER['BASE_URI'];
+
+    //         require_once __DIR__ . '/../views/header.tpl.php';
+    //         require_once __DIR__ . '/../views/' . $viewName . '.tpl.php';
+    //         require_once __DIR__ . '/../views/footer.tpl.php';
+    //     }
 }
