@@ -1,9 +1,16 @@
 <?php
 // require_once __DIR__ . './../Models/Brand.php';
 // require_once __DIR__ . './../Models/Category.php';
-
+// require_once __DIR__ . './../Models/Category.php';
 class CoreController
 {
+
+    /**
+     * Affiche la page
+     *
+     * @param Type $viewName
+     * @param array $viewData (Facultatif)
+     */
     public function show($viewName, $viewData = [])
     {
         // Si on veut transmettre aux templates une donnée, on peut le faire ici
@@ -22,9 +29,12 @@ class CoreController
         // Objectif : récupérer les liens vers les marques (pour les utiliser dans le menu)
         $modelBrand = new Brand();
         $allBrands = $modelBrand->findAll();
-        
-        require_once __DIR__ . '/../views/header.tpl.php';        
+
+        // $modelProduct = new Product();
+        // $allProductsByTypeId = $modelProduct->findAllByCategory(2);
+
+        require_once __DIR__ . '/../views/header.tpl.php';
         require_once __DIR__ . '/../views/' . $viewName . '.tpl.php';
-        require_once __DIR__ . '/../views/footer.tpl.php';        
+        require_once __DIR__ . '/../views/footer.tpl.php';
     }
 }

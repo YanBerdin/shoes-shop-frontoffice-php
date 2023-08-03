@@ -1,5 +1,5 @@
 <?php
-var_dump($absoluteURL);
+// var_dump($absoluteURL);
  // var_dump($viewData); 
 
 // Recuperer $product transmis via $viewData par CatalogController

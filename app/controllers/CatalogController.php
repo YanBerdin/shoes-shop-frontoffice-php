@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "./../models/Brand.php";
 require_once __DIR__ . "./../models/Product.php";
-// require_once __DIR__ . "./../models/Type.php";
+require_once __DIR__ . "./../models/Type.php";
 require_once __DIR__ . "./../models/Category.php";
 // Heritage mise en place
 require_once __DIR__ . '/CoreController.php';
@@ -58,8 +58,26 @@ class CatalogController extends CoreController
      */
     public function type($params)
     {
-        $this->show('type');
+        // On récupère les vraies données du type $id
+        $typeModel = new Type();
+        $type = $typeModel->findOne($params['id']);
+    // dd($type);
+        // Interroger le bon model pour récupérer les produits.
+        // On va devoir créer une nouvelle methode dans le bon model pour ça.
+        //     $productModel = new Product();
+        //     $products = $productModel->findAllByType($params['id']);
+        $this->show("type", [
+            'type' => $type,
+            // 'products' => $products
+        ]);
     }
+
+
+    // V1 de function type($params)
+    // public function type($params)
+    // {
+    //     $this->show('type');
+    // }
 
     /**
      * Méthode qui affiche une marque ciblée avec son id
@@ -120,7 +138,6 @@ class CatalogController extends CoreController
 
     // Commenté Depuis mise en place de CoreController qui possede show()
     // N'est plus utile ici
-
     //     /**
     //      * Affiche la page
     //      *

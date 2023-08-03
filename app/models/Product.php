@@ -335,4 +335,24 @@ class Product extends CoreModel
 
         return $results;
     }
+
+    /**
+     * Retourne tous les produits liés à un type précis
+     *
+     * @param int $typeId
+     *
+     * @return Product[]
+     */
+    public function findAllByType($typeId)
+    {
+        $pdo = Database::getPDO();
+
+        $sql = "SELECT * FROM `product` WHERE type_id = $typeId";
+        
+        $pdoStatement = $pdo->query($sql);
+
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Product');
+
+        return $results;
+    }
 }

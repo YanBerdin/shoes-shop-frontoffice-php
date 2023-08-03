@@ -1,6 +1,6 @@
 <?php
 // Inutile maintenant grace à l'Heritage de CoreModel
-// require_once __DIR__ . './../Utils/Database.php';
+ // require_once __DIR__ . './../utils/Database.php';
 
 require_once __DIR__ . '/CoreModel.php';
 
@@ -10,7 +10,10 @@ class Type extends CoreModel
 
     // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
     // private $id;
+
+    /** @var string */
     private $name;
+
     // private $created_at;
     // private $updated_at;
 
@@ -34,13 +37,22 @@ class Type extends CoreModel
         return $results;
     }
 
+
+    /**
+     * Retourne un type spécifique via son id dans la BDD
+     *
+     * @param int $id
+     *
+     * @return Type
+     */
     public function findOne($id)
     {
         $pdo = Database::getPDO();
-
+        // var_dump($pdo);
         $queryString = 'SELECT * FROM `type` WHERE id = ' . $id;
 
         $pdoStatement = $pdo->query($queryString);
+        // var_dump($pdoStatement);
 
         $result = $pdoStatement->fetchObject('Type');
 
