@@ -1,13 +1,19 @@
+            <?php var_dump($viewData); ?>
+            <?php $category = $viewData['category']; ?>
 <section class="hero">
     <div class="container">
         <!-- Breadcrumbs -->
         <ol class="breadcrumb justify-content-center">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= $router->generate('home') ?>">Home</a></li>
             <li class="breadcrumb-item active">Détente</li>
         </ol>
         <!-- Hero Content-->
         <div class="hero-content pb-5 text-center">
-            <h1 class="hero-heading">Détente</h1>
+            <h1 class="hero-heading"><?= $category->getName()?></h1>
+            <!-- <p> Ajout Perso -->
+            <h4 class="hero-heading"><?= $category->getSubtitle()?></h4>
+            <p>(Categorie n°<?= $category->getId()?>) </p>
+
             <div class="row">
                 <div class="col-xl-8 offset-xl-2">
                     <p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor

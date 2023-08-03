@@ -6,12 +6,16 @@ class MainController
 {
     public function test() // Etape 5.1 avec Renaud (test)
     {
-        $product = new Product();
-        $products = $product->findAll();
+        $object  = new Product(); // Tester avec Brand ou Category ou Type
+        $objects  = $object ->findAll();
 
         $this->show("test");
         // Visu Test
-         dd($products);
+         // dd($objects);
+         $object3 = $object->findOne(3);
+
+         dd($objects, $object3, $object3->getName(), $object3->getId());
+ 
     }
 
     public function home($params)

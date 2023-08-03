@@ -2,6 +2,7 @@
 require_once __DIR__ . "./../models/Brand.php";
 require_once __DIR__ . "./../models/Product.php";
 // require_once __DIR__ . "./../models/Type.php";
+require_once __DIR__ . "./../models/Category.php";
 
 class CatalogController
 {
@@ -10,23 +11,23 @@ class CatalogController
      *
      * @param int $params
      */
-    // public function category($params)
-    // {
-    //     // Objectif : avoir accès à la catégorie demandée
-    //     // Moyens : le Controller doit demander au Model d'accéder à la BDD pour cela
-    //     // (le Model comporte une méthode dédiée : findOne ou findAll)
-    //     $categoryModel = new Category();
-    //     $category = $categoryModel->findOne($params['id']);
-
-    //     $this->show('category', [
-    //         'categoryId' => $params['id'],
-    //         'category' => $category
-    //     ]);
-    // }
     public function category($params)
     {
-        $this->show('category');
+        // Objectif : avoir accès à la catégorie demandée
+        // Moyens : le Controller doit demander au Model d'accéder à la BDD pour cela
+        // (le Model comporte une méthode dédiée : findOne ou findAll)
+        $categoryModel = new Category();
+        $category = $categoryModel->findOne($params['id']);
+
+        $this->show('category', [
+            'categoryId' => $params['id'],
+            'category' => $category
+        ]);
     }
+    // public function category($params)
+    // {
+    //     $this->show('category');
+    // }
 
 
     /**
@@ -37,7 +38,6 @@ class CatalogController
     public function type($params)
     {
         $this->show('type');
-      
     }
 
     /**
@@ -68,14 +68,8 @@ class CatalogController
      *
      * @param int $params
      */
-    // public function product($id)
-    // {
-    //     $this->show("product", ['id' => $id]);
-    // }
     public function product($params)
     {
-        // 
-        
         // V2 : On récupère à présent des paramètres via $params
         // cad l'id de la marque
         // On appelle la méthode findOne() pour récupérer la marque concernée
