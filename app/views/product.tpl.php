@@ -1,8 +1,21 @@
+<?php
+var_dump($absoluteURL);
+ // var_dump($viewData); 
+
+// Recuperer $product transmis via $viewData par CatalogController
+// /**
+//  * @var Product[]
+//  */
+$product = $viewData['product'];
+ var_dump($product)
+// var_dump($product->getName());
+?>
+
 <section class="hero">
     <div class="container">
         <!-- Breadcrumbs -->
         <ol class="breadcrumb justify-content-center">
-            <li class="breadcrumb-item"><a href="<?= $router->generate('home') ?>" >Home</a></li>
+            <li class="breadcrumb-item"><a href="<?= $router->generate('home') ?>">Home</a></li>
             <li class="breadcrumb-item active">Détente</li>
         </ol>
     </div>
@@ -13,21 +26,20 @@
 
         <div class="row">
             <!-- product-->
-            <!-- <?php var_dump($viewData); ?> -->
-            <!-- Recuperer $product transmis via $viewData par CatalogController -->
-            <?php $product = $viewData['product']; ?>
-            <!-- <?php var_dump($product) ?> -->
-            <!-- <?php var_dump($product->getName()); ?> -->
             <div class="col-lg-6 col-sm-12">
                 <div class="product-image">
                     <a href="detail.html" class="product-hover-overlay-link">
-                        <img src="<?= $absoluteURL ?>/assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid">
-                    </a>
+                        <img src="<?= $absoluteURL ?>/assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid"> </a>
+                        <!-- A remplacer :
+                            <img src="<?= $baseUri.$product->getPicture() ?> alt="product" class="img-fluid"> -->
+
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12">
                 <div class="mb-3">
-                    <h3 class="h3 text-uppercase mb-1">Produit n°<?= $product->getId()?></h3>
+                    <!-- ajout moi  -->
+                    <h1 class="hero-heading"><?= $product->getName() ?></h1>
+                    <h3 class="h3 text-uppercase mb-1">Produit n°<?= $product->getId() ?></h3>
                     <div class="text-muted">by <em>BOOTstrap</em></div>
                     <div>
                         <i class="fa fa-star"></i>

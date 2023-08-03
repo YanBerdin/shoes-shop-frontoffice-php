@@ -1,5 +1,7 @@
 <?php
-
+// Require De Gerard ici 
+// require_once __DIR__ . './../Utils/Database.php';
+// require_once __DIR__ . '/CoreModel.php';
 /**
  * Model servant à gérer les catégories
  */
@@ -103,11 +105,21 @@ class Category
      */
     public function findAll()
     {
+        // 1. On se connecte à la BDD
         $pdo = Database::getPDO();
 
-        $pdoStatement = $pdo->query("SELECT * FROM `category`");
+        // 2. On fait (prépare) notre requête (SQL) sous forme de string
+        $queryString = 'SELECT * FROM `category`';
 
-        return $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Category');
+        // 3. On exécute la requête
+        $pdoStatement = $pdo->query($queryString);
+
+        // 4. On récupère tous les résultats
+        // On dit explicitement que les résultats récupérés seront de type 'Category'
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Category');
+
+        // 5. On retourne les résultats
+        return $results;
     }
 
     /**
@@ -119,13 +131,20 @@ class Category
      */
     public function findOne($id)  // voir find() vs finfOne()
     {
+        // 1. Connexion à la BDD
         $pdo = Database::getPDO();
 
-        $pdoStatement = $pdo->query("SELECT * FROM `category` WHERE id=$id");
-        //                      =   'SELECT * FROM `category` WHERE id = ' . $id;
-        // Idéalement, ici je devrai vérifier que $pdoStatement n'est pas false
+        // 2. On écrit la query string
+        $queryString = 'SELECT * FROM `category` WHERE id = ' . $id;
+        //       idem  "SELECT * FROM `category` WHERE id=$id");
+        // 3. On exécute la requête
+        $pdoStatement = $pdo->query($queryString);
+        // Idéalement, ici je devrais vérifier que $pdoStatement n'est pas false
         // avant de faire le fetch
+        // 4. On récupère la catégorie
+        $result = $pdoStatement->fetchObject('Category');
 
-        return $pdoStatement->fetchObject('Category');
+        // 5. On retourne le résultat
+        return $result;
     }
 }

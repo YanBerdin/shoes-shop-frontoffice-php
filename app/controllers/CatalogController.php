@@ -18,16 +18,33 @@ class CatalogController
         // (le Model comporte une méthode dédiée : findOne ou findAll)
         $categoryModel = new Category();
         $category = $categoryModel->findOne($params['id']);
+        //Renaud => $categoryModel->find($id);
 
+        // Récupérer les Data des produits de chaque categorie N°($id)
+        // Créer un objet contenant les Data de Class/Model Product
+        // Instancier un objet new Product($id)
+        $productModel = new Product();
+        // objet (Data) de Class/Model Product) => Tous les produits de la categorie demandée
+        $products = $productModel->findAllByCategory($params['id']);
+        //   idem = $productModel->findAllByCategory($id);
+
+        // Transmettre Data à la view
         $this->show('category', [
-            'categoryId' => $params['id'],
-            'category' => $category
+            // Maintenant que je recupere depuis CatalogController un Objet $category categoryId est dedans
+            // 'categoryId' => $params['id'],
+            'category' => $category,
+            // objet (ttes les Data) de Class/Model Product)
+            'products' => $products
         ]);
     }
+    // V1 qui ne fait qu'afficher page statique selon son id
     // public function category($params)
     // {
     //     $this->show('category');
     // }
+
+
+
 
 
     /**
@@ -58,7 +75,8 @@ class CatalogController
         $brand = $brandModel->findOne($params['id']);
 
         $this->show('brand', [
-            'brandId' => $params['id'],
+            // Maintenant que je recupere depuis CatalogController un Objet $product brandId est dedans
+            // 'brandId' => $params['id'],
             'brand' => $brand // A la clé brand on transmet toutes les données dans la requete (objet Brand recup grace à FetchObject)
         ]);
     }
@@ -77,11 +95,21 @@ class CatalogController
         $product = $productModel->findOne($params['id']);
 
         $this->show('product', [
-            'productId' => $params['id'],
-            'product' => $product // A la clé product on transmet toutes les données dans la requete (objet Brand recup grace à FetchObject)
+            // Maintenant que je recupere depuis CatalogController un Objet $product productId est dedans
+            // 'productId' => $params['id'],
+            'product' => $product // A la clé product on transmet toutes les données dans la requete (objet product recup grace à FetchObject)
         ]);
     }
 
+    // Récupérer Data pour afficher les produits d'une catégorie N°($id)
+    // La page categorie pointe vers le CatalogCntroller et sa méthode category()
+    // Donc c'est CatalogController et sa méthode catégory() 
+    // qui interroge le model Product pour récupérer les data
+
+    // CatalogController ne peut utiliser le Model Product
+    // Car le Model Product ne possede pas de méthode 'select FetchAll dans la BDD'
+    // Permettant de Retourner tous les produits liés à une catégorie précise
+    // Dans le Model Product => Créer une Méthode findAllByCategory($categoryId)
 
     /**
      * Affiche la page

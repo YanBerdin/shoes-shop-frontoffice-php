@@ -290,12 +290,34 @@ class Product
         // 3. On exécute la requête
         $pdoStatement = $pdo->query($queryString);
 
-        // 4. On récupère le produit
+        // 4. On récupère le produit (objet)
         $product = $pdoStatement->fetchObject('Product');
         // fetchObject IDEAL sachant qu'on veut l'utiliser qu'1 fois
         // et + performant car variable inutilisée consomme de la mémoire serveur
 
         // 5. On retourne le résultat
         return $product;
+    }
+
+    // Se connecter à la BDD pour selectionner des produits selon l'id de leur categorie (S05-E05)
+    /**
+     * Retourne tous les produits liés à une catégories précise
+     *
+     * @param int $categoryId
+     *
+     * @return Product[]
+     */
+    public function findAllByCategory($categoryId)
+    {
+        // Connexion BDD
+        $pdo = Database::getPDO();
+        // Prepare Requête 
+        $sql = "SELECT * FROM `product` WHERE category_id = $categoryId";
+        // Execute requête 
+        $pdoStatement = $pdo->query($sql);
+        // Stock l'objet de class Product
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Product');
+
+        return $results;
     }
 }
