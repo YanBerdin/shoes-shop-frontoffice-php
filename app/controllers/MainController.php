@@ -1,8 +1,9 @@
 <?php
-require_once __DIR__ . './../models/Brand.php';
-require_once __DIR__ . "./../models/Product.php";
+// Inutile on dirait !
+// require_once __DIR__ . './../models/Brand.php';
+// require_once __DIR__ . "./../models/Product.php";
 
-class MainController
+class MainController 
 {        
     // Tester l'appel aux methodes finAll() et findOne() de nos models
     public function test()

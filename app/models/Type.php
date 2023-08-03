@@ -1,14 +1,18 @@
 <?php
-require_once __DIR__ . './../Utils/Database.php';
+// Inutile maintenant grace à l'Heritage de CoreModel
+// require_once __DIR__ . './../Utils/Database.php';
+
 require_once __DIR__ . '/CoreModel.php';
 
-class Type 
+class Type extends CoreModel
 {
     // Propriétés
-    private $id;
+
+    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
+    // private $id;
     private $name;
-    private $created_at;
-    private $updated_at;
+    // private $created_at;
+    // private $updated_at;
 
     // Méthodes
 
@@ -45,15 +49,16 @@ class Type
 
     /**
      * Get the value of id
-     */ 
-    public function getId()
-    {
-        return $this->id;
-    }
+     */
+    // Commenté => Maintenant c'est le CCoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function getId()
+    // {
+    //     return $this->id;
+    // }
 
     /**
      * Get the value of name
-     */ 
+     */
     public function getName()
     {
         return $this->name;
@@ -63,7 +68,7 @@ class Type
      * Set the value of name
      *
      * @return  self
-     */ 
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -73,41 +78,45 @@ class Type
 
     /**
      * Get the value of created_at
-     */ 
-    public function getCreated_at()
-    {
-        return $this->created_at;
-    }
+     */
+    // Commenté => Maintenant c'est le CCoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function getCreated_at()
+    // {
+    //     return $this->created_at;
+    // }
 
     /**
      * Set the value of created_at
      *
      * @return  self
-     */ 
-    public function setCreated_at($created_at)
-    {
-        $this->created_at = $created_at;
+     */
+    // Commenté => Maintenant c'est le CCoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function setCreated_at($created_at)
+    // {
+    //     $this->created_at = $created_at;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * Get the value of updated_at
-     */ 
-    public function getUpdated_at()
-    {
-        return $this->updated_at;
-    }
+     */
+    // Commenté => Maintenant c'est le CCoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function getUpdated_at()
+    // {
+    //     return $this->updated_at;
+    // }
 
     /**
      * Set the value of updated_at
      *
      * @return  self
-     */ 
-    public function setUpdated_at($updated_at)
-    {
-        $this->updated_at = $updated_at;
+     */
+    // Commenté => Maintenant c'est le CCoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function setUpdated_at($updated_at)
+    // {
+    //     $this->updated_at = $updated_at;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }
