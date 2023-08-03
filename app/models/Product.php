@@ -5,6 +5,7 @@ require_once __DIR__ . '/CoreModel.php';
 
 class Product extends CoreModel
 {
+    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
     // private $id;
     private $name;
     private $description;
@@ -23,7 +24,7 @@ class Product extends CoreModel
     /**
      * Get the value of id
      */
-    // Commenté => Maintenant c'est le CCoreModel qui déclare ces Propriétés et Getters/Setters
+    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
     // public function getId()
     // {
     //     return $this->id;

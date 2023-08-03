@@ -2,35 +2,37 @@
 // Require De Gerard ici 
 // require_once __DIR__ . './../Utils/Database.php';
 // require_once __DIR__ . '/CoreModel.php';
+
+// Heritage
+require_once __DIR__ . '/CoreModel.php';
+
 /**
  * Model servant à gérer les catégories
  */
-class Category
+class Category extends CoreModel
 {
-    private $id;
-
+    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
+    // private $id;
     private $name;
-
     private $subtitle;
-
     private $picture;
-
     private $home_order;
+    // private $created_at;
+    // private $updated_at;
 
-    private $created_at;
+    // Méthodes
 
-    private $updated_at;
+    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function getId()
+    // {
+    //     return $this->id;
+    // }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
+    // public function setId($id): self
+    // {
+    //     $this->id = $id;
+    //     return $this;
+    // }
 
     public function getName()
     {
@@ -76,27 +78,31 @@ class Category
         return $this;
     }
 
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
+    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function getCreatedAt()
+    // {
+    //     return $this->created_at;
+    // }
 
-    public function setCreatedAt($created_at): self
-    {
-        $this->created_at = $created_at;
-        return $this;
-    }
+    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function setCreatedAt($created_at): self
+    // {
+    //     $this->created_at = $created_at;
+    //     return $this;
+    // }
 
-    public function getUpdatedAt()
-    {
-        return $this->updated_at;
-    }
+    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function getUpdatedAt()
+    // {
+    //     return $this->updated_at;
+    // }
 
-    public function setUpdatedAt($updated_at): self
-    {
-        $this->updated_at = $updated_at;
-        return $this;
-    }
+    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function setUpdatedAt($updated_at): self
+    // {
+    //     $this->updated_at = $updated_at;
+    //     return $this;
+    // }
 
     /**
      * Retourne la liste de toutes les catégories de la BDD
@@ -137,10 +143,12 @@ class Category
         // 2. On écrit la query string
         $queryString = 'SELECT * FROM `category` WHERE id = ' . $id;
         //       idem  "SELECT * FROM `category` WHERE id=$id");
+
         // 3. On exécute la requête
         $pdoStatement = $pdo->query($queryString);
         // Idéalement, ici je devrais vérifier que $pdoStatement n'est pas false
         // avant de faire le fetch
+        
         // 4. On récupère la catégorie
         $result = $pdoStatement->fetchObject('Category');
 
