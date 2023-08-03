@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . './../Utils/Database.php';
+require_once __DIR__ . '/CoreModel.php';
 
 class Type 
 {

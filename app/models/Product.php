@@ -1,18 +1,19 @@
 <?php
 require_once __DIR__ . './../utils/Database.php';
-// require_once __DIR__ . '/CoreModel.php';
+// Heritage
+require_once __DIR__ . '/CoreModel.php';
 
-class Product // extends CoreModel
+class Product extends CoreModel
 {
-    private $id;
+    // private $id;
     private $name;
     private $description;
     private $picture;
     private $price;
     private $rate;
     private $status;
-    private $created_at;
-    private $updated_at;
+    // private $created_at;
+    // private $updated_at;
     private $brand_id;
     private $category_id;
     private $type_id;
@@ -22,10 +23,11 @@ class Product // extends CoreModel
     /**
      * Get the value of id
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    // Commenté => Maintenant c'est le CCoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function getId()
+    // {
+    //     return $this->id;
+    // }
 
     // Généralement pas de Setter pour un id auto incrémenté
     // public function setId($id)
@@ -155,42 +157,47 @@ class Product // extends CoreModel
     /**
      * Get the value of created_at
      */
-    public function getCreated_at()
-    {
-        return $this->created_at;
-    }
+    // Commenté => Maintenant c'est le CCoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function getCreated_at()
+    // {
+    //     return $this->created_at;
+    // }
 
     /**
+     * 
      * Set the value of created_at
-     *
      * @return  self
      */
-    public function setCreated_at($created_at)
-    {
-        $this->created_at = $created_at;
+    // Commenté => Maintenant c'est le CCoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function setCreated_at($created_at)
+    // {
+    //     $this->created_at = $created_at;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
+     * 
      * Get the value of updated_at
      */
-    public function getUpdated_at()
-    {
-        return $this->updated_at;
-    }
+    // Commenté => Maintenant c'est le CCoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function getUpdated_at()
+    // {
+    //     return $this->updated_at;
+    // }
 
     /**
      * Set the value of updated_at
      *
      * @return  self
      */
-    public function setUpdated_at($updated_at)
-    {
-        $this->updated_at = $updated_at;
+    // Commenté => Maintenant c'est le CCoreModel qui déclare ces Propriétés et Getters/Setters
+    // public function setUpdated_at($updated_at)
+    // {
+    //     $this->updated_at = $updated_at;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * Get the value of brand_id
@@ -258,16 +265,20 @@ class Product // extends CoreModel
      */
     public function findAll()
     {
-        // Connexion à la base de données en utilisant la classe Database
+        // Créer la requete sql qui récupère toutes les données de tous les
+        // produits de la BDD
+
+        // Connexion à la BDD en utilisant la classe Database
         // (dont on a pas besoin de connaître le contenu)
         $pdo = Database::getPDO();
 
-        // On crée la requete sql qui récupère toutes les données de tous les
-        // produits de la BDD
+        // Préparer la query string
         $queryString = "SELECT * FROM `product`";
+
+        // Exécuter la requête
         $pdoStatement = $pdo->query($queryString);
 
-        // On récupère les données
+        // Récupèrer les résultats les données
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Product');
 
         return $results;
