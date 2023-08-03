@@ -1,7 +1,6 @@
 <?php
 // Require De Gerard ici 
 // require_once __DIR__ . './../Utils/Database.php';
-// require_once __DIR__ . '/CoreModel.php';
 
 // Heritage
 require_once __DIR__ . '/CoreModel.php';
@@ -11,13 +10,27 @@ require_once __DIR__ . '/CoreModel.php';
  */
 class Category extends CoreModel
 {
-    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
+    // Commenté => Maintenant c'est CoreModel qui déclare ces Propriétés et Getters/Setters
+    /** @var int Identifiant unique de la categorie */
     // private $id;
+
+    /** @var string */
     private $name;
+
+    /** @var string */
     private $subtitle;
+
     private $picture;
+    
+    /** @var int Ordre de placement sur la page Home */
     private $home_order;
+
+    // Commenté => Maintenant c'est CoreModel qui déclare ces Propriétés et Getters/Setters
+    /** @var string Date de création au format Y-m-d H:i:s */
     // private $created_at;
+
+    // Commenté => Maintenant c'est CoreModel qui déclare ces Propriétés et Getters/Setters
+    /** @var string Date de création au format Y-m-d H:i:s */
     // private $updated_at;
 
     // Méthodes
@@ -148,7 +161,7 @@ class Category extends CoreModel
         $pdoStatement = $pdo->query($queryString);
         // Idéalement, ici je devrais vérifier que $pdoStatement n'est pas false
         // avant de faire le fetch
-        
+
         // 4. On récupère la catégorie
         $result = $pdoStatement->fetchObject('Category');
 
