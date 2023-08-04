@@ -264,22 +264,27 @@ class Product extends CoreModel
      *
      * @return Product[]
      */
-    public function findAll()
+    public function findAll($sort = "")
     {
-        // Créer la requete sql qui récupère toutes les données de tous les
+        // Requete sql -> récupère les données de tous les
         // produits de la BDD
 
         // Connexion à la BDD en utilisant la classe Database
-        // (dont on a pas besoin de connaître le contenu)
         $pdo = Database::getPDO();
 
         // Préparer la query string
         $queryString = "SELECT * FROM `product`";
 
+        // Si un classement est demandé => l'ajouter dans la requete
+        if ($sort !== "") {
+            // $sql = $sql . " ORDER BY $sort";
+            $queryString .= " ORDER BY $sort";
+        }
+
         // Exécuter la requête
         $pdoStatement = $pdo->query($queryString);
 
-        // Récupèrer les résultats les données
+        // Récupèrer les résultats (Objet de classe Product contenant les données)
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Product');
 
         return $results;
@@ -294,21 +299,21 @@ class Product extends CoreModel
      */
     public function findOne($id)
     {
-        // 1. On se connecte à la BDD
+        // Connexion à la BDD en utilisant la classe Database
         $pdo = Database::getPDO();
 
-        // 2. On fait (prépare) notre requête (SQL) sous forme de string
+        // 2. Préparer notre requête (SQL) sous forme de string
         $queryString = 'SELECT * FROM `product` WHERE id = ' . $id;
 
-        // 3. On exécute la requête
+        // 3. Exécuter la requête
         $pdoStatement = $pdo->query($queryString);
 
-        // 4. On récupère le produit (objet)
+        // 4. Récupèrer le produit (objet)
         $product = $pdoStatement->fetchObject('Product');
         // fetchObject IDEAL sachant qu'on veut l'utiliser qu'1 fois
         // et + performant car variable inutilisée consomme de la mémoire serveur
 
-        // 5. On retourne le résultat
+        // 5. Retourne le résultat
         return $product;
     }
 
@@ -325,11 +330,13 @@ class Product extends CoreModel
         // Connexion BDD
         $pdo = Database::getPDO();
         
-        // Prepare Requête 
+        // Preparer Requête 
         $sql = "SELECT * FROM `product` WHERE category_id = $categoryId";
-        // Execute requête 
+        
+        // Executer requête 
         $pdoStatement = $pdo->query($sql);
-        // Stock l'objet de class Product
+        
+        // Stocker l'objet de class Product
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Product');
 
         return $results;

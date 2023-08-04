@@ -112,6 +112,7 @@ class Category extends CoreModel
     //     return $this;
     // }
 
+    
     /**
      * Retourne la liste de toutes les catégories de la BDD
      *
@@ -119,29 +120,30 @@ class Category extends CoreModel
      */
     public function findAll($sort = "")
     {
-        // 1. On se connecte à la BDD
+        // 1. Connexion à la BDD en utilisant la classe Database
         $pdo = Database::getPDO();
 
-        // 2. On fait (prépare) notre requête (SQL) sous forme de string
+        // 2. Préparer notre requête (SQL) sous forme de string
         $queryString = 'SELECT * FROM `category`';
 
-        // besoin d'ordonner la liste => ajout de parametre à la requete SQL
+        // Si un classement est demandé => l'ajouter dans la requete
         if ($sort !== "") {
             // $sql = $sql . "ORDER BY $sort";
             $queryString .= " ORDER BY $sort";
         }
 
 
-        // 3. On exécute la requête
+        // 3. Exécuter la requête
         $pdoStatement = $pdo->query($queryString);
 
-        // 4. On récupère tous les résultats
+        // 4. Récupèrer tous les résultats
         // On dit explicitement que les résultats récupérés seront de type 'Category'
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Category');
 
-        // 5. On retourne les résultats
+        // 5. Retourne les résultats
         return $results;
     }
+
 
     /**
      * Retourne une catégorie spécifique via son id dans la BDD
@@ -152,22 +154,22 @@ class Category extends CoreModel
      */
     public function findOne($id)  // voir find() vs finfOne()
     {
-        // 1. Connexion à la BDD
+        // Connexion à la BDD en utilisant la classe Database
         $pdo = Database::getPDO();
 
-        // 2. On écrit la query string
+        // Préparer la query string
         $queryString = 'SELECT * FROM `category` WHERE id = ' . $id;
         //       idem  "SELECT * FROM `category` WHERE id=$id");
 
-        // 3. On exécute la requête
+        // Exécuter la requête
         $pdoStatement = $pdo->query($queryString);
         // Idéalement, ici je devrais vérifier que $pdoStatement n'est pas false
         // avant de faire le fetch
 
-        // 4. On récupère la catégorie
+        // Récupèrer les résultats (Objet de classe Product contenant les données)
         $result = $pdoStatement->fetchObject('Category');
 
-        // 5. On retourne le résultat
+        // Retourne le résultat
         return $result;
     }
 }

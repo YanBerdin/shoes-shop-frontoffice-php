@@ -115,37 +115,43 @@ class Brand extends CoreModel
     // Méthodes --------------------------------------------
 
     // Méthode pour récupérer toutes les marques
-    public function findAll()
+    public function findAll($sort = "")
     {
-        // 1. On se connecte à la BDD
+        // Connexion à la BDD en utilisant la classe Database
         $pdo = Database::getPDO();
 
-        // 2. On fait (prépare) notre requête (SQL) sous forme de string
+        // Préparer la query string requête (SQL) sous forme de string
         $queryString = 'SELECT * FROM `brand`';
 
-        // 3. On exécute la requête
-        $pdoStatement = $pdo->query($queryString);
+        // Si un classement est demandé => l'ajouter dans la requete
+        if ($sort !== "") {
+            // $sql = $sql . " ORDER BY $sort";
+            $queryString .= " ORDER BY $sort";
+        }
 
-        // 4. On récupère tous les résultats
-        // On dit explicitement que les résultats récupérés seront de type 'Brand'
+         // Exécuter la requête
+        $pdoStatement = $pdo->query($queryString);
+        
+        // Récupèrer les résultats (Objet) contenant les données)
+        // Inidiquer explicitement que les résultats récupérés seront de classe 'Brand'
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Brand');
 
-        // 5. On retourne les résultats
+        // Retourne le résultat
         return $results;
     }
 
     public function findOne($id)
     {
-        // 1. Connexion à la BDD
+        // Connexion à la BDD en utilisant la classe Database
         $pdo = Database::getPDO();
 
-        // 2. On écrit la query string
+        // Préparer la query string
         $queryString = 'SELECT * FROM `brand` WHERE id = ' . $id;
 
-        // 3. On exécute la requête
+        // Exécuter la requête
         $pdoStatement = $pdo->query($queryString);
 
-        // 4. On récupère la marque
+        // Récupèrer les résultats (Objet de classe Brand contenant les données)
         $result = $pdoStatement->fetchObject('Brand');
         // fetchObject IDEAL sachant qu'on veut l'utiliser qu'1 fois
         // et + performant car variable inutilisée consomme de la mémoire serveur
