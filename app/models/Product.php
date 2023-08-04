@@ -326,6 +326,7 @@ class Product extends CoreModel
     {
         // Connexion BDD
         $pdo = Database::getPDO();
+        
         // Prepare Requête 
         $sql = "SELECT * FROM `product` WHERE category_id = $categoryId";
         // Execute requête 
@@ -355,4 +356,25 @@ class Product extends CoreModel
 
         return $results;
     }
+
+    /**
+     * Retourne tous les produits liés à un type précis
+     *
+     * @param int $typeId
+     *
+     * @return Product[]
+     */
+    public function findAllByBrand($brandId)
+    {
+        $pdo = Database::getPDO();
+        // var_dump($pdo);
+        $sql = "SELECT * FROM `product` WHERE brand_id = $brandId";
+        
+        $pdoStatement = $pdo->query($sql);
+
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Product');
+
+        return $results;
+    }
+
 }

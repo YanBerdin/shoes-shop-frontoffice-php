@@ -98,10 +98,16 @@ class CatalogController extends CoreController
         $brandModel = new Brand();
         $brand = $brandModel->findOne($params['id']);
 
+        // Interroger le bon model pour récupérer les produits.
+        // On va devoir créer une nouvelle methode dans le bon model pour ça.
+        $productModel = new Product();
+        $products = $productModel->findAllByBrand($params['id']);
+
         $this->show('brand', [
             // Maintenant que je recupere depuis CatalogController un Objet $product brandId est dedans
             // 'brandId' => $params['id'],
-            'brand' => $brand // A la clé brand on transmet toutes les données dans la requete (objet Brand recup grace à FetchObject)
+            'brand' => $brand, // A la clé brand on transmet toutes les données dans la requete (objet Brand recup grace à FetchObject)
+            'products' => $products
         ]);
     }
 

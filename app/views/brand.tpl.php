@@ -1,7 +1,9 @@
- <!-- <?php var_dump($viewData); ?> -->
-<!--var_dump($viewData['brand']);
+<?php // var_dump($viewData); ?>
+<?php // var_dump($viewData['brand']); ?>
 <?php $brand = $viewData['brand']; ?>
-var_dump($brand->getName());-->
+<?php // var_dump($brand->getName()); ?>
+<?php $products = $viewData['products']; ?>
+<?php // var_dump($products); ?>
 
   <section class="hero">
     <div class="container">
