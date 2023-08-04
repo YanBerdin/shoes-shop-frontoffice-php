@@ -1,10 +1,4 @@
 <?php
-// Inutile on dirait !
-// require_once __DIR__ . './../models/Brand.php';
-// require_once __DIR__ . "./../models/Product.php";
-
-// Heritage
-require_once __DIR__ . '/CoreController.php';
 
 class MainController extends CoreController
 {

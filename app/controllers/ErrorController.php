@@ -1,6 +1,4 @@
 <?php
-// Heritage
-require_once __DIR__ . '/CoreController.php';
 
 class ErrorController extends CoreController
 {

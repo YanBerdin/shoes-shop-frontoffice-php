@@ -1,12 +1,7 @@
 <?php
-// Require De Gerard ici 
-// require_once __DIR__ . './../Utils/Database.php';
-
-// Heritage
-require_once __DIR__ . '/CoreModel.php';
 
 /**
- * Model servant à gérer les catégories
+ * Model servant à récupérer les données selon leur catégorie
  */
 class Category extends CoreModel
 {

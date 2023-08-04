@@ -1,11 +1,7 @@
 <?php
-// Inutile maintenant grace à l'Heritage de CoreModel
-// require_once __DIR__ . './../utils/Database.php';
-
-require_once __DIR__ . '/CoreModel.php';
 
 /**
- * Model servant les gérer les types
+ * Model servant à récupérer les données selon leur type
  */
 class Type extends CoreModel
 {

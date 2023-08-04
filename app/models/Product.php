@@ -1,10 +1,8 @@
 <?php
-// Require De Gerard ici 
-// require_once __DIR__ . './../utils/Database.php';
 
-// Heritage
-require_once __DIR__ . '/CoreModel.php';
-
+/**
+ * Model servant récupérer un/des Produit(s)
+ */
 class Product extends CoreModel
 {
     // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters

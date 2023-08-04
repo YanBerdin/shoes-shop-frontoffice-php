@@ -1,12 +1,4 @@
 <?php
-require_once __DIR__ . "./../models/Brand.php";
-require_once __DIR__ . "./../models/Product.php";
-require_once __DIR__ . "./../models/Type.php";
-require_once __DIR__ . "./../models/Category.php";
-// Heritage mise en place
-require_once __DIR__ . '/CoreController.php';
-
-
 
 class CatalogController extends CoreController
 {
