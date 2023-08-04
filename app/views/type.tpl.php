@@ -2,7 +2,7 @@
 //var_dump($absoluteURL);
 // var_dump($viewData); 
 
-// Recuperer $type transmis via $viewData par CatalogController
+// Recuperer l'objet $type transmis via $viewData par CatalogController
 $type = $viewData['type'];
 // var_dump($type);
 // var_dump($type->getName());
@@ -18,11 +18,14 @@ $type = $viewData['type'];
     <!-- Hero Content-->
     <div class="hero-content pb-5 text-center">
       <h1 class="hero-heading">Page du TYPE</h1>
+
       <h2>Type : <?= $type->getName() ?> N° <?= $type->getId() ?> </h2>
+
+
       <div class="row">
         <div class="col-xl-8 offset-xl-2">
-          <p class="lead text-muted">Futur Sous-titre.</p>
         </div>
+
       </div>
     </div>
   </div>

@@ -21,7 +21,7 @@ class Category extends CoreModel
     private $subtitle;
 
     private $picture;
-    
+
     /** @var int Ordre de placement sur la page Home */
     private $home_order;
 
@@ -122,13 +122,20 @@ class Category extends CoreModel
      *
      * @return Category[]
      */
-    public function findAll()
+    public function findAll($sort = "")
     {
         // 1. On se connecte à la BDD
         $pdo = Database::getPDO();
 
         // 2. On fait (prépare) notre requête (SQL) sous forme de string
         $queryString = 'SELECT * FROM `category`';
+
+        // besoin d'ordonner la liste => ajout de parametre à la requete SQL
+        if ($sort !== "") {
+            // $sql = $sql . "ORDER BY $sort";
+            $queryString .= " ORDER BY $sort";
+        }
+
 
         // 3. On exécute la requête
         $pdoStatement = $pdo->query($queryString);
