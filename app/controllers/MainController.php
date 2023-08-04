@@ -44,7 +44,7 @@ class MainController extends CoreController
      */
     // public function show($viewName, $viewData = [])
     // {
-    //     global $router; // Ca c'est hyper degueulasse mais pour l'instant ça fait le café
+    //     global $router; // Ca c'est pas l'ideal mais pour l'instant ça fait le café
 
     //     $absoluteURL = $_SERVER['BASE_URI'] . '/';
 

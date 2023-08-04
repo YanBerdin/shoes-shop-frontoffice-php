@@ -3,9 +3,9 @@
  // var_dump($viewData); 
 
 // Recuperer $product transmis via $viewData par CatalogController
-// /**
-//  * @var Product[]
-//  */
+/**
+ * @var Product[]
+ */
 $product = $viewData['product'];
  var_dump($product)
 // var_dump($product->getName());

@@ -58,17 +58,19 @@ class CatalogController extends CoreController
      */
     public function type($params)
     {
-        // On récupère les vraies données du type $id
+        // On récupère les données du type $id en BDD
         $typeModel = new Type();
         $type = $typeModel->findOne($params['id']);
-    // dd($type);
+        // dd($type);
+
         // Interroger le bon model pour récupérer les produits.
         // On va devoir créer une nouvelle methode dans le bon model pour ça.
-        //     $productModel = new Product();
-        //     $products = $productModel->findAllByType($params['id']);
+        $productModel = new Product();
+        $products = $productModel->findAllByType($params['id']);
+
         $this->show("type", [
             'type' => $type,
-            // 'products' => $products
+            'products' => $products
         ]);
     }
 

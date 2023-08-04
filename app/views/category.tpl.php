@@ -7,9 +7,11 @@
             <li class="breadcrumb-item"><a href="<?= $router->generate('home') ?>">Home</a></li>
             <li class="breadcrumb-item active">Détente</li>
         </ol>
+
         <!-- Hero Content-->
         <div class="hero-content pb-5 text-center">
-            <h1 class="hero-heading"><?= $category->getName()?></h1>
+            <h1 class="hero-heading">Page de la catégorie</h1>
+            <h2>Type : <?= $category->getName() ?> </h2>
             <!-- <p> Ajout Perso -->
             <h4 class="hero-heading"><?= $category->getSubtitle()?></h4>
             <p>(Categorie n°<?= $category->getId()?>) </p>
