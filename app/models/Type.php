@@ -1,9 +1,12 @@
 <?php
 // Inutile maintenant grace à l'Heritage de CoreModel
- // require_once __DIR__ . './../utils/Database.php';
+// require_once __DIR__ . './../utils/Database.php';
 
 require_once __DIR__ . '/CoreModel.php';
 
+/**
+ * Model servant les gérer les types
+ */
 class Type extends CoreModel
 {
     // Propriétés
@@ -16,48 +19,6 @@ class Type extends CoreModel
 
     // private $created_at;
     // private $updated_at;
-
-    // Méthodes
-
-    public function findAll()
-    {
-        // On se connecte à la BDD
-        $pdo = Database::getPDO();
-
-        // On prépare la query string
-        $queryString = 'SELECT * FROM `type`';
-
-        // On exécute la requête
-        $pdoStatement = $pdo->query($queryString);
-
-        // On récupère les résultats
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Type');
-
-        // On retourne les résultats
-        return $results;
-    }
-
-
-    /**
-     * Retourne un type spécifique via son id dans la BDD
-     *
-     * @param int $id
-     *
-     * @return Type
-     */
-    public function findOne($id)
-    {
-        $pdo = Database::getPDO();
-        // var_dump($pdo);
-        $queryString = 'SELECT * FROM `type` WHERE id = ' . $id;
-
-        $pdoStatement = $pdo->query($queryString);
-        // var_dump($pdoStatement);
-
-        $result = $pdoStatement->fetchObject('Type');
-
-        return $result;
-    }
 
     /**
      * Get the value of id
@@ -131,4 +92,58 @@ class Type extends CoreModel
 
     //     return $this;
     // }
+
+    // Méthodes
+
+    /**
+     * Retourne un type spécifique via son id dans la BDD
+     *
+     * @param int $id
+     *
+     * @return Type
+     */
+    public function findOne($id)
+    {
+        $pdo = Database::getPDO();
+        // var_dump($pdo);
+        $queryString = 'SELECT * FROM `type` WHERE id = ' . $id;
+
+        $pdoStatement = $pdo->query($queryString);
+        // var_dump($pdoStatement);
+
+        $result = $pdoStatement->fetchObject('Type');
+
+        return $result;
+    }
+
+    /**
+     * Retourne la liste de tous les types de la BDD
+     *
+     * @param string $sort Contient le nom d'un champ sur lequel filtrer
+     *
+     * @return Type[]
+     */
+    // public function findAll()
+    public function findAll($sort = "")
+    {
+        // On se connecte à la BDD
+        $pdo = Database::getPDO();
+
+        // On prépare la query string
+        $queryString = 'SELECT * FROM `type`';
+
+        if ($sort !== "") {
+            // $sql = $sql . " ORDER BY $sort";
+            $queryString .= " ORDER BY $sort";
+        }
+
+        // On exécute la requête
+        $pdoStatement = $pdo->query($queryString);
+
+        // On récupère les résultats
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Type');
+
+        // On retourne les résultats
+        return $results;
+    }
 }

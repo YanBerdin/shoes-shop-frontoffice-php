@@ -48,7 +48,7 @@
         <div class="product col-xl-3 col-lg-4 col-sm-6">
           <div class="product-image">
             <a href="product.html" class="product-hover-overlay-link">
-              <img src="./assets/images/produits/1-kiss_tn.jpg" alt="product" class="img-fluid">
+              <img src="<?= $absoluteURL ?>/assets/images/produits/1-kiss_tn.jpg" alt="product" class="img-fluid">
             </a>
           </div>
           <div class="product-action-buttons">
@@ -65,7 +65,7 @@
         <div class="product col-xl-3 col-lg-4 col-sm-6">
             <div class="product-image">
               <a href="product.html" class="product-hover-overlay-link">
-                <img src="./assets/images/produits/2-rose_tn.jpg" alt="product" class="img-fluid">
+                <img src="<?= $absoluteURL ?>/assets/images/produits/2-rose_tn.jpg" alt="product" class="img-fluid">
               </a>
             </div>
             <div class="product-action-buttons">
@@ -82,7 +82,7 @@
         <div class="product col-xl-3 col-lg-4 col-sm-6">
             <div class="product-image">
               <a href="product.html" class="product-hover-overlay-link">
-                <img src="./assets/images/produits/3-panda_tn.jpg" alt="product" class="img-fluid">
+                <img src="<?= $absoluteURL ?>/assets/images/produits/3-panda_tn.jpg" alt="product" class="img-fluid">
               </a>
             </div>
             <div class="product-action-buttons">
@@ -99,7 +99,7 @@
         <div class="product col-xl-3 col-lg-4 col-sm-6">
             <div class="product-image">
               <a href="product.html" class="product-hover-overlay-link">
-                <img src="./assets/images/produits/20-deadpool_tn.jpg" alt="product" class="img-fluid">
+                <img src="<?= $absoluteURL ?>/assets/images/produits/20-deadpool_tn.jpg" alt="product" class="img-fluid">
               </a>
             </div>
             <div class="product-action-buttons">
