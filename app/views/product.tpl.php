@@ -11,10 +11,16 @@ $product = $viewData['product'];
 // var_dump($product->getName());
 // var_dump($product->getCategory_id());
 
-// Récupérer l
+// Récupérer un objet Category de la catégorie du produit sélectionné
 $curentcategory = $viewData['curentcategory'];
-var_dump($curentcategory);
+// var_dump($curentcategory);
 ?>
+
+<?php
+// Récupérer le chemin "src" de l'image du produit
+$picture = ($absoluteURL . "/" . $product->getPicture());
+?>
+
 
 <section class="hero">
     <div class="container">
@@ -35,10 +41,9 @@ var_dump($curentcategory);
             <div class="col-lg-6 col-sm-12">
                 <div class="product-image">
                     <a href="detail.html" class="product-hover-overlay-link">
-                        <img src="<?= $absoluteURL ?>/assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid"> </a>
-                    <!-- A remplacer :-->
-                    <img src="<?= $absoluteURL ?>/<?= $product->getPicture() ?> alt=" product" class="img-fluid">
-
+                        <!-- <img src="<?= $absoluteURL ?>/assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid"> </a> -->
+                    <!-- Dynamisé-->
+                    <img src="<?= $picture ?>" alt=" product" class="img-fluid">
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12">
@@ -66,7 +71,7 @@ var_dump($curentcategory);
                 </div>
                 <div class="mt-5">
                     <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum, consequuntur vel libero magni tempore rerum eos ipsum assumenda, velit architecto exercitationem animi dicta quis at facilis veritatis ut accusamus ipsa sequi recusandae officia similique tenetur? Nemo, repellat at dolore nobis non reprehenderit iusto, nostrum consectetur unde ab id quo quia eum rem veniam, ratione cum fuga autem odio perspiciatis minus reiciendis recusandae est. Earum praesentium minus quisquam et voluptates facere saepe, non velit tempore obcaecati! Porro esse sint blanditiis nulla in officiis aut dicta ipsum fugit ex enim, ab voluptas maxime culpa? Debitis, sequi minus cum, quos minima tempora eum quas repellat sunt incidunt delectus dolor eaque. Natus fugiat neque facere placeat corporis, commodi cum numquam vel exercitationem temporibus eum?
+                    <?= $product->getDescription() ?>
                     </p>
                 </div>
             </div>

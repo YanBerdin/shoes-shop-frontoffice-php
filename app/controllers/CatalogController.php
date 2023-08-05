@@ -101,7 +101,7 @@ class CatalogController extends CoreController
             // Maintenant que je recupere depuis CatalogController un Objet $product brandId est dedans
             // 'brandId' => $params['id'],
             'brand' => $brand, // A la clé brand on transmet toutes les données dans la requete (objet Brand recup grace à FetchObject)
-            'products' => $products
+            'products' => $products,
         ]);
     }
 
