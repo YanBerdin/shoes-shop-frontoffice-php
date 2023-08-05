@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/CoreController.php';
+
 class CatalogController extends CoreController
 {
     /**
@@ -116,6 +118,8 @@ class CatalogController extends CoreController
         $productModel = new Product();
         $product = $productModel->findOne($params['id']);
 
+
+
         $this->show('product', [
             // Maintenant que je recupere depuis CatalogController un Objet $product productId est dedans
             // 'productId' => $params['id'],
@@ -136,7 +140,7 @@ class CatalogController extends CoreController
 
 
 
-    // Commenté Depuis mise en place de CoreController qui possede show()
+    // Commenté Depuis mise en place de la classe Mere CoreController qui possede show()
     // N'est plus utile ici
     //     /**
     //      * Affiche la page

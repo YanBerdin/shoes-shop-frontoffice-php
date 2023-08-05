@@ -14,18 +14,20 @@ require_once __DIR__ . '/../vendor/autoload.php';
         - Soit on affiche la page d'erreur 404
  */
 
- // 
 require_once __DIR__ . "/../app/controllers/CoreController.php";
 require_once __DIR__ . "/../app/controllers/ErrorController.php";
 require_once __DIR__ . "/../app/controllers/MainController.php";
 require_once __DIR__ . "/../app/controllers/CatalogController.php";
 
-require_once __DIR__ . "/../app/utils/Database.php";
-require_once __DIR__ . "/../app/models/CoreModel.php";
-require_once __DIR__ . "/../app/models/Product.php";
-require_once __DIR__ . "/../app/models/Brand.php";
-require_once __DIR__ . "/../app/models/Type.php";
-require_once __DIR__ . "/../app/models/Category.php";
+ // Probleme d'implémenter tous les Require dans l'index 
+ // => Sécurité => Accès à tous les fichiers dès le point d'entrée
+ // => Augmente le temps de chargement
+// require_once __DIR__ . "/../app/utils/Database.php";
+// require_once __DIR__ . "/../app/models/CoreModel.php";
+// require_once __DIR__ . "/../app/models/Product.php";
+// require_once __DIR__ . "/../app/models/Brand.php";
+// require_once __DIR__ . "/../app/models/Type.php";
+// require_once __DIR__ . "/../app/models/Category.php";
 
 // On utilise AltoRouter
 // 1. On créé une nouvelle instance de la classe AltoRouter

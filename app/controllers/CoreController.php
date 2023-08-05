@@ -1,5 +1,10 @@
 <?php
 
+require_once __DIR__ . './../models/Brand.php';
+require_once __DIR__ . './../models/Category.php';
+require_once __DIR__ . './../models/Type.php';
+require_once __DIR__ . './../models/Product.php';
+
 class CoreController
 {
 
@@ -28,12 +33,15 @@ class CoreController
         // CoreController va passer à tous les templates ces listes (Grace à l'heritage)
 
         $categoryModel = new Category();
+        // Liste  des categories classées par ordre alphabetique
         $categoriesList = $categoryModel->findAll('name');
 
         $typeModel = new Type();
+        // Liste  des types classées par ordre alphabetique
         $typesList = $typeModel->findAll('name');
 
         $modelBrand = new Brand();
+        // Liste  des marques classées par ordre alphabetique
         $brandsList = $modelBrand->findAll('name');
 
         require_once __DIR__ . '/../views/header.tpl.php';

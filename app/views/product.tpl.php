@@ -1,14 +1,22 @@
 <?php
 // var_dump($absoluteURL);
- // var_dump($viewData); 
+  var_dump($viewData); 
 
 // Recuperer $product transmis via $viewData par CatalogController
 /**
- * @var Product[]
+ * @var Product
  */
 $product = $viewData['product'];
- var_dump($product)
-// var_dump($product->getName());
+ // var_dump($product)
+ // var_dump($product->getName());
+
+ var_dump($category);
+ // var_dump($category->getId());
+ // var_dump($product->getCategory_id());
+
+ $currentCategoryId = $product->getCategory_id();
+ // $currentCategory = ->findOne($currentCategoryId)
+
 ?>
 
 <section class="hero">
@@ -16,7 +24,8 @@ $product = $viewData['product'];
         <!-- Breadcrumbs -->
         <ol class="breadcrumb justify-content-center">
             <li class="breadcrumb-item"><a href="<?= $router->generate('home') ?>">Home</a></li>
-            <li class="breadcrumb-item active"> <a href="<?= $absoluteURL ?>/catalogue/categorie/<?= $category->getId() ?>/"><?= $category->getName() ?></a></li>
+            <!-- <li class="breadcrumb-item active">Détente</li> -->
+            <li class="breadcrumb-item active"> <a href="<?= $absoluteURL ?>/catalogue/categorie/<?= $product->getCategory_id() ?>/">Nom de categorie à dynamiser</a></li>
         </ol>
     </div>
 </section>
@@ -30,8 +39,8 @@ $product = $viewData['product'];
                 <div class="product-image">
                     <a href="detail.html" class="product-hover-overlay-link">
                         <img src="<?= $absoluteURL ?>/assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid"> </a>
-                        <!-- A remplacer :
-                            <img src="<?= $baseUri.$product->getPicture() ?> alt="product" class="img-fluid"> -->
+                        <!-- A remplacer :-->
+                            <img src="<?= $absoluteURL ?>/<?= $product->getPicture() ?> alt="product" class="img-fluid"> 
 
                 </div>
             </div>

@@ -1,4 +1,9 @@
 <?php
+// Require De Gerard ici 
+ require_once __DIR__ . './../utils/Database.php';
+
+// Heritage
+require_once __DIR__ . '/CoreModel.php';
 
 /**
  * Model servant à récupérer les données selon leur catégorie

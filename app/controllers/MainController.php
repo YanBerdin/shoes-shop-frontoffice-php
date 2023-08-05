@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/CoreController.php';
+
 class MainController extends CoreController
 {
     // Tester l'appel aux methodes finAll() et findOne() de nos models
