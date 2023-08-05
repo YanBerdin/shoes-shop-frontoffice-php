@@ -15,6 +15,7 @@ class Brand extends CoreModel
     /** @var int Identifiant unique de ma marque */
     // private $id;
 
+    // private = les enfants ne pourront hériter de $name
     /** @var string */
     private $name;
 

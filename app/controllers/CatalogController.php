@@ -1,5 +1,5 @@
 <?php
-
+// Plus besoin de require les Models ici grace à Core Controller
 require_once __DIR__ . '/CoreController.php';
 
 class CatalogController extends CoreController
@@ -117,10 +117,11 @@ class CatalogController extends CoreController
         // On appelle la méthode findOne() pour récupérer la marque concernée
         $productModel = new Product();
         $product = $productModel->findOne($params['id']);
-        // Récupérer l'id de la categorie à laquelle le produit est associé
+
+        // Récupérer l'id de la categorie à laquelle 1 produit est associé
         $currentCategoryId = $product->getCategory_id();
 
-        // Récupérer la catégorie à laquelle le produit ci-dessus est associé
+        // Récupérer la catégorie à laquelle 1 produit est associé
         $categoryModel = new Category();
         $curentcategory = $categoryModel->findOne($currentCategoryId);
 

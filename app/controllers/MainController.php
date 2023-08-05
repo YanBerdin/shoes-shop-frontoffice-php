@@ -1,4 +1,5 @@
 <?php
+// Pas besoin de require les Models ici grace à Core Controller
 
 require_once __DIR__ . '/CoreController.php';
 
