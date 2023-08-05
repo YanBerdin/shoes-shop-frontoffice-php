@@ -16,7 +16,7 @@ $product = $viewData['product'];
         <!-- Breadcrumbs -->
         <ol class="breadcrumb justify-content-center">
             <li class="breadcrumb-item"><a href="<?= $router->generate('home') ?>">Home</a></li>
-            <li class="breadcrumb-item active">Détente</li>
+            <li class="breadcrumb-item active"> <a href="<?= $absoluteURL ?>/catalogue/categorie/<?= $category->getId() ?>/"><?= $category->getName() ?></a></li>
         </ol>
     </div>
 </section>

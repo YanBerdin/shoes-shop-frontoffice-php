@@ -122,8 +122,6 @@ class Type extends CoreModel
     // public function findAll()
     public function findAll($sort = "")
     {
-        // Requete sql -> récupère les données de tous les
-        // types en BDD
 
         // Connexion à la BDD en utilisant la classe Database
         $pdo = Database::getPDO();
@@ -135,6 +133,7 @@ class Type extends CoreModel
         if ($sort !== "") {
             // $sql = $sql . " ORDER BY $sort";
             $queryString .= " ORDER BY $sort";
+            // Par défaut les résultats sont classés par ordre ascendant
         }
 
         // Exécuter la requête

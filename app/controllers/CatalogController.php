@@ -55,8 +55,8 @@ class CatalogController extends CoreController
         $type = $typeModel->findOne($params['id']);
         // dd($type);
 
-        // Interroger le bon model pour récupérer les produits.
-        // On va devoir créer une nouvelle methode dans le bon model pour ça.
+        // Interroger le model Product pour récupérer des produits.
+        // Créer une methode dans ce model
         $productModel = new Product();
         $products = $productModel->findAllByType($params['id']);
 

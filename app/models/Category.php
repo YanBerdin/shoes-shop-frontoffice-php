@@ -116,6 +116,8 @@ class Category extends CoreModel
     /**
      * Retourne la liste de toutes les catégories de la BDD
      *
+     * @param string $sort Contient le nom d'un champ sur lequel filtrer
+     *
      * @return Category[]
      */
     public function findAll($sort = "")
@@ -130,6 +132,7 @@ class Category extends CoreModel
         if ($sort !== "") {
             // $sql = $sql . "ORDER BY $sort";
             $queryString .= " ORDER BY $sort";
+            // Par défaut les résultats sont classés par ordre ascendant
         }
 
 

@@ -114,7 +114,14 @@ class Brand extends CoreModel
 
     // Méthodes --------------------------------------------
 
-    // Méthode pour récupérer toutes les marques
+
+    /**
+    * Retourne la liste de toustes les marques de la BDD
+    *
+    * @param string $sort Contient le nom d'un champ sur lequel filtrer
+    *
+    * @return Brand[]
+    */
     public function findAll($sort = "")
     {
         // Connexion à la BDD en utilisant la classe Database
@@ -127,6 +134,7 @@ class Brand extends CoreModel
         if ($sort !== "") {
             // $sql = $sql . " ORDER BY $sort";
             $queryString .= " ORDER BY $sort";
+            // Par défaut les résultats sont classés par ordre ascendant
         }
 
          // Exécuter la requête

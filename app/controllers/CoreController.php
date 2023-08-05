@@ -1,7 +1,5 @@
 <?php
-// require_once __DIR__ . './../Models/Brand.php';
-// require_once __DIR__ . './../Models/Category.php';
-// require_once __DIR__ . './../Models/Category.php';
+
 class CoreController
 {
 
@@ -25,13 +23,18 @@ class CoreController
         // Cela revient à importer $router depuis index.php à l'intérieur de la méthode show
         global $router;
 
-        // Ajout pour tester la partie Fonctionnalités (fin journée S05E05)
-        // Objectif : récupérer les liens vers les marques (pour les utiliser dans le menu)
-        $modelBrand = new Brand();
-        $allBrands = $modelBrand->findAll();
+        // Objectif : récupérer toutes les marques/categories/types
+        // et dynamiser les liens du menu 
+        // CoreController va passer à tous les templates ces listes (Grace à l'heritage)
 
-        // $modelProduct = new Product();
-        // $allProductsByTypeId = $modelProduct->findAllByCategory(2);
+        $categoryModel = new Category();
+        $categoriesList = $categoryModel->findAll('name');
+
+        $typeModel = new Type();
+        $typesList = $typeModel->findAll('name');
+
+        $modelBrand = new Brand();
+        $brandsList = $modelBrand->findAll('name');
 
         require_once __DIR__ . '/../views/header.tpl.php';
         require_once __DIR__ . '/../views/' . $viewName . '.tpl.php';

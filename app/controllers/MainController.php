@@ -9,12 +9,22 @@ class MainController extends CoreController
         $TestObject  = new Product(); // Tester avec Brand ou Category ou Type
         $TestObjects  = $TestObject->findAll();
 
-        $this->show("test");
+        $TestObjectId5 = $TestObject->findOne(5);
+        // dd($TestObjectId5);
+
+        // Transmettre les données à la vue
+        $this->show("test", [
+            'TestObjects' => $TestObjects,
+            'TestObjectId5' => $TestObjectId5
+        ]);
         // Visu Test
         // dd($TestObjects);
-        $TestObjectId5 = $TestObject->findOne(5);
 
-        dd($TestObjects, $TestObjectId5, $TestObjectId5->getName(), $TestObjectId5->getId());
+        // $TestObjectId5 = $TestObject->findOne(5);
+
+        // dd($TestObjects, $TestObjectId5, $TestObjectId5->getName(), $TestObjectId5->getId());
+
+
     }
 
     public function home($params)
