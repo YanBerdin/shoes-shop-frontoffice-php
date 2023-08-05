@@ -1,5 +1,7 @@
 <?php
-// Template utilisée par sur Projet Renaud pour afficher une liste de d'objet
+// Template inutilisée 
+// (correction)
+// Projet Renaud pour afficher une liste de d'objet
 // D'un certain Type/ Categorie/Marque
 // Moi j'ai opté pour une page par Marque/Categorie/Type
 
@@ -31,7 +33,7 @@ $products = $viewData['products'];
             // method_exists est une fonction native PHP qui permet de vérifier
             // si une classe ou un objet contient une certaine méthode.
             if (method_exists($object, 'getSubtitle')) {
-                ?>
+            ?>
                 <div class="row">
                     <div class="col-xl-8 offset-xl-2">
                         <p class="lead text-muted">
@@ -39,7 +41,7 @@ $products = $viewData['products'];
                         </p>
                     </div>
                 </div>
-                <?php
+            <?php
             }
             ?>
         </div>
@@ -67,11 +69,11 @@ $products = $viewData['products'];
         <div class="row">
             <?php
             foreach ($products as $product) {
-                ?>
+            ?>
                 <div class="product col-xl-3 col-lg-4 col-sm-6">
                     <div class="product-image">
                         <a href="product.html" class="product-hover-overlay-link">
-                            <img src="<?= $baseUri.$product->getPicture() ?>" alt="product" class="img-fluid">
+                            <img src="<?= $baseUri . $product->getPicture() ?>" alt="product" class="img-fluid">
                         </a>
                     </div>
                     <div class="product-action-buttons">
@@ -79,11 +81,15 @@ $products = $viewData['products'];
                         <a href="product.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">Voir</span></a>
                     </div>
                     <div class="py-2">
-                        <p class="text-muted text-sm mb-1"><?= $typesListById[$product->getTypeId()]->getName() ?></p>
+                        <p class="text-muted text-sm mb-1">
+                            <!-- // balise echo php
+                             $typesListById[$product->getTypeId()]->getName() 
+                            -->
+                        </p>
                         <h3 class="h6 text-uppercase mb-1"><a href="product.html" class="text-dark"><?= $product->getName() ?></a></h3><span class="text-muted">40€</span>
                     </div>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
