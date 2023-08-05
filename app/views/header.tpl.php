@@ -12,6 +12,7 @@
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
             <!-- V2 : On utilise la variable $absoluteURL pour avoir des URLs absolues au niveau de nos assets -->
             <!-- $absoluteURL contient : 'localhost/.../public' -->
             <link rel="stylesheet" href="<?= $absoluteURL ?>/assets/css/bootstrap.min.css">
@@ -44,6 +45,8 @@
                 <nav class="navbar navbar-expand-lg navbar-sticky navbar-airy navbar-light">
                     <div class="container-fluid">
                         <!-- Navbar Header  -->
+                        <!-- La méthode show() a récupéré $router
+                        on peut donc utiliser la méthode generate() qui prend en argument le nom de la route et reconstruit automatiquement l'URL correspondante -->
                         <!-- <a href="index.html" class="navbar-brand">oShop</a> -->
                         <a href="<?= $router->generate('home') ?>" class="navbar-brand">oShop</a>
                         <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>

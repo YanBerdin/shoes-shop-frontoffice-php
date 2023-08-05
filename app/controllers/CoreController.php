@@ -1,5 +1,7 @@
 <?php
 
+// Rappel : Controller interroge Model -> récupère Data -> transmet Data à Template
+
 require_once __DIR__ . './../models/Brand.php';
 require_once __DIR__ . './../models/Category.php';
 require_once __DIR__ . './../models/Type.php';
@@ -30,10 +32,11 @@ class CoreController
 
         // Objectif : récupérer toutes les marques/categories/types
         // et dynamiser les liens du menu 
-        // CoreController va passer à tous les templates ces listes (Grace à l'heritage)
+        // CoreController globaliser ces données 
+        // => va passer à tous les templates ces listes (Grace à l'heritage)
 
         $categoryModel = new Category();
-        // Liste  des categories classées par ordre alphabetique
+        // Liste  des categories dont le champ 'name' est classé par ordre alphabetique
         $categoriesList = $categoryModel->findAll('name');
 
         $typeModel = new Type();

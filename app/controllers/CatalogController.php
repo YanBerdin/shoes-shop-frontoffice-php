@@ -117,13 +117,19 @@ class CatalogController extends CoreController
         // On appelle la méthode findOne() pour récupérer la marque concernée
         $productModel = new Product();
         $product = $productModel->findOne($params['id']);
+        // Récupérer l'id de la categorie à laquelle le produit est associé
+        $currentCategoryId = $product->getCategory_id();
 
+        // Récupérer la catégorie à laquelle le produit ci-dessus est associé
+        $categoryModel = new Category();
+        $curentcategory = $categoryModel->findOne($currentCategoryId);
 
 
         $this->show('product', [
             // Maintenant que je recupere depuis CatalogController un Objet $product productId est dedans
             // 'productId' => $params['id'],
-            'product' => $product // A la clé product on transmet toutes les données dans la requete (objet product recup grace à FetchObject)
+            'product' => $product, // A la clé product on transmet toutes les données dans la requete (objet product recup grace à FetchObject)
+            'curentcategory' => $curentcategory
         ]);
     }
 
