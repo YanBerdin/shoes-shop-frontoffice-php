@@ -1,9 +1,17 @@
 <?php
 
-require_once __DIR__ . './../utils/Database.php';
+// require_once __DIR__ . './../utils/Database.php';
 
 // Heritage
-require_once __DIR__ . '/CoreModel.php';
+// require_once __DIR__ . '/CoreModel.php';
+
+namespace App\Models;
+
+use App\Utils\Database;
+use PDO;
+// Pour les classes natives PHP, exemple PDO
+use App\Models\CoreModel;
+
 
 /**
  * Model servant à récupérer les données selon leur type
@@ -112,7 +120,7 @@ class Type extends CoreModel
         $pdoStatement = $pdo->query($queryString);
         // var_dump($pdoStatement);
 
-        $result = $pdoStatement->fetchObject('Type');
+        $result = $pdoStatement->fetchObject('App\Models\Type');
 
         return $result;
     }
@@ -145,7 +153,7 @@ class Type extends CoreModel
         $pdoStatement = $pdo->query($queryString);
 
         // Récupèrer les résultats (Objet contenant les données)
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Type');
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Type');
 
         // Retourne le résultat
         return $results;

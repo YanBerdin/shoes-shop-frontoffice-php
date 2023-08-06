@@ -1,7 +1,11 @@
 <?php
+// require_once __DIR__ . '/CoreController.php';
 // Pas besoin de require les Models ici grace à Core Controller
+namespace App\Controllers;
 
-require_once __DIR__ . '/CoreController.php';
+use App\Models\Product;
+
+use App\Controllers\CoreController;
 
 class MainController extends CoreController
 {

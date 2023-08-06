@@ -1,4 +1,10 @@
 <?php // var_dump($viewData); 
+namespace App\views;
+
+use App\Models\Category;
+
+$categoryModel = new Category();
+
 ?>
 <?php // var_dump($viewData['brand']); 
 ?>
@@ -6,6 +12,8 @@
 <?php // var_dump($brand->getName()); 
 ?>
 
+<?php
+ ?>
 
 <?php
 /**
@@ -64,7 +72,7 @@ $products = $viewData['products']; ?>
         $currentCategoryId = $product->getCategory_id();
 
         // Récupérer la catégorie à laquelle 1 produit est associé
-        $categoryModel = new Category();
+        // $categoryModel = new Category();
         $curentcategory = $categoryModel->findOne($currentCategoryId);
       ?>
         <?php 

@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Models;
+
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Type;
+use App\Models\Product;
+
 class CoreModel
 {
     // Propriétés

@@ -1,6 +1,15 @@
 <?php
 // Plus besoin de require les Models ici grace à Core Controller
-require_once __DIR__ . '/CoreController.php';
+// require_once __DIR__ . '/CoreController.php';
+
+namespace App\Controllers;
+
+use App\Controllers\CoreController;
+
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Brand;
+use App\Models\Type;
 
 class CatalogController extends CoreController
 {
@@ -97,11 +106,12 @@ class CatalogController extends CoreController
         $productModel = new Product();
         $products = $productModel->findAllByBrand($params['id']);
 
+
         $this->show('brand', [
             // Maintenant que je recupere depuis CatalogController un Objet $product brandId est dedans
             // 'brandId' => $params['id'],
             'brand' => $brand, // A la clé brand on transmet toutes les données dans la requete (objet Brand recup grace à FetchObject)
-            'products' => $products,
+            'products' => $products
         ]);
     }
 

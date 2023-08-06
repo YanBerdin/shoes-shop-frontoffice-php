@@ -1,4 +1,10 @@
 <?php
+namespace App\Utils;
+
+// On ajoute ce use pour éviter d'écrire à chaque fois '\PDO'
+// Un namespace ayant directement la forme \NOM_DE_LA_CLASSE
+// correspond forcément à une classe native PHP
+use PDO;
 
 // Retenir son utilisation  => Database::getPDO()
 // Design Pattern : Singleton

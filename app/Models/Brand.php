@@ -1,9 +1,19 @@
 <?php
 
- require_once __DIR__ . './../utils/Database.php';
+ // require_once __DIR__ . './../Utils/Database.php';
 
 // Heritage
-require_once __DIR__ . '/CoreModel.php';
+// require_once __DIR__ . '/CoreModel.php';
+
+
+namespace App\Models;
+
+use PDO;
+// Pour les classes natives PHP, exemple PDO
+use App\Models\CoreModel;
+use App\Utils\Database;
+
+use App\Models\Category;
 
 /**
  * Model servant à gérer les marques
@@ -143,7 +153,7 @@ class Brand extends CoreModel
         
         // Récupèrer les résultats (Objet) contenant les données)
         // Inidiquer explicitement que les résultats récupérés seront de classe 'Brand'
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Brand');
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Brand');
 
         // Retourne le résultat
         return $results;
@@ -161,7 +171,7 @@ class Brand extends CoreModel
         $pdoStatement = $pdo->query($queryString);
 
         // Récupèrer les résultats (Objet de classe Brand contenant les données)
-        $result = $pdoStatement->fetchObject('Brand');
+        $result = $pdoStatement->fetchObject('App\Models\Brand');
         // fetchObject IDEAL sachant qu'on veut l'utiliser qu'1 fois
         // et + performant car variable inutilisée consomme de la mémoire serveur
 
