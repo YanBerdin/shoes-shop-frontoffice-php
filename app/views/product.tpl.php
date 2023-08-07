@@ -12,9 +12,12 @@ $product = $viewData['product'];
 // var_dump($product->getCategory_id());
 
 // Récupérer un objet Category de la catégorie du produit sélectionné
-$curentcategory = $viewData['curentcategory'];
+// ------------$curentcategory = $viewData['curentcategory'];
 // var_dump($curentcategory);
 ?>
+
+
+
 
 <?php
 // Récupérer le chemin "src" de l'image du produit
@@ -28,7 +31,7 @@ $picture = ($absoluteURL . "/" . $product->getPicture());
         <ol class="breadcrumb justify-content-center">
             <li class="breadcrumb-item"><a href="<?= $router->generate('home') ?>">Home</a></li>
             <!-- <li class="breadcrumb-item active">Détente</li> -->
-            <li class="breadcrumb-item active"> <a href="<?= $absoluteURL ?>/catalogue/categorie/<?= $product->getCategory_id() ?>/"><?= $curentcategory->getName() ?></a></li>
+            <li class="breadcrumb-item active"> <a href="<?= $absoluteURL ?>/catalogue/categorie/<?= $product->getCategory_id() ?>/"><?= $product->GetCategory_name() ?></a></li>
         </ol>
     </div>
 </section>
@@ -40,8 +43,9 @@ $picture = ($absoluteURL . "/" . $product->getPicture());
             <!-- product-->
             <div class="col-lg-6 col-sm-12">
                 <div class="product-image">
-                    <a href="detail.html" class="product-hover-overlay-link">
-                        <!-- <img src="<?= $absoluteURL ?>/assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid"> </a> -->
+                    <!-- <a href="detail.html" class="product-hover-overlay-link"> -->
+
+                    <!-- <img src="<?= $absoluteURL ?>/assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid"> </a> -->
                     <!-- Dynamisé-->
                     <img src="<?= $picture ?>" alt=" product" class="img-fluid">
                 </div>
@@ -51,7 +55,7 @@ $picture = ($absoluteURL . "/" . $product->getPicture());
                     <!-- ajout moi  -->
                     <h1 class="hero-heading"><?= $product->getName() ?></h1>
                     <h3 class="h3 text-uppercase mb-1">Produit n°<?= $product->getId() ?></h3>
-                    <div class="text-muted">by <em>BOOTstrap</em></div>
+                    <div class="text-muted"> <a href="<?= $absoluteURL ?>/catalogue/marque/<?= $product->getBrand_id() ?>/"><em><?= $product->getBrand_Name() ?></em></a></div>
                     <div>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -61,7 +65,7 @@ $picture = ($absoluteURL . "/" . $product->getPicture());
                     </div>
                 </div>
                 <div class="my-2">
-                    <div class="text-muted"><span class="h4">40 €</span> TTC</div>
+                    <div class="text-muted"><span class="h4"><?= $product->getPrice() ?>€</span> TTC</div>
                 </div>
                 <div class="product-action-buttons">
                     <form action="cart.html" method="post">
@@ -71,7 +75,7 @@ $picture = ($absoluteURL . "/" . $product->getPicture());
                 </div>
                 <div class="mt-5">
                     <p>
-                    <?= $product->getDescription() ?>
+                        <?= $product->getDescription() ?>
                     </p>
                 </div>
             </div>
