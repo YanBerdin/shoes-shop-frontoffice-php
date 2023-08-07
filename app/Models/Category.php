@@ -1,9 +1,17 @@
 <?php
-// Require De Gerard ici 
- require_once __DIR__ . './../utils/Database.php';
+//  require_once __DIR__ . './../Utils/Database.php';
 
 // Heritage
-require_once __DIR__ . '/CoreModel.php';
+// require_once __DIR__ . '/CoreModel.php';
+
+namespace App\Models;
+
+use PDO;
+// Pour les classes natives PHP, exemple PDO
+use App\Models\CoreModel;
+use App\Utils\Database;
+
+
 
 /**
  * Model servant à récupérer les données selon leur catégorie
@@ -146,7 +154,7 @@ class Category extends CoreModel
 
         // 4. Récupèrer tous les résultats
         // On dit explicitement que les résultats récupérés seront de type 'Category'
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'Category');
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Category');
 
         // 5. Retourne les résultats
         return $results;
@@ -175,7 +183,7 @@ class Category extends CoreModel
         // avant de faire le fetch
 
         // Récupèrer les résultats (Objet de classe Product contenant les données)
-        $result = $pdoStatement->fetchObject('Category');
+        $result = $pdoStatement->fetchObject('App\Models\Category');
 
         // Retourne le résultat
         return $result;

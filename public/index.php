@@ -14,14 +14,21 @@ require_once __DIR__ . '/../vendor/autoload.php';
         - Soit on affiche la page d'erreur 404
  */
 
-require_once __DIR__ . "/../app/controllers/CoreController.php";
-require_once __DIR__ . "/../app/controllers/ErrorController.php";
-require_once __DIR__ . "/../app/controllers/MainController.php";
-require_once __DIR__ . "/../app/controllers/CatalogController.php";
+use App\Controllers\CoreController;
+use App\Controllers\MainController;
+use App\Controllers\CatalogController;
+use App\Controllers\ErrorController;
 
- // Probleme d'implémenter tous les Require dans l'index 
- // => Sécurité => Accès à tous les fichiers dès le point d'entrée
- // => Augmente le temps de chargement
+// Namespaces => Plus besoin des require pour les controlleurs => Utilisation de "use"
+// require_once __DIR__ . "/../app/controllers/CoreController.php";
+// require_once __DIR__ . "/../app/controllers/MainController.php";
+// require_once __DIR__ . "/../app/controllers/CatalogController.php";
+// require_once __DIR__ . "/../app/controllers/ErrorController.php";
+
+
+// Probleme d'implémenter tous les Require dans l'index 
+// => Sécurité => Accès à tous les fichiers dès le point d'entrée
+// => Augmente le temps de chargement
 // require_once __DIR__ . "/../app/utils/Database.php";
 // require_once __DIR__ . "/../app/models/CoreModel.php";
 // require_once __DIR__ . "/../app/models/Product.php";
@@ -63,7 +70,7 @@ $router->map(
     'GET', // La méthode HTTP autorisée pour cette route
     '/',   // Partie de l'URL qui correspond à la page demandée (route)
     [
-        'controller' => 'MainController', // Cible le bon controller et la bonne methode
+        'controller' => 'App\Controllers\MainController', // Cible le bon controller et la bonne methode
         'method' => 'home',
     ],
     'home' // Identifiant unique de la route
@@ -74,7 +81,7 @@ $router->map(
     "GET",
     '/mentions-legales/', // Partie de l'URL qui correspond à la page demandée (route)
     [
-        'controller' => 'MainController',
+        'controller' => 'App\Controllers\MainController',
         'method' => 'legalNotices',
     ],
     'legal-notices'
@@ -85,7 +92,7 @@ $router->map(
     "GET",
     '/catalogue/categorie/[i:id]/',
     [
-        'controller' => 'CatalogController',
+        'controller' => 'App\Controllers\CatalogController',
         'method' => 'category',
     ],
     'catalog-category'
@@ -96,7 +103,7 @@ $router->map(
     "GET",
     '/catalogue/type/[i:id]/',
     [
-        'controller' => 'CatalogController',
+        'controller' => 'App\Controllers\CatalogController',
         'method' => 'type',
     ],
     'catalog-type'
@@ -107,7 +114,7 @@ $router->map(
     'GET',
     '/catalogue/marque/[i:id]/',
     [
-        'controller' => 'CatalogController',
+        'controller' => 'App\Controllers\CatalogController',
         'method' => 'brand'
     ],
     'catalog-brand'
@@ -118,7 +125,7 @@ $router->map(
     'GET',
     '/catalogue/produit/[i:id]/',
     [
-        'controller' => 'CatalogController',
+        'controller' => 'App\Controllers\CatalogController',
         'method' => 'product'
     ],
     'catalog-product'
@@ -140,7 +147,7 @@ $router->map(
     'GET',
     '/test/',
     [
-        'controller' => 'MainController',
+        'controller' => 'App\Controllers\MainController',
         'method'     => 'test'
     ],
     'test'

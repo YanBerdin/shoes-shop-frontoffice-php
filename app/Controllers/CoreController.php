@@ -2,10 +2,18 @@
 
 // Rappel : Controller interroge Model -> récupère Data -> transmet Data à Template
 
-require_once __DIR__ . './../models/Brand.php';
-require_once __DIR__ . './../models/Category.php';
-require_once __DIR__ . './../models/Type.php';
-require_once __DIR__ . './../models/Product.php';
+// Grace à autoload (PSR-4) => Utilisqr "use"
+// require_once __DIR__ . './../models/Brand.php';
+// require_once __DIR__ . './../models/Category.php';
+// require_once __DIR__ . './../models/Type.php';
+// require_once __DIR__ . './../models/Product.php';
+
+namespace App\Controllers;
+
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Type;
+use App\Models\Product;
 
 class CoreController
 {
