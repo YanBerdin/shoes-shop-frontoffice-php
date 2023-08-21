@@ -1,6 +1,7 @@
 <?php
 // var_dump($absoluteURL);
-var_dump($viewData);
+// var_dump($viewData);
+// dump($viewData);
 
 // Recuperer $product transmis via $viewData par CatalogController
 /**
@@ -19,7 +20,9 @@ $product = $viewData['product'];
 
 <?php
 // Récupérer le chemin "src" de l'image du produit
-$picture = ($absoluteURL . "/" . $product->getPicture());
+// Maintenant que les images sont hébergées par BenOclock
+// $picture = ($absoluteURL . "/" . $product->getPicture());
+$picture = $product->getPicture();
 ?>
 
 

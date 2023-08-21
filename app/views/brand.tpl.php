@@ -14,14 +14,15 @@ use App\Models\Category;
 ?>
 
 <?php
- ?>
+?>
 
 <?php
 /**
  * @var Product[]
  */
 $products = $viewData['products']; ?>
-<?php  var_dump($products); 
+<?php  // var_dump($products);
+dump($products);
 ?>
 
 <section class="hero">
@@ -76,21 +77,26 @@ $products = $viewData['products']; ?>
         // $categoryModel = new Category();
         //$curentcategory = $categoryModel->findOne($currentCategoryId);
       ?>
-        <?php 
+        <?php
         // var_dump($absoluteURL); 
         // var_dump($product); 
         ?>
 
         <?php
         // Récupérer le chemin absolu "src" de chaque image
-        $picture = ($absoluteURL . "/" . $product->getPicture());
+        // $picture = ($absoluteURL . "/" . $product->getPicture());
+        // Nouveau chemin à reconstituer avec images hebergées par BenOclock
+        $picture = $product->getPicture();
         // var_dump($picture);
+
+
+
         ?>
 
         <div class="product col-xl-3 col-lg-4 col-sm-6">
           <div class="product-image">
             <!-- <a href="<?= $absoluteURL ?>/catalogue/produit/<?= $product->getId() ?>/" class="product-hover-overlay-link"> -->
-              <img src="<?= $picture ?>" alt=" product" class="img-fluid">
+            <img src="<?= $picture ?>" alt=" product" class="img-fluid">
           </div>
           <div class="product-action-buttons">
             <a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a>
