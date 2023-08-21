@@ -33,7 +33,10 @@ class Product extends CoreModel
     private $brand_id;
     private $category_id;
     private $type_id;
-
+    // ajouté suite Triple jointure
+    private $brand_name;
+    private $category_name;
+    private $type_name;
     // Méthodes
 
     /**
@@ -180,7 +183,7 @@ class Product extends CoreModel
     // }
 
     /**
-     * 
+     *
      * Set the value of created_at
      * @return  self
      */
@@ -193,7 +196,7 @@ class Product extends CoreModel
     // }
 
     /**
-     * 
+     *
      * Get the value of updated_at
      */
     // Commenté => Maintenant c'est le CCoreModel qui déclare ces Propriétés et Getters/Setters
@@ -274,6 +277,34 @@ class Product extends CoreModel
 
         return $this;
     }
+
+
+    /**
+     * Get the value of brand_name
+     */
+    public function getBrand_name()
+    {
+        // nouvelle Propriété à déclarer au début
+        return $this->brand_name; 
+    }
+
+    /**
+     * Get the value of category_name
+     */
+    public function getCategory_name()
+    {
+        return $this->category_name;
+    }
+
+    /**
+     * Get the value of type_name
+     */
+    public function getType_name()
+    {
+        return $this->type_name;
+    }
+
+
     /**
      * Retourne la liste de tous les produits de la BDD
      *
@@ -320,8 +351,24 @@ class Product extends CoreModel
         // Connexion à la BDD en utilisant la classe Database
         $pdo = Database::getPDO();
 
+        // ------>  V1 sans jointure
+        //
         // 2. Préparer notre requête (SQL) sous forme de string
-        $queryString = 'SELECT * FROM `product` WHERE id = ' . $id;
+        //$queryString = 'SELECT * FROM `product` WHERE id = ' . $id;
+
+        // ------> V2 avec triple jointure
+        //
+        // Objectif : récupérer le nom de la marque et de la catégorie auxquels est rattaché le produit
+        // Ici, on utilisera le LEFT JOIN plutôt que INNER JOIN
+        // Différence : LEFT JOIN retourne ts les produits (cad toutes les données de la table de gauche)
+        // même si le produit($id) n'est rattaché à aucune marque / catégorie
+        $queryString = '
+        SELECT `product`.*, `brand`.name AS brand_name, `category`.`name` AS category_name, `type`.`name` AS type_name
+        FROM `product`
+        LEFT JOIN `brand` ON `brand`.`id` = `product`.`brand_id`
+        LEFT JOIN `category` ON `category`.`id` = `product`.`category_id`
+        LEFT JOIN `type` ON `type`.`id` = `product`.`type_id`
+        WHERE `product`.`id`  = ' . $id;
 
         // 3. Exécuter la requête
         $pdoStatement = $pdo->query($queryString);
@@ -347,13 +394,13 @@ class Product extends CoreModel
     {
         // Connexion BDD
         $pdo = Database::getPDO();
-        
-        // Preparer Requête 
+
+        // Preparer Requête
         $sql = "SELECT * FROM `product` WHERE category_id = $categoryId";
-        
-        // Executer requête 
+
+        // Executer requête
         $pdoStatement = $pdo->query($sql);
-        
+
         // Stocker l'objet de class Product
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
 
@@ -372,7 +419,7 @@ class Product extends CoreModel
         $pdo = Database::getPDO();
 
         $sql = "SELECT * FROM `product` WHERE type_id = $typeId";
-        
+
         $pdoStatement = $pdo->query($sql);
 
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
@@ -392,12 +439,12 @@ class Product extends CoreModel
         $pdo = Database::getPDO();
         // var_dump($pdo);
         $sql = "SELECT * FROM `product` WHERE brand_id = $brandId";
-        
+
         $pdoStatement = $pdo->query($sql);
 
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
 
         return $results;
-    }
 
+    }
 }
