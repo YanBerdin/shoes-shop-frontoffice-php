@@ -396,10 +396,20 @@ class Product extends CoreModel
         $pdo = Database::getPDO();
 
         // Preparer Requête
-        $sql = "SELECT * FROM `product` WHERE category_id = $categoryId";
+        // $queryString = "SELECT * FROM `product` WHERE category_id = $categoryId";
+
+        // V2 avec triple jointure
+        $queryString = '
+        SELECT `product`.*, `brand`.name AS brand_name, `category`.`name` AS category_name, `type`.`name` AS type_name
+        FROM `product`
+        LEFT JOIN `brand` ON `brand`.`id` = `product`.`brand_id`
+        LEFT JOIN `category` ON `category`.`id` = `product`.`category_id`
+        LEFT JOIN `type` ON `type`.`id` = `product`.`type_id`
+        WHERE `category`.`id`  = ' . $categoryId;
+
 
         // Executer requête
-        $pdoStatement = $pdo->query($sql);
+        $pdoStatement = $pdo->query($queryString);
 
         // Stocker l'objet de class Product
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
@@ -438,9 +448,19 @@ class Product extends CoreModel
     {
         $pdo = Database::getPDO();
         // var_dump($pdo);
-        $sql = "SELECT * FROM `product` WHERE brand_id = $brandId";
+        // $queryString = "SELECT * FROM `product` WHERE brand_id = $brandId";
 
-        $pdoStatement = $pdo->query($sql);
+        // V2 avec triple jointure
+        $queryString = '
+        SELECT `product`.*, `brand`.name AS brand_name, `category`.`name` AS category_name, `type`.`name` AS type_name
+        FROM `product`
+        LEFT JOIN `brand` ON `brand`.`id` = `product`.`brand_id`
+        LEFT JOIN `category` ON `category`.`id` = `product`.`category_id`
+        LEFT JOIN `type` ON `type`.`id` = `product`.`type_id`
+        WHERE `brand`.`id`  = ' . $brandId;
+
+
+        $pdoStatement = $pdo->query($queryString);
 
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
 

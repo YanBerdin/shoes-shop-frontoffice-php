@@ -1,8 +1,9 @@
-            <?php // var_dump($viewData); 
+            <?php  var_dump($viewData); 
             ?>
             <?php $category = $viewData['category']; ?>
             <?php $products = $viewData['products']; ?>
-            <?php // var_dump($products); ?>
+            <?php // var_dump($products); 
+            ?>
 
             <section class="hero">
               <div class="container">
@@ -14,14 +15,14 @@
                 <!-- Hero Content-->
                 <div class="hero-content pb-5 text-center">
                   <h1 class="hero-heading">Catégorie : <?= $category->getName() ?> </h1>
-                  
+
                   <h2>Categorie (N°<?= $category->getId() ?>) </h2>
 
-                    <div class="row">
-                      <div class="col-xl-8 offset-xl-2">
-                        <p class="lead text-muted"><?= $category->getSubtitle() ?></p>
-                      </div>
+                  <div class="row">
+                    <div class="col-xl-8 offset-xl-2">
+                      <p class="lead text-muted"><?= $category->getSubtitle() ?></p>
                     </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -46,24 +47,30 @@
                 </header>
                 <div class="row">
                   <!-- product-->
-                  <div class="product col-xl-3 col-lg-4 col-sm-6">
-                    <div class="product-image">
-                      <a href="product.html" class="product-hover-overlay-link">
-                        <img src="<?= $absoluteURL ?>/assets/images/produits/1-kiss_tn.jpg" alt="product" class="img-fluid">
-                      </a>
+
+                  <?php foreach ($products as $product) : ?>
+
+                    <div class="product col-xl-3 col-lg-4 col-sm-6">
+                      <div class="product-image">
+                        <a href="product.html" class="product-hover-overlay-link">
+                          <img src="<?= $absoluteURL ?>/<?= $product->getPicture() ?>" alt="product" class="img-fluid">
+                        </a>
+                      </div>
+                      <div class="product-action-buttons">
+                        <a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a>
+                        <a href="<?= $absoluteURL ?>/catalogue/produit/<?= $product->getId() ?>/" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">Voir</span></a>
+                      </div>
+                      <div class="py-2">
+                        <p class="text-muted text-sm mb-1"><?= $product->getType_name() ?></p>
+                        <h3 class="h6 text-uppercase mb-1"><a href="<?= $absoluteURL ?>/catalogue/produit/<?= $product->getId() ?>/" class="text-dark"><?= $product->getName() ?></a></h3><span class="text-muted"><?= $product->getPrice() ?>€</span>
+                      </div>
                     </div>
-                    <div class="product-action-buttons">
-                      <a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a>
-                      <a href="product.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">Voir</span></a>
-                    </div>
-                    <div class="py-2">
-                      <p class="text-muted text-sm mb-1">Chausson</p>
-                      <h3 class="h6 text-uppercase mb-1"><a href="product.html" class="text-dark">Kissing</a></h3><span class="text-muted">40€</span>
-                    </div>
-                  </div>
-                  <!-- /product-->
+                    <!-- /product-->
+
+                  <?php endforeach; ?>
+
                   <!-- product-->
-                  <div class="product col-xl-3 col-lg-4 col-sm-6">
+                  <!-- <div class="product col-xl-3 col-lg-4 col-sm-6">
                     <div class="product-image">
                       <a href="product.html" class="product-hover-overlay-link">
                         <img src="<?= $absoluteURL ?>/assets/images/produits/2-rose_tn.jpg" alt="product" class="img-fluid">
@@ -77,10 +84,10 @@
                       <p class="text-muted text-sm mb-1">Tong</p>
                       <h3 class="h6 text-uppercase mb-1"><a href="product.html" class="text-dark">Pink lady</a></h3><span class="text-muted">20€</span>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- /product-->
                   <!-- product-->
-                  <div class="product col-xl-3 col-lg-4 col-sm-6">
+                  <!-- <div class="product col-xl-3 col-lg-4 col-sm-6">
                     <div class="product-image">
                       <a href="product.html" class="product-hover-overlay-link">
                         <img src="<?= $absoluteURL ?>/assets/images/produits/3-panda_tn.jpg" alt="product" class="img-fluid">
@@ -94,10 +101,10 @@
                       <p class="text-muted text-sm mb-1">Chausson</p>
                       <h3 class="h6 text-uppercase mb-1"><a href="product.html" class="text-dark">Panda</a></h3><span class="text-muted">50€</span>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- /product-->
                   <!-- product-->
-                  <div class="product col-xl-3 col-lg-4 col-sm-6">
+                  <!-- <div class="product col-xl-3 col-lg-4 col-sm-6">
                     <div class="product-image">
                       <a href="product.html" class="product-hover-overlay-link">
                         <img src="<?= $absoluteURL ?>/assets/images/produits/20-deadpool_tn.jpg" alt="product" class="img-fluid">
@@ -111,7 +118,7 @@
                       <p class="text-muted text-sm mb-1">Pantoufle</p>
                       <h3 class="h6 text-uppercase mb-1"><a href="product.html" class="text-dark">Deadpool</a></h3><span class="text-muted">15€</span>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- /product-->
 
                 </div>

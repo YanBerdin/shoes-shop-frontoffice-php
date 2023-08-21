@@ -21,7 +21,7 @@ use App\Models\Category;
  * @var Product[]
  */
 $products = $viewData['products']; ?>
-<?php // var_dump($products); 
+<?php  var_dump($products); 
 ?>
 
 <section class="hero">
