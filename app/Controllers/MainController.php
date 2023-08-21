@@ -6,6 +6,7 @@ namespace App\Controllers;
 use App\Models\Product;
 
 use App\Controllers\CoreController;
+use App\Models\Category;
 
 class MainController extends CoreController
 {
@@ -36,7 +37,15 @@ class MainController extends CoreController
 
     public function home($params)
     {
-        $this->show("home");
+        // gérer dynamiquement les 5 catégories de Home Page
+        // Utiliser Model Category et créer méthode dédiée findByHomeOrder()
+
+        $modelCategory = new Category();
+        $homeCategories = $modelCategory->findByHomeOrder();
+
+        $this->show("home", [
+            'homeCategories' => $homeCategories
+        ]);
     }
 
     public function legalNotices($params)

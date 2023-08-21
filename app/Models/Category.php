@@ -6,12 +6,11 @@
 
 namespace App\Models;
 
-use PDO;
 // Pour les classes natives PHP, exemple PDO
 use App\Models\CoreModel;
 use App\Utils\Database;
 
-
+use PDO;
 
 /**
  * Model servant à récupérer les données selon leur catégorie
@@ -125,7 +124,7 @@ class Category extends CoreModel
     //     return $this;
     // }
 
-    
+
     /**
      * Retourne la liste de toutes les catégories de la BDD
      *
@@ -187,5 +186,23 @@ class Category extends CoreModel
 
         // Retourne le résultat
         return $result;
+    }
+
+    public function findByHomeOrder()
+    {
+        $pdo = Database::getPDO();
+
+        $queryString = "
+    SELECT *
+    FROM `category`
+    WHERE `home_order`> 0
+    ORDER BY `home_order`
+    LIMIT 5";
+
+        $pdoStatement = $pdo->query($queryString);
+
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Category');
+
+        return $results;
     }
 }

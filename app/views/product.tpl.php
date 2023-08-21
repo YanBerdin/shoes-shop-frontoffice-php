@@ -1,6 +1,6 @@
 <?php
 // var_dump($absoluteURL);
-// var_dump($viewData);
+ var_dump($viewData);
 
 // Recuperer $product transmis via $viewData par CatalogController
 /**
@@ -55,6 +55,8 @@ $picture = ($absoluteURL . "/" . $product->getPicture());
                     <!-- ajout moi  -->
                     <h1 class="hero-heading"><?= $product->getName() ?></h1>
                     <h3 class="h3 text-uppercase mb-1">Produit n°<?= $product->getId() ?></h3>
+                           <!-- Grâce à triple jointure sur findOne() et propriétés déclarées subséquentes
+                            je peux afficher les noms de marques, type...   -->
                     <div class="text-muted"> <a href="<?= $absoluteURL ?>/catalogue/marque/<?= $product->getBrand_id() ?>/"><em><?= $product->getBrand_Name() ?></em></a></div>
                     <div>
                         <i class="fa fa-star"></i>

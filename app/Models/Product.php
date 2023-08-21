@@ -284,7 +284,8 @@ class Product extends CoreModel
      */
     public function getBrand_name()
     {
-        return $this->brand_name;
+        // nouvelle Propriété à déclarer au début
+        return $this->brand_name; 
     }
 
     /**
