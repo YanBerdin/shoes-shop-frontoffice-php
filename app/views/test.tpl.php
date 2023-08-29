@@ -2,7 +2,7 @@
     <div class="container">
         <!-- Breadcrumbs -->
         <ol class="breadcrumb justify-content-center">
-        <li class="breadcrumb-item"><a href="<?= $router->generate('home') ?>">Home</a></li>
+        <li class="breadcrumb-item"><a href="<?php // echo $router->generate('home') ?>">Home</a></li>
         </ol>
 
         <div class="hero-content pb-5 text-center">
@@ -29,11 +29,10 @@
         $TestObjectId5 = $viewData['TestObjectId5']; ?>
         <?php // var_dump($TestObjectId5) 
         ?>
-        <?php var_dump(
-            $TestObjectId5->getName(),
-            $TestObjectId5->getId(),
-            $TestObjectId5
-        );
+        <?php // var_dump(
+            // $TestObjectId5->getName(),
+            // $TestObjectId5->getId(),
+           // $TestObjectId5 );
         ?>
 
     </div>

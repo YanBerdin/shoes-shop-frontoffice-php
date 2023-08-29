@@ -46,7 +46,7 @@ $picture = $product->getPicture();
                 <div class="product-image">
                     <!-- <a href="detail.html" class="product-hover-overlay-link"> -->
 
-                    <!-- <img src="<?= $absoluteURL ?>/assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid"> </a> -->
+                    <img src="<?= $absoluteURL ?>/assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid"> </a>
                     <!-- Dynamisé-->
                     <img src="<?= $picture ?>" alt=" product" class="img-fluid">
                 </div>
