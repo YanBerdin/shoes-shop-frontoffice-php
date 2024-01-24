@@ -43,7 +43,7 @@ $router = new AltoRouter();
 
 // 2. On doit dire à AltoRouter la partie de l'URL à ne pas prendre en compte pour le mapping
 // Pour cela, on va utiliser une variable fournie par le .htaccess
-// var_dump($_SERVER);
+dump($_SERVER);
 // $_SERVER['BASE_URI'] contient la partie de l'URL à ne pas prendre en compte
 
 // On spéficie d'où on part pour nos routes
