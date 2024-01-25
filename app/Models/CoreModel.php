@@ -2,11 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\Type;
-use App\Models\Product;
-
 class CoreModel
 {
     // Propriétés
@@ -46,7 +41,7 @@ class CoreModel
      *
      * @return  self
      */
-    public function setCreated_at($created_at)
+    public function setCreated_at($created_at): self
     {
         $this->created_at = $created_at;
 
@@ -66,7 +61,7 @@ class CoreModel
      *
      * @return  self
      */
-    public function setUpdated_at($updated_at)
+    public function setUpdated_at($updated_at): self
     {
         $this->updated_at = $updated_at;
 

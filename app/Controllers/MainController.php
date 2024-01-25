@@ -1,11 +1,9 @@
 <?php
-// require_once __DIR__ . '/CoreController.php';
-// Pas besoin de require les Models ici grace à Core Controller
+
 namespace App\Controllers;
 
 use App\Models\Product;
 
-use App\Controllers\CoreController;
 use App\Models\Category;
 
 class MainController extends CoreController
@@ -35,7 +33,7 @@ class MainController extends CoreController
 
     }
 
-    public function home($params)
+    public function home()
     {
         // gérer dynamiquement les 5 catégories de Home Page
         // Utiliser Model Category et créer méthode dédiée findByHomeOrder()
@@ -48,7 +46,7 @@ class MainController extends CoreController
         ]);
     }
 
-    public function legalNotices($params)
+    public function legalNotices()
     {
         $this->show('legal-notices');
     }

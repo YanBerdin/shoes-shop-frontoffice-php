@@ -1,19 +1,9 @@
 <?php
 
-// require_once __DIR__ . './../utils/Database.php';
-
-// Heritage
-// require_once __DIR__ . '/CoreModel.php';
-
 namespace App\Models;
 
 use App\Utils\Database;
-
 use PDO;
-// Pour les classes natives PHP, exemple PDO
-use App\Models\CoreModel;
-
-
 
 /**
  * Model servant récupérer un/des Produit(s)
@@ -33,7 +23,8 @@ class Product extends CoreModel
     private $brand_id;
     private $category_id;
     private $type_id;
-    // ajouté suite Triple jointure
+
+    //TODO ajouté suite Triple jointure
     private $brand_name;
     private $category_name;
     private $type_name;
@@ -334,7 +325,7 @@ class Product extends CoreModel
         $pdoStatement = $pdo->query($queryString);
 
         // Récupèrer les résultats (Objet de classe Product contenant les données)
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Product::class);
 
         return $results;
     }
@@ -374,7 +365,7 @@ class Product extends CoreModel
         $pdoStatement = $pdo->query($queryString);
 
         // 4. Récupèrer le produit (objet)
-        $product = $pdoStatement->fetchObject('App\Models\Product');
+        $product = $pdoStatement->fetchObject(Product::class);
         // fetchObject IDEAL sachant qu'on veut l'utiliser qu'1 fois
         // et + performant car variable inutilisée consomme de la mémoire serveur
 
@@ -412,7 +403,7 @@ class Product extends CoreModel
         $pdoStatement = $pdo->query($queryString);
 
         // Stocker l'objet de class Product
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Product::class);
 
         return $results;
     }
@@ -432,7 +423,7 @@ class Product extends CoreModel
 
         $pdoStatement = $pdo->query($sql);
 
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Product::class);
 
         return $results;
     }
@@ -462,7 +453,7 @@ class Product extends CoreModel
 
         $pdoStatement = $pdo->query($queryString);
 
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Product::class);
 
         return $results;
 

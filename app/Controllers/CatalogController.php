@@ -1,10 +1,6 @@
 <?php
-// Plus besoin de require les Models ici grace à Core Controller
-// require_once __DIR__ . '/CoreController.php';
 
 namespace App\Controllers;
-
-use App\Controllers\CoreController;
 
 use App\Models\Category;
 use App\Models\Product;
@@ -16,15 +12,15 @@ class CatalogController extends CoreController
     /**
      * Méthode qui affiche une catégorie ciblée avec son id
      *
-     * @param int $params
+     * @param int $id
      */
-    public function category($params)
+    public function category($id)
     {
         // Objectif : avoir accès à la catégorie demandée
         // Moyens : le Controller doit demander au Model d'accéder à la BDD pour cela
         // (le Model comporte une méthode dédiée : findOne ou findAll)
         $categoryModel = new Category();
-        $category = $categoryModel->findOne($params['id']);
+        $category = $categoryModel->findOne($id);
         //Renaud => $categoryModel->find($id);
 
         // Récupérer les Data des produits de chaque categorie N°($id)
@@ -32,11 +28,11 @@ class CatalogController extends CoreController
         // Instancier un objet new Product($id)
         $productModel = new Product();
         // objet (Data) de Class/Model Product) => Tous les produits de la categorie demandée
-        $products = $productModel->findAllByCategory($params['id']);
+        $products = $productModel->findAllByCategory($id);
         //   idem = $productModel->findAllByCategory($id);
 
         // Transmettre Data à la view
-        $this->show('category', [
+        $this->show('catalog-category', [
             // Maintenant que je recupere depuis CatalogController un Objet $category categoryId est dedans
             // 'categoryId' => $params['id'],
             'category' => $category,
@@ -57,26 +53,25 @@ class CatalogController extends CoreController
     /**
      * Méthode qui affiche un type ciblé avec son id
      *
-     * @param int $params
+     * @param int $id
      */
-    public function type($params)
+    public function type($id)
     {
         // On récupère les données du type $id en BDD
         $typeModel = new Type();
-        $type = $typeModel->findOne($params['id']);
+        $type = $typeModel->findOne($id);
         // dd($type);
 
         // Interroger le model Product pour récupérer des produits.
         // Créer une methode dans ce model
         $productModel = new Product();
-        $products = $productModel->findAllByType($params['id']);
+        $products = $productModel->findAllByType($id);
 
-        $this->show("type", [
+        $this->show("catalog-type", [
             'type' => $type,
             'products' => $products
         ]);
     }
-
 
     // V1 de function type($params)
     // public function type($params)
@@ -93,21 +88,21 @@ class CatalogController extends CoreController
     // {
     //     $this->show("products_list", ['id' => $id, 'title' => "Marque"]);
     // }
-    public function brand($params)
+    public function brand($id)
     {
         // V2 : On récupère à présent des paramètres via $params
         // cad l'id de la marque
         // On appelle la méthode findOne() pour récupérer la marque concernée
         $brandModel = new Brand();
-        $brand = $brandModel->findOne($params['id']);
+        $brand = $brandModel->findOne($id);
 
         // Interroger le bon model pour récupérer les produits.
         // On va devoir créer une nouvelle methode dans le bon model pour ça.
         $productModel = new Product();
-        $products = $productModel->findAllByBrand($params['id']);
+        $products = $productModel->findAllByBrand($id);
 
 
-        $this->show('brand', [
+        $this->show('catalog-brand', [
             // Maintenant que je recupere depuis CatalogController un Objet $product brandId est dedans
             // 'brandId' => $params['id'],
             'brand' => $brand, // A la clé brand on transmet toutes les données dans la requete (objet Brand recup grace à FetchObject)
@@ -136,7 +131,7 @@ class CatalogController extends CoreController
         $curentcategory = $categoryModel->findOne($currentCategoryId);
 
 
-        $this->show('product', [
+        $this->show('catalog-product', [
             // Maintenant que je recupere depuis CatalogController un Objet $product productId est dedans
             // 'productId' => $params['id'],
             'product' => $product, // A la clé product on transmet toutes les données dans la requete (objet product recup grace à FetchObject)
@@ -153,8 +148,6 @@ class CatalogController extends CoreController
     // Car le Model Product ne possede pas de méthode 'select FetchAll dans la BDD'
     // Permettant de Retourner tous les produits liés à une catégorie précise
     // Dans le Model Product => Créer une Méthode findAllByCategory($categoryId)
-
-
 
 
     // Commenté Depuis mise en place de la classe Mere CoreController qui possede show()

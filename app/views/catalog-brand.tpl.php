@@ -87,7 +87,7 @@ dump($products);
         // $picture = ($absoluteURL . "/" . $product->getPicture());
         // Nouveau chemin à reconstituer avec images hebergées par BenOclock
         $picture = $product->getPicture();
-        // var_dump($picture);
+         var_dump($picture);
 
 
 
@@ -95,16 +95,16 @@ dump($products);
 
         <div class="product col-xl-3 col-lg-4 col-sm-6">
           <div class="product-image">
-            <!-- <a href="<?= $absoluteURL ?>/catalogue/produit/<?= $product->getId() ?>/" class="product-hover-overlay-link"> -->
+            <a href="<?= $BASE_URI ?>catalogue/produit/<?= $product->getId() ?>/" class="product-hover-overlay-link">
             <img src="<?= $picture ?>" alt=" product" class="img-fluid">
           </div>
           <div class="product-action-buttons">
             <a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a>
-            <a href="<?= $absoluteURL ?>/catalogue/produit/<?= $product->getId() ?>/" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">Voir</span></a>
+            <a href="<?= $BASE_URI ?>catalogue/produit/<?= $product->getId() ?>/" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">Voir</span></a>
           </div>
           <div class="py-2">
             <p class="text-muted text-sm mb-1"><?= $product->getName() ?></p>
-            <h3 class="h6 text-uppercase mb-1"><a href="<?= $absoluteURL ?>/catalogue/categorie/<?= $product->getCategory_id() ?>/"><?= $product->getCategory_name() ?></a></h3><span class="text-muted">20€</span>
+            <h3 class="h6 text-uppercase mb-1"><a href="<?= $BASE_URI ?>catalogue/categorie/<?= $product->getCategory_id() ?>/"><?= $product->getCategory_name() ?></a></h3><span class="text-muted">20€</span>
           </div>
         </div>
 
@@ -116,7 +116,7 @@ dump($products);
       <!-- <div class="product col-xl-3 col-lg-4 col-sm-6">
         <div class="product-image">
           <a href="product.html" class="product-hover-overlay-link">
-            <img src="<?= $absoluteURL ?>/assets/images/produits/3-panda_tn.jpg" alt="product" class="img-fluid">
+            <img src="<?php // echo $absoluteURL ?>/assets/images/produits/3-panda_tn.jpg" alt="product" class="img-fluid">
           </a>
         </div>
         <div class="product-action-buttons">

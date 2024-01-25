@@ -14,7 +14,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
         - Soit on affiche la page d'erreur 404
  */
 
-use App\Controllers\CoreController;
 use App\Controllers\MainController;
 use App\Controllers\CatalogController;
 use App\Controllers\ErrorController;
@@ -41,19 +40,26 @@ use App\Controllers\ErrorController;
 // (Pas besoin require car installé comme dependance avec Composer)
 $router = new AltoRouter();
 
-// 2. On doit dire à AltoRouter la partie de l'URL à ne pas prendre en compte pour le mapping
-// Pour cela, on va utiliser une variable fournie par le .htaccess
-dump($_SERVER);
-// $_SERVER['BASE_URI'] contient la partie de l'URL à ne pas prendre en compte
+// 2. On doit dire à AltoRouter la partie de l'URL //! à ne pas prendre en compte pour le mapping
+// Pour cela, utiliser une variable fournie par le .htaccess
+// dump($_SERVER);
+// $_SERVER['BASE_URI'] contient la partie de l'URL //! à ne pas prendre en compte
 
 // On spéficie d'où on part pour nos routes
 // $_SERVER est une variable spéciale qui contient tout un tas d'informations.
 // Attention, entre 2 machines on ne trouvera pas toujours les mêmes clés dans le tableau.
 // Définition du basepath (partie fixe de l'url)
-$router->setBasePath($_SERVER['BASE_URI']);
+//?$router->setBasePath($_SERVER['BASE_URI']);
 // dd($_SERVER['BASE_URI']);
 
-
+// Version bis
+if (array_key_exists('BASE_URI', $_SERVER)) {
+    $router->setBasePath($_SERVER['BASE_URI']);
+} else {
+    $_SERVER['BASE_URI'] = '/';
+}
+// dump($_SERVER['BASE_URI']);
+// dump($_SERVER);
 
 // 3. On fait le "mapping" cad la correspondance entre URL demandée et route associée
 // map() prend 4 paramètres :
@@ -70,7 +76,7 @@ $router->map(
     'GET', // La méthode HTTP autorisée pour cette route
     '/',   // Partie de l'URL qui correspond à la page demandée (route)
     [
-        'controller' => 'App\Controllers\MainController', // Cible le bon controller et la bonne methode
+        'controller' => MainController::class, // Cible le bon controller et la bonne methode
         'method' => 'home',
     ],
     'home' // Identifiant unique de la route
@@ -79,9 +85,9 @@ $router->map(
 // Route pour les mentions légales
 $router->map(
     "GET",
-    '/mentions-legales/', // Partie de l'URL qui correspond à la page demandée (route)
+    '/mentions-legales', // Partie de l'URL qui correspond à la page demandée (route)
     [
-        'controller' => 'App\Controllers\MainController',
+        'controller' => MainController::class,
         'method' => 'legalNotices',
     ],
     'legal-notices'
@@ -90,9 +96,9 @@ $router->map(
 // Route pour les catégories du catalogue produit
 $router->map(
     "GET",
-    '/catalogue/categorie/[i:id]/',
+    '/catalogue/categorie/[i:id]',
     [
-        'controller' => 'App\Controllers\CatalogController',
+        'controller' => CatalogController::class,
         'method' => 'category',
     ],
     'catalog-category'
@@ -101,9 +107,9 @@ $router->map(
 // Route pour les types
 $router->map(
     "GET",
-    '/catalogue/type/[i:id]/',
+    '/catalogue/type/[i:id]',
     [
-        'controller' => 'App\Controllers\CatalogController',
+        'controller' => CatalogController::class,
         'method' => 'type',
     ],
     'catalog-type'
@@ -112,9 +118,9 @@ $router->map(
 // Route pour les marques
 $router->map(
     'GET',
-    '/catalogue/marque/[i:id]/',
+    '/catalogue/marque/[i:id]',
     [
-        'controller' => 'App\Controllers\CatalogController',
+        'controller' => CatalogController::class,
         'method' => 'brand'
     ],
     'catalog-brand'
@@ -123,12 +129,12 @@ $router->map(
 // Route pour les produits
 $router->map(
     'GET',
-    '/catalogue/produit/[i:id]/',
+    '/catalogue/produit/[i:id]',
     [
-        'controller' => 'App\Controllers\CatalogController',
+        'controller' => CatalogController::class,
         'method' => 'product'
     ],
-    'catalog-product'
+    'product'
 );
 
 // Route pour les produits
@@ -145,9 +151,9 @@ $router->map(
 // Route test
 $router->map(
     'GET',
-    '/test/',
+    '/test',
     [
-        'controller' => 'App\Controllers\MainController',
+        'controller' => MainController::class,
         'method'     => 'test'
     ],
     'test'
@@ -167,18 +173,19 @@ $match = $router->match();
 
 // Si on a quelque chose dans $match, alors on peut faire la suite du traitement
 if ($match) {   // équivalent à $match != false
-    $controllerToUse = $match['target']['controller'];
+    $controllerToUse = new $match['target']['controller']();
 
     // On doit récupérer la méthode à appeler
     $methodToUse = $match['target']['method'];
 
+
     // On instancie le controller
-    $controller = new $controllerToUse();
+    // $controller = new $controllerToUse();
 
     // On appelle la méthode
     // $controller->$methodToUse();
     // V3 : on appelle à présent la méthode en lui transmettant l'argument $match['params']
-    $controller->$methodToUse($match['params']);
+    //  $controller->$methodToUse($match['params']);
 
 
     // $id = isset($match['params']['id']) ? $match['params']['id'] : null;
@@ -189,14 +196,16 @@ if ($match) {   // équivalent à $match != false
     //     $id = null;
     // }
 
+    $id = $match['params']['id'] ?? null;
+
     // Le dispatcher
     // 0 === null -> non
     //donc : 0 !== null -> oui
-    // if ($id !== null) {
-    //     $controller->$method($id);
-    // } else {
-    //     $controller->$method();
-    // }
+    if ($id !== null) {
+        $controllerToUse->$methodToUse($id);
+    } else {
+        $controllerToUse->$methodToUse();
+    }
 } else {
     $controller = new ErrorController();
     $controller->error404();

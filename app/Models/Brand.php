@@ -1,20 +1,8 @@
 <?php
-
- // require_once __DIR__ . './../Utils/Database.php';
-
-// Heritage
-// require_once __DIR__ . '/CoreModel.php';
-
-
 namespace App\Models;
 
-use PDO;
-// Pour les classes natives PHP, exemple PDO
-use App\Models\CoreModel;
 use App\Utils\Database;
-
-use App\Models\Category;
-
+use PDO;
 /**
  * Model servant à gérer les marques
  */
@@ -75,7 +63,7 @@ class Brand extends CoreModel
      *
      * @return  self
      */
-    public function setName($name)
+    public function setName($name): self
     {
         $this->name = $name;
         return $this;
@@ -127,7 +115,7 @@ class Brand extends CoreModel
 
 
     /**
-    * Retourne la liste de toustes les marques de la BDD
+    * Retourne la liste de toutes les marques de la BDD
     *
     * @param string $sort Contient le nom d'un champ sur lequel filtrer
     *
@@ -153,12 +141,20 @@ class Brand extends CoreModel
         
         // Récupèrer les résultats (Objet) contenant les données)
         // Inidiquer explicitement que les résultats récupérés seront de classe 'Brand'
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Brand');
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Brand::class);
 
         // Retourne le résultat
         return $results;
     }
 
+
+        /**
+     * Retourne une marque spécifique via son id dans la BDD
+     *
+     * @param int $id
+     *
+     * @return Brand
+     */
     public function findOne($id)
     {
         // Connexion à la BDD en utilisant la classe Database
@@ -171,7 +167,7 @@ class Brand extends CoreModel
         $pdoStatement = $pdo->query($queryString);
 
         // Récupèrer les résultats (Objet de classe Brand contenant les données)
-        $result = $pdoStatement->fetchObject('App\Models\Brand');
+        $result = $pdoStatement->fetchObject(Brand::class);
         // fetchObject IDEAL sachant qu'on veut l'utiliser qu'1 fois
         // et + performant car variable inutilisée consomme de la mémoire serveur
 

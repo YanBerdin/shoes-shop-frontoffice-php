@@ -1,15 +1,8 @@
 <?php
-//  require_once __DIR__ . './../Utils/Database.php';
-
-// Heritage
-// require_once __DIR__ . '/CoreModel.php';
 
 namespace App\Models;
 
-// Pour les classes natives PHP, exemple PDO
-use App\Models\CoreModel;
 use App\Utils\Database;
-
 use PDO;
 
 /**
@@ -98,33 +91,6 @@ class Category extends CoreModel
         return $this;
     }
 
-    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
-    // public function getCreatedAt()
-    // {
-    //     return $this->created_at;
-    // }
-
-    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
-    // public function setCreatedAt($created_at): self
-    // {
-    //     $this->created_at = $created_at;
-    //     return $this;
-    // }
-
-    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
-    // public function getUpdatedAt()
-    // {
-    //     return $this->updated_at;
-    // }
-
-    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
-    // public function setUpdatedAt($updated_at): self
-    // {
-    //     $this->updated_at = $updated_at;
-    //     return $this;
-    // }
-
-
     /**
      * Retourne la liste de toutes les catégories de la BDD
      *
@@ -153,7 +119,7 @@ class Category extends CoreModel
 
         // 4. Récupèrer tous les résultats
         // On dit explicitement que les résultats récupérés seront de type 'Category'
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Category');
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Category::class);
 
         // 5. Retourne les résultats
         return $results;
@@ -173,8 +139,9 @@ class Category extends CoreModel
         $pdo = Database::getPDO();
 
         // Préparer la query string
-        $queryString = 'SELECT * FROM `category` WHERE id = ' . $id;
-        //       idem  "SELECT * FROM `category` WHERE id=$id");
+       // $queryString = 'SELECT * FROM `category` WHERE id = ' . $id;
+        //       idem  
+        $queryString = "SELECT * FROM `category` WHERE id=$id";
 
         // Exécuter la requête
         $pdoStatement = $pdo->query($queryString);
@@ -182,12 +149,18 @@ class Category extends CoreModel
         // avant de faire le fetch
 
         // Récupèrer les résultats (Objet de classe Product contenant les données)
-        $result = $pdoStatement->fetchObject('App\Models\Category');
+        $result = $pdoStatement->fetchObject(Category::class);
 
         // Retourne le résultat
         return $result;
     }
 
+    /**
+     * Retourne la liste de toutes les catégories de la BDD à afficher sur la
+     * homepage, dans le bon ordre
+     *
+     * @return Category[]
+     */
     public function findByHomeOrder()
     {
         $pdo = Database::getPDO();
@@ -201,7 +174,7 @@ class Category extends CoreModel
 
         $pdoStatement = $pdo->query($queryString);
 
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Category');
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Category::class);
 
         return $results;
     }

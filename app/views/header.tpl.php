@@ -1,9 +1,5 @@
-        <?php // var_dump($url); 
-        ?>
-        <?php // var_dump($absoluteURL) 
-        ?>
-
-        <?php // var_dump($typesList);
+        <?php
+        // dump(get_defined_vars()); 
         ?>
 
         <!DOCTYPE html>
@@ -13,16 +9,13 @@
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-            <!-- V2 : On utilise la variable $absoluteURL pour avoir des URLs absolues au niveau de nos assets -->
-            <!-- $absoluteURL contient : 'localhost/.../public' -->
-            <link rel="stylesheet" href="<?= $absoluteURL ?>/assets/css/bootstrap.min.css">
-            <link rel="stylesheet" href="<?= $absoluteURL ?>/assets/css/font-awesome.min.css">
-            <link rel="stylesheet" href="<?= $absoluteURL ?>/assets/css/styles.css">
-            <!-- <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./assets/css/font-awesome.min.css">
-  <link rel="stylesheet" href="./assets/css/styles.css"> -->
+            <link rel="stylesheet" href="<?= $BASE_URI ?>assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="<?= $BASE_URI ?>assets/css/font-awesome.min.css">
+            <link rel="stylesheet" href="<?= $BASE_URI ?>assets/css/styles.css">
+
             <title>oShop</title>
         </head>
+
 
         <body>
             <header>
@@ -40,8 +33,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <nav class="navbar navbar-expand-lg navbar-sticky navbar-airy navbar-light">
                     <div class="container-fluid">
                         <!-- Navbar Header  -->
@@ -54,34 +45,25 @@
                         <div id="navbarCollapse" class="collapse navbar-collapse">
                             <ul class="navbar-nav mx-auto">
                                 <li class="nav-item">
-                                    <!-- <a href="index.html" class="nav-link active">Accueil</a> -->
                                     <a href="<?= $router->generate('home') ?>" class="nav-link active">Accueil</a>
                                 </li>
                                 <li class="nav-item">
                                     <div class="dropdown">
-                                        <a class="nav-link dropdown-toggle" href="<?= $router->generate('catalog-category') ?>" data-toggle="dropdown">Catégories</a>
+                                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Catégories</a>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-                                            <?php
-                                            foreach ($categoriesList as $category) : ?>
-                                                <?php // var_dump($category); 
-                                                ?>
-                                                <!--     Recontruit chemin href           ===>             ==>         /         id             /          Texte du lien    -->
-                                                <a class="dropdown-item" href="<?= $absoluteURL ?>/catalogue/categorie/<?= $category->getId() ?>/"><?= $category->getName() ?></a>
-                                            <?php endforeach; ?>
-
+                                            <?php foreach ($categoriesList as $categoryElement) { ?>
+                                                <a class="dropdown-item" href="<?= $router->generate('catalog-category', ["id" => $categoryElement->getId()]) ?>"><?= $categoryElement->getName() ?></a>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </li>
                                 <li class="nav-item">
                                     <div class="dropdown">
-                                        <a class="nav-link dropdown-toggle" href="<?= $router->generate('catalog-type') ?>" data-toggle="dropdown">Types de produits</a>
+                                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Types de produits</a>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-                                            <?php foreach ($typesList as $type) : ?>
-                                                <a class="dropdown-item" href="<?= $absoluteURL ?>/catalogue/type/<?= $type->getId() ?>/"><?= $type->getName() ?></a>
-                                            <?php endforeach; ?>
-
+                                            <?php foreach ($typesList as $type) { ?>
+                                                <a class="dropdown-item" href="<?= $router->generate('catalog-type', ["id" => $type->getId()]) ?>"><?= $type->getName() ?></a>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </li>
@@ -89,13 +71,9 @@
                                     <div class="dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Marques</a>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-                                            <?php foreach ($brandsList as $brand) : ?>
-                                                <!-- dans ce foreach, $allBrands est un array d'objets -->
-                                                <!-- et $brand représente chaque objet Brand -->
-                                                <a class="dropdown-item" href="<?php echo $absoluteURL . '/catalogue/marque/' . $brand->getId() . '/'; ?>"><?php echo $brand->getName(); ?></a>
-                                            <?php endforeach; ?>
-
+                                            <?php foreach ($brandsList as $brand) { ?>
+                                                <a class="dropdown-item" href="<?= $router->generate('catalog-brand', ["id" => $brand->getId()]) ?>"><?= $brand->getName() ?></a>
+                                            <?php } ?>
                                             <!-- <a class="dropdown-item" href="products_list.html">BOOTstrap</a>
                                             <a class="dropdown-item" href="products_list.html">O'shoes</a>
                                             <a class="dropdown-item" href="products_list.html">oCirage</a>

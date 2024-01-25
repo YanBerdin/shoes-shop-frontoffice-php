@@ -1,4 +1,4 @@
-            <?php dump($viewData);
+            <?php // dump($viewData);
             ?>
             <?php $category = $viewData['category']; ?>
             <?php $products = $viewData['products']; ?>
@@ -63,11 +63,11 @@
                       </div>
                       <div class="product-action-buttons">
                         <a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a>
-                        <a href="<?= $absoluteURL ?>/catalogue/produit/<?= $product->getId() ?>/" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">Voir</span></a>
+                        <a href="<?= $BASE_URI ?>catalogue/produit/<?= $product->getId() ?>/" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">Voir</span></a>
                       </div>
                       <div class="py-2">
                         <p class="text-muted text-sm mb-1"><?= $product->getType_name() ?></p>
-                        <h3 class="h6 text-uppercase mb-1"><a href="<?= $absoluteURL ?>/catalogue/produit/<?= $product->getId() ?>/" class="text-dark"><?= $product->getName() ?></a></h3><span class="text-muted"><?= $product->getPrice() ?>€</span>
+                        <h3 class="h6 text-uppercase mb-1"><a href="<?= $BASE_URI ?>catalogue/produit/<?= $product->getId() ?>/" class="text-dark"><?= $product->getName() ?></a></h3><span class="text-muted"><?= $product->getPrice() ?>€</span>
                       </div>
                     </div>
                     <!-- /product-->

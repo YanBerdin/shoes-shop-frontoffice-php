@@ -101,13 +101,13 @@
                     <div class="col-md-3">
                         <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
                             <li class="list-inline-item">
-                                <img src="<?= $absoluteURL ?>/assets/images/visa.svg" alt="..." class="payment-icon">
+                                <img src="<?= $BASE_URI ?>assets/images/visa.svg" alt="..." class="payment-icon">
                             </li>
                             <li class="list-inline-item">
-                                <img src="<?= $absoluteURL ?>/assets/images/mastercard.svg" alt="..." class="payment-icon">
+                                <img src="<?= $BASE_URI ?>assets/images/mastercard.svg" alt="..." class="payment-icon">
                             </li>
                             <li class="list-inline-item">
-                                <img src="<?= $absoluteURL ?>/assets/images/paypal.svg" alt="..." class="payment-icon">
+                                <img src="<?= $BASE_URI ?>assets/images/paypal.svg" alt="..." class="payment-icon">
                             </li>
                         </ul>
                     </div>
@@ -117,10 +117,10 @@
     </footer>
 
     <!-- JS -->
-    <script src="<?= $absoluteURL ?>/assets/js/jquery.min.js"></script>
-    <script src="<?= $absoluteURL ?>/assets/js/popper.min.js"></script>
-    <script src="<?= $absoluteURL ?>/assets/js/bootstrap.min.js"></script>
-    <script src="<?= $absoluteURL ?>/assets/js/app.js"></script>
+    <script src="<?= $BASE_URI ?>assets/js/jquery.min.js"></script>
+    <script src="<?= $BASE_URI ?>assets/js/popper.min.js"></script>
+    <script src="<?= $BASE_URI ?>assets/js/bootstrap.min.js"></script>
+    <script src="<?= $BASE_URI ?>assets/js/app.js"></script>
 </body>
 
 </html>
