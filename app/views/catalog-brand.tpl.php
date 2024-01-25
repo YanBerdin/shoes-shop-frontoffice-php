@@ -3,8 +3,7 @@
 $brand = $viewData['brand'];
 // var_dump($brand->getName()); 
 $products = $viewData['products'];
-// var_dump($products);
-dump($products);
+// dump($products);
 ?>
 
 <section class="hero">

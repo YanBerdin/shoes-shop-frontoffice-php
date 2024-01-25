@@ -115,13 +115,13 @@ class CatalogController extends CoreController
      *
      * @param int $params
      */
-    public function product($params)
+    public function product($id)
     {
         // V2 : On récupère à présent des paramètres via $params
         // cad l'id de la marque
         // On appelle la méthode findOne() pour récupérer la marque concernée
         $productModel = new Product();
-        $product = $productModel->findOne($params['id']);
+        $product = $productModel->findOne($id);
 
         // Récupérer l'id de la categorie à laquelle 1 produit est associé
         $currentCategoryId = $product->getCategory_id();
@@ -131,7 +131,7 @@ class CatalogController extends CoreController
         $curentcategory = $categoryModel->findOne($currentCategoryId);
 
 
-        $this->show('catalog-product', [
+        $this->show('product', [
             // Maintenant que je recupere depuis CatalogController un Objet $product productId est dedans
             // 'productId' => $params['id'],
             'product' => $product, // A la clé product on transmet toutes les données dans la requete (objet product recup grace à FetchObject)

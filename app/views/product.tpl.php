@@ -8,7 +8,7 @@
  * @var Product
  */
 $product = $viewData['product'];
-// var_dump($product);
+dump($product);
 // var_dump($product->getName());
 // var_dump($product->getCategory_id());
 
@@ -22,7 +22,7 @@ $product = $viewData['product'];
 // Récupérer le chemin "src" de l'image du produit
 // Maintenant que les images sont hébergées par BenOclock
 // $picture = ($absoluteURL . "/" . $product->getPicture());
-$picture = $product->getPicture();
+// $picture = $product->getPicture();
 ?>
 
 
@@ -32,7 +32,7 @@ $picture = $product->getPicture();
         <ol class="breadcrumb justify-content-center">
             <li class="breadcrumb-item"><a href="<?= $router->generate('home') ?>">Home</a></li>
             <!-- <li class="breadcrumb-item active">Détente</li> -->
-            <li class="breadcrumb-item active"> <a href="<?= $BASE_URI ?>catalogue/categorie/<?= $product->getCategory_id() ?>/"><?= $product->GetCategory_name() ?></a></li>
+            <li class="breadcrumb-item active"> <a href="<?= $BASE_URI ?>catalogue/categorie/<?= $product->getCategory_id() ?>"><?= $product->GetCategory_name() ?></a></li>
         </ol>
     </div>
 </section>
@@ -46,9 +46,8 @@ $picture = $product->getPicture();
                 <div class="product-image">
                     <!-- <a href="detail.html" class="product-hover-overlay-link"> -->
 
-                    <img src="<?= $BASE_URI ?>assets/images/produits/1-kiss.jpg" alt="product" class="img-fluid"> </a>
                     <!-- Dynamisé-->
-                    <img src="<?= $picture ?>" alt=" product" class="img-fluid">
+                    <img src="<?= $product->getPicture() ?>" alt=" product" class="img-fluid">
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12">
@@ -58,7 +57,8 @@ $picture = $product->getPicture();
                     <h3 class="h3 text-uppercase mb-1">Produit n°<?= $product->getId() ?></h3>
                     <!-- Grâce à triple jointure sur findOne() et propriétés déclarées subséquentes
                             je peux afficher les noms de marques, type...   -->
-                    <div class="text-muted"> <a href="<?= $BASE_URI ?>/catalogue/marque/<?= $product->getBrand_id() ?>/"><em><?= $product->getBrand_Name() ?></em></a></div>
+                            <?php //TODO $router generate ?>
+                    <div class="text-muted"> <a href="<?= $BASE_URI ?>/catalogue/marque/<?= $product->getBrand_id() ?>"><em><?= $product->getBrand_Name() ?></em></a></div>
                     <h4><?= $product->getCategory_name() ?></h4>
                     <div>
                         <i class="fa fa-star"></i>
