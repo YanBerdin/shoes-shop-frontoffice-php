@@ -1,41 +1,17 @@
-<?php // var_dump($viewData); 
-namespace App\views;
-
-use App\Models\Category;
-
-// $categoryModel = new Category();
-
-?>
-<?php // var_dump($viewData['brand']); 
-
-?>
-<?php $brand = $viewData['brand']; ?>
-<?php // var_dump($brand->getName()); 
-?>
-
 <?php
-?>
-
-<?php
-/**
- * @var Product[]
- */
-$products = $viewData['products']; ?>
-<?php  // var_dump($products);
+// var_dump($viewData); 
+$brand = $viewData['brand'];
+// var_dump($brand->getName()); 
+$products = $viewData['products'];
+// var_dump($products);
 dump($products);
 ?>
 
 <section class="hero">
   <div class="container">
-    <!-- Breadcrumbs -->
-    <ol class="breadcrumb justify-content-center">
-      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-
-    </ol>
-
     <!-- Hero Content-->
     <div class="hero-content pb-5 text-center">
-      <h1 class="hero-heading">Bienvenue dans l'univers</br> <?= $brand->getName() ?></h1>
+      <h1 class="hero-heading">Bienvenue dans l'univers de la marque : </br> <?= $brand->getName() ?></h1>
       <div class="row">
         <div class="col-xl-8 offset-xl-2">
         </div>
@@ -67,44 +43,32 @@ dump($products);
     <div class="row">
 
       <!-- product-->
+
       <?php
-      foreach ($products as $product) :
+      // Récupérer l'id de la categorie à laquelle 1 produit est associé
+      // $currentCategoryId = $product->getCategory_id();
 
-        // Récupérer l'id de la categorie à laquelle 1 produit est associé
-        // $currentCategoryId = $product->getCategory_id();
+      // Récupérer la catégorie à laquelle 1 produit est associé
+      // $categoryModel = new Category();
+      //$curentcategory = $categoryModel->findOne($currentCategoryId);
 
-        // Récupérer la catégorie à laquelle 1 produit est associé
-        // $categoryModel = new Category();
-        //$curentcategory = $categoryModel->findOne($currentCategoryId);
-      ?>
-        <?php
-        // var_dump($absoluteURL); 
-        // var_dump($product); 
-        ?>
-
-        <?php
-        // Récupérer le chemin absolu "src" de chaque image
-        // $picture = ($absoluteURL . "/" . $product->getPicture());
-        // Nouveau chemin à reconstituer avec images hebergées par BenOclock
-        $picture = $product->getPicture();
-         var_dump($picture);
-
-
-
-        ?>
-
+      // var_dump($absoluteURL);  
+      // Récupérer le chemin absolu "src" de chaque image
+      // $picture = ($absoluteURL . "/" . $product->getPicture());
+      // Nouveau chemin à reconstituer avec images hebergées par BenOclock
+      foreach ($products as $product) : ?>
         <div class="product col-xl-3 col-lg-4 col-sm-6">
           <div class="product-image">
-            <a href="<?= $BASE_URI ?>catalogue/produit/<?= $product->getId() ?>/" class="product-hover-overlay-link">
-            <img src="<?= $picture ?>" alt=" product" class="img-fluid">
+            <a href="<?= $BASE_URI ?>catalogue/produit/<?= $product->getId() ?>" class="product-hover-overlay-link">
+              <img src="<?= $product->getPicture(); ?>" alt=" product" class="img-fluid">
           </div>
           <div class="product-action-buttons">
             <a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a>
-            <a href="<?= $BASE_URI ?>catalogue/produit/<?= $product->getId() ?>/" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">Voir</span></a>
+            <a href="<?= $router->generate('product', ["id" => $product->getId()]) ?>" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">Voir</span></a>
           </div>
           <div class="py-2">
             <p class="text-muted text-sm mb-1"><?= $product->getName() ?></p>
-            <h3 class="h6 text-uppercase mb-1"><a href="<?= $BASE_URI ?>catalogue/categorie/<?= $product->getCategory_id() ?>/"><?= $product->getCategory_name() ?></a></h3><span class="text-muted">20€</span>
+            <h3 class="h6 text-uppercase mb-1"><a href="<?= $router->generate('catalog-category', ["id" => $product->getCategory_id()]) ?>"><?= $product->getCategory_name() ?></a></h3><span class="text-muted">20€</span>
           </div>
         </div>
 
@@ -116,7 +80,8 @@ dump($products);
       <!-- <div class="product col-xl-3 col-lg-4 col-sm-6">
         <div class="product-image">
           <a href="product.html" class="product-hover-overlay-link">
-            <img src="<?php // echo $absoluteURL ?>/assets/images/produits/3-panda_tn.jpg" alt="product" class="img-fluid">
+            <img src="<?php // echo $absoluteURL 
+                      ?>/assets/images/produits/3-panda_tn.jpg" alt="product" class="img-fluid">
           </a>
         </div>
         <div class="product-action-buttons">
