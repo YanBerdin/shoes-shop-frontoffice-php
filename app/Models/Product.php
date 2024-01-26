@@ -456,9 +456,9 @@ class Product extends CoreModel
         //? Lier le paramètre ':typeId' à la variable $typeId
         $pdoStatement->execute([':typeId' => $typeId]);
 
-        //TODO ALEC => Faut il utiliser ici bindvalue() ??
-        //TODO?? $pdoStatement->bindValue(':typeId', $typeId, PDO::PARAM_INT);
-        //TODO?? $pdoStatement->execute();
+        //FIXME: ALEC => Faut il utiliser ici bindvalue() ??
+        //TODO ? $pdoStatement->bindValue(':typeId', $typeId, PDO::PARAM_INT);
+        //TODO ? $pdoStatement->execute();
         
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Product::class);
 

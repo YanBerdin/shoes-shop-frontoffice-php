@@ -186,9 +186,9 @@ class Brand extends CoreModel
         //? Lier le paramètre ':id' à la variable $id
         $pdoStatement->execute([':id' => $id]);
 
-        //TODO ALEC => Faut il utiliser ici bindvalue() ??
-        //TODO?? $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
-        //TODO?? $pdoStatement->execute();
+        //FIXME: ALEC => Faut il utiliser ici bindvalue() ??
+        //TODO ? $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+        //TODO ? $pdoStatement->execute();
 
         // Récupèrer les résultats (Objet de classe Brand contenant les données)
         $result = $pdoStatement->fetchObject(Brand::class);
