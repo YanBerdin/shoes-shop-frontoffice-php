@@ -139,9 +139,10 @@ class Category extends CoreModel
         $pdo = Database::getPDO();
 
         // Préparer la query string
-       // $queryString = 'SELECT * FROM `category` WHERE id = ' . $id;
-        //       idem  
-        // $queryString = "SELECT * FROM `category` WHERE id=$id";
+        //? Interpolation (risque Injection SQL)
+        // $queryString = 'SELECT * FROM `category` WHERE id = ' . $id;
+        //?       idem  
+        //? $queryString = "SELECT * FROM `category` WHERE id=$id";
         $queryString = "SELECT * FROM `category` WHERE `id` =:id";
 
         // Préparer la requête

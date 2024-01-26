@@ -131,11 +131,21 @@ class Brand extends CoreModel
         // Préparer la query string requête (SQL) sous forme de string
         $queryString = 'SELECT * FROM `brand`';
 
+        //? les requêtes préparées ne sont généralement pas utilisées pour les noms de champs ou de tables
+        //? => validation ou nettoyage
+
         // Si un classement est demandé => l'ajouter dans la requete
-        if ($sort !== "") {
-            // $sql = $sql . " ORDER BY $sort";
+        //? if ($sort !== "") {
+        // $sql = $sql . " ORDER BY $sort";
+        //? $queryString .= " ORDER BY $sort";
+        // Par défaut les résultats sont classés par ordre ascendant
+        //? }
+
+        //! Liste des champs autorisés pour le tri
+        $allowedSortFields = ['id', 'name', 'created_at', 'updated_at'];
+        //! => validation
+        if (in_array($sort, $allowedSortFields)) {
             $queryString .= " ORDER BY $sort";
-            // Par défaut les résultats sont classés par ordre ascendant
         }
 
         // Exécuter la requête
@@ -163,7 +173,8 @@ class Brand extends CoreModel
         $pdo = Database::getPDO();
 
         // Définir la query string
-        // $queryString = 'SELECT * FROM `brand` WHERE id = ' . $id;
+        //? Interpolation (risque Injection SQL)
+        //? $queryString = 'SELECT * FROM `brand` WHERE id = ' . $id;
         $queryString = "SELECT * FROM `brand` WHERE `id` =:id";
 
         // Préparer la requête
