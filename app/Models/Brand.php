@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Models;
 
 use App\Utils\Database;
 use PDO;
+
 /**
  * Model servant à gérer les marques
  */
@@ -115,12 +117,12 @@ class Brand extends CoreModel
 
 
     /**
-    * Retourne la liste de toutes les marques de la BDD
-    *
-    * @param string $sort Contient le nom d'un champ sur lequel filtrer
-    *
-    * @return Brand[]
-    */
+     * Retourne la liste de toutes les marques de la BDD
+     *
+     * @param string $sort Contient le nom d'un champ sur lequel filtrer
+     *
+     * @return Brand[]
+     */
     public function findAll($sort = "")
     {
         // Connexion à la BDD en utilisant la classe Database
@@ -136,9 +138,9 @@ class Brand extends CoreModel
             // Par défaut les résultats sont classés par ordre ascendant
         }
 
-         // Exécuter la requête
+        // Exécuter la requête
         $pdoStatement = $pdo->query($queryString);
-        
+
         // Récupèrer les résultats (Objet) contenant les données)
         // Inidiquer explicitement que les résultats récupérés seront de classe 'Brand'
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Brand::class);
@@ -148,7 +150,7 @@ class Brand extends CoreModel
     }
 
 
-        /**
+    /**
      * Retourne une marque spécifique via son id dans la BDD
      *
      * @param int $id
@@ -160,18 +162,23 @@ class Brand extends CoreModel
         // Connexion à la BDD en utilisant la classe Database
         $pdo = Database::getPDO();
 
-        // Préparer la query string
-        $queryString = 'SELECT * FROM `brand` WHERE id = ' . $id;
+        // Définir la query string
+        // $queryString = 'SELECT * FROM `brand` WHERE id = ' . $id;
+        $queryString = "SELECT * FROM `brand` WHERE `id` =:id";
+
+        // Préparer la requête
+        $pdoStatement = $pdo->prepare($queryString);
 
         // Exécuter la requête
-        $pdoStatement = $pdo->query($queryString);
+        // $pdoStatement = $pdo->query($queryString);
+        $pdoStatement->execute([':id' => $id]);
 
         // Récupèrer les résultats (Objet de classe Brand contenant les données)
         $result = $pdoStatement->fetchObject(Brand::class);
+
         // fetchObject IDEAL sachant qu'on veut l'utiliser qu'1 fois
         // et + performant car variable inutilisée consomme de la mémoire serveur
 
-        // 5. On retourne le résultat
         return $result;
     }
 }

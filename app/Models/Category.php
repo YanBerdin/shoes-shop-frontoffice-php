@@ -141,10 +141,16 @@ class Category extends CoreModel
         // Préparer la query string
        // $queryString = 'SELECT * FROM `category` WHERE id = ' . $id;
         //       idem  
-        $queryString = "SELECT * FROM `category` WHERE id=$id";
+        // $queryString = "SELECT * FROM `category` WHERE id=$id";
+        $queryString = "SELECT * FROM `category` WHERE `id` =:id";
+
+        // Préparer la requête
+        $pdoStatement = $pdo->prepare($queryString);
 
         // Exécuter la requête
-        $pdoStatement = $pdo->query($queryString);
+        // $pdoStatement = $pdo->query($queryString);
+        $pdoStatement->execute([':id' => $id]);
+
         // Idéalement, ici je devrais vérifier que $pdoStatement n'est pas false
         // avant de faire le fetch
 
