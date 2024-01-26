@@ -1,8 +1,4 @@
 <?php
-
-// Rappel : Controller interroge Model -> récupère Data -> transmet Data à Template
-
-// Grace à autoload (PSR-4) => Utilisqr "use"
 // require_once __DIR__ . './../models/Brand.php';
 // require_once __DIR__ . './../models/Category.php';
 // require_once __DIR__ . './../models/Type.php';
@@ -10,6 +6,7 @@
 
 namespace App\Controllers;
 
+// Grace à autoload (PSR-4) => Utiliser "use"
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Type;

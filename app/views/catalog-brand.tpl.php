@@ -19,7 +19,6 @@ $products = $viewData['products'];
   </div>
 </section>
 
-
 <section class="products-grid">
   <div class="container-fluid">
 
@@ -51,18 +50,20 @@ $products = $viewData['products'];
       // $categoryModel = new Category();
       //$curentcategory = $categoryModel->findOne($currentCategoryId);
 
-      // var_dump($absoluteURL);  
       // Récupérer le chemin absolu "src" de chaque image
       // $picture = ($absoluteURL . "/" . $product->getPicture());
       // Nouveau chemin à reconstituer avec images hebergées par BenOclock
+
       foreach ($products as $product) : ?>
         <div class="product col-xl-3 col-lg-4 col-sm-6">
           <div class="product-image">
-            <a href="<?= $BASE_URI ?>catalogue/produit/<?= $product->getId() ?>" class="product-hover-overlay-link">
-              <img src="<?= $product->getPicture(); ?>" alt=" product" class="img-fluid">
+            <!-- <a href="#" class="product-hover-overlay-link"> -->
+            <img src="<?php echo $product->getPicture(); ?>" alt=" product" class="img-fluid">
+            <!-- </a> -->
           </div>
           <div class="product-action-buttons">
-            <a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a>
+            <!-- Bouton shopping-cart désactivé -->
+            <a href="<?= $router->generate('home') ?>" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a>
             <a href="<?= $router->generate('product', ["id" => $product->getId()]) ?>" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">Voir</span></a>
           </div>
           <div class="py-2">
@@ -72,29 +73,8 @@ $products = $viewData['products'];
         </div>
 
       <?php endforeach; ?>
-
-      <!-- /product-->
-
-      <!-- product-->
-      <!-- <div class="product col-xl-3 col-lg-4 col-sm-6">
-        <div class="product-image">
-          <a href="product.html" class="product-hover-overlay-link">
-            <img src="<?php // echo $absoluteURL 
-                      ?>/assets/images/produits/3-panda_tn.jpg" alt="product" class="img-fluid">
-          </a>
-        </div>
-        <div class="product-action-buttons">
-          <a href="#" class="btn btn-outline-dark btn-product-left"><i class="fa fa-shopping-cart"></i></a>
-          <a href="product.html" class="btn btn-dark btn-buy"><i class="fa-search fa"></i><span class="btn-buy-label ml-2">Voir</span></a>
-        </div>
-        <div class="py-2">
-          <p class="text-muted text-sm mb-1">Chausson</p>
-          <h3 class="h6 text-uppercase mb-1"><a href="product.html" class="text-dark">Panda</a></h3><span class="text-muted">50€</span>
-        </div>
-      </div> -->
       <!-- /product-->
 
     </div>
-
   </div>
 </section>

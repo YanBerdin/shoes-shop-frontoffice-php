@@ -74,12 +74,6 @@
                                             <?php foreach ($brandsList as $brand) { ?>
                                                 <a class="dropdown-item" href="<?= $router->generate('catalog-brand', ["id" => $brand->getId()]) ?>"><?= $brand->getName() ?></a>
                                             <?php } ?>
-                                            <!-- <a class="dropdown-item" href="products_list.html">BOOTstrap</a>
-                                            <a class="dropdown-item" href="products_list.html">O'shoes</a>
-                                            <a class="dropdown-item" href="products_list.html">oCirage</a>
-                                            <a class="dropdown-item" href="products_list.html">oPompes</a>
-                                            <a class="dropdown-item" href="products_list.html">Pattes d'eph</a>
-                                            <a class="dropdown-item" href="products_list.html">PHPieds</a> -->
                                         </div>
                                     </div>
                                 </li>

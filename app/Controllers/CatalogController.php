@@ -40,15 +40,6 @@ class CatalogController extends CoreController
             'products' => $products
         ]);
     }
-    // V1 qui ne fait qu'afficher page statique selon son id
-    // public function category($params)
-    // {
-    //     $this->show('category');
-    // }
-
-
-
-
 
     /**
      * Méthode qui affiche un type ciblé avec son id
@@ -72,12 +63,6 @@ class CatalogController extends CoreController
             'products' => $products
         ]);
     }
-
-    // V1 de function type($params)
-    // public function type($params)
-    // {
-    //     $this->show('type');
-    // }
 
     /**
      * Méthode qui affiche une marque ciblée avec son id
@@ -148,32 +133,4 @@ class CatalogController extends CoreController
     // Car le Model Product ne possede pas de méthode 'select FetchAll dans la BDD'
     // Permettant de Retourner tous les produits liés à une catégorie précise
     // Dans le Model Product => Créer une Méthode findAllByCategory($categoryId)
-
-
-    // Commenté Depuis mise en place de la classe Mere CoreController qui possede show()
-    // N'est plus utile ici
-    //     /**
-    //      * Affiche la page
-    //      *
-    //      * @param Type $viewName
-    //      * @param array $viewData (Facultatif)
-    //      */
-    //     public function show($viewName, $viewData = [])
-    //     {
-    //         global $router; // Ca c'est hyper degueulasse mais pour l'instant ça fait le café
-
-    // 1er essai: $baseUri = $_SERVER['BASE_URI'] . '/';
-
-    // Si on veut transmettre aux templates une donnée, on peut le faire ici
-    // $url = 'google.com';
-
-    // Objectif : récupérer proprement tous nos assets (style, images, ...)
-    // On doit utiliser une URL absolue (plutôt que relative) pour cela
-    // On a vu que $_SERVER['BASE_URI'] contenait l'URL dont on a besoin
-    //         $absoluteURL = $_SERVER['BASE_URI'];
-
-    //         require_once __DIR__ . '/../views/header.tpl.php';
-    //         require_once __DIR__ . '/../views/' . $viewName . '.tpl.php';
-    //         require_once __DIR__ . '/../views/footer.tpl.php';
-    //     }
 }
