@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\Utils\Database;
@@ -107,10 +106,16 @@ class Type extends CoreModel
     {
         $pdo = Database::getPDO();
         // var_dump($pdo);
-        $queryString = 'SELECT * FROM `type` WHERE id = ' . $id;
+        //? Interpolation (risque Injection SQL)
+        //? $queryString = 'SELECT * FROM `type` WHERE id = ' . $id;
+        $queryString = 'SELECT * FROM `type` WHERE id = :id';
 
-        $pdoStatement = $pdo->query($queryString);
-        // var_dump($pdoStatement);
+        // Préparer la requête
+        $pdoStatement = $pdo->prepare($queryString);
+
+        // Exécuter la requête
+        // $pdoStatement = $pdo->query($queryString);
+        $pdoStatement->execute([':id' => $id]);
 
         $result = $pdoStatement->fetchObject(Type::class);
 
@@ -134,11 +139,22 @@ class Type extends CoreModel
         // Préparer la query string
         $queryString = 'SELECT * FROM `type`';
 
+        //? les requêtes préparées ne sont généralement pas utilisées pour les noms de champs ou de tables
+        //! => validation ou nettoyage
+
         // Si un classement est demandé => l'ajouter dans la requete
-        if ($sort !== "") {
-            // $sql = $sql . " ORDER BY $sort";
+        //? if ($sort !== "") {
+        // $sql = $sql . " ORDER BY $sort";
+        //? $queryString .= " ORDER BY $sort";
+        // Par défaut les résultats sont classés par ordre ascendant
+        //? }
+
+        //! Liste des champs autorisés pour le tri
+        $allowedSortFields = ['id', 'name', 'created_at', 'updated_at'];
+
+        //! => validation
+        if (in_array($sort, $allowedSortFields)) {
             $queryString .= " ORDER BY $sort";
-            // Par défaut les résultats sont classés par ordre ascendant
         }
 
         // Exécuter la requête

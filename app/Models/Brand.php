@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\Utils\Database;
@@ -131,10 +130,11 @@ class Brand extends CoreModel
         // Préparer la query string requête (SQL) sous forme de string
         $queryString = 'SELECT * FROM `brand`';
 
-        //? les requêtes préparées ne sont généralement pas utilisées pour les noms de champs ou de tables
-        //? => validation ou nettoyage
-
         // Si un classement est demandé => l'ajouter dans la requete
+
+        //? les requêtes préparées ne sont généralement pas utilisées pour les noms de champs ou de tables
+        //! => validation ou nettoyage
+
         //? if ($sort !== "") {
         // $sql = $sql . " ORDER BY $sort";
         //? $queryString .= " ORDER BY $sort";
@@ -143,6 +143,7 @@ class Brand extends CoreModel
 
         //! Liste des champs autorisés pour le tri
         $allowedSortFields = ['id', 'name', 'created_at', 'updated_at'];
+
         //! => validation
         if (in_array($sort, $allowedSortFields)) {
             $queryString .= " ORDER BY $sort";
@@ -177,12 +178,17 @@ class Brand extends CoreModel
         //? $queryString = 'SELECT * FROM `brand` WHERE id = ' . $id;
         $queryString = "SELECT * FROM `brand` WHERE `id` =:id";
 
-        // Préparer la requête
+        //? Préparer la requête
         $pdoStatement = $pdo->prepare($queryString);
 
         // Exécuter la requête
         // $pdoStatement = $pdo->query($queryString);
+        //? Lier le paramètre ':id' à la variable $id
         $pdoStatement->execute([':id' => $id]);
+
+        //TODO ALEC => Faut il utiliser ici bindvalue() ??
+        //TODO?? $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+        //TODO?? $pdoStatement->execute();
 
         // Récupèrer les résultats (Objet de classe Brand contenant les données)
         $result = $pdoStatement->fetchObject(Brand::class);

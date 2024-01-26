@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\Utils\Database;
@@ -24,7 +23,7 @@ class Product extends CoreModel
     private $category_id;
     private $type_id;
 
-    //TODO ajouté suite Triple jointure
+    //! Triple jointure
     private $brand_name;
     private $category_name;
     private $type_name;
@@ -276,7 +275,7 @@ class Product extends CoreModel
     public function getBrand_name()
     {
         // nouvelle Propriété à déclarer au début
-        return $this->brand_name; 
+        return $this->brand_name;
     }
 
     /**
@@ -315,10 +314,21 @@ class Product extends CoreModel
         $queryString = "SELECT * FROM `product`";
 
         // Si un classement est demandé => l'ajouter dans la requete
-        if ($sort !== "") {
-            // $sql = $sql . " ORDER BY $sort";
+        //? Requêtes préparées généralement pas pour les noms de champs ou de tables
+        //? TODO => validation ou nettoyage
+
+        //? if ($sort !== "") {
+        // $sql = $sql . " ORDER BY $sort";
+        //?  $queryString .= " ORDER BY $sort";
+        // Par défaut les résultats sont classés par ordre ascendant
+        //? }
+
+        //! Liste des champs autorisés pour le tri
+        $allowedSortFields = ['id', 'name', 'description', 'picture', 'price', 'rate', 'status', 'created_at', 'updated_at', 'brand_id', 'category_id', 'type_id'];
+
+        //! => validation
+        if (in_array($sort, $allowedSortFields)) {
             $queryString .= " ORDER BY $sort";
-            // Par défaut les résultats sont classés par ordre ascendant
         }
 
         // Exécuter la requête
@@ -343,8 +353,8 @@ class Product extends CoreModel
         $pdo = Database::getPDO();
 
         // ------>  V1 sans jointure
-        //
-        // 2. Préparer notre requête (SQL) sous forme de string
+        // 2. 
+        // définir requête (SQL) sous forme de string
         //$queryString = 'SELECT * FROM `product` WHERE id = ' . $id;
 
         // ------> V2 avec triple jointure
@@ -353,16 +363,25 @@ class Product extends CoreModel
         // Ici, on utilisera le LEFT JOIN plutôt que INNER JOIN
         // Différence : LEFT JOIN retourne ts les produits (cad toutes les données de la table de gauche)
         // même si le produit($id) n'est rattaché à aucune marque / catégorie
+
         $queryString = '
         SELECT `product`.*, `brand`.name AS brand_name, `category`.`name` AS category_name, `type`.`name` AS type_name
         FROM `product`
         LEFT JOIN `brand` ON `brand`.`id` = `product`.`brand_id`
         LEFT JOIN `category` ON `category`.`id` = `product`.`category_id`
         LEFT JOIN `type` ON `type`.`id` = `product`.`type_id`
-        WHERE `product`.`id`  = ' . $id;
+        WHERE `product`.`id`  = :id';
+        // WHERE `product`.`id`  = ' . $id; //? Interpolation (risque Injection SQL)
+
+        //? Préparer la requête
+        $pdoStatement = $pdo->prepare($queryString);
+
+        //? Lier le paramètre ':id' à la variable $id
+        $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
 
         // 3. Exécuter la requête
-        $pdoStatement = $pdo->query($queryString);
+        // $pdoStatement = $pdo->query($queryString);
+        $pdoStatement->execute();
 
         // 4. Récupèrer le produit (objet)
         $product = $pdoStatement->fetchObject(Product::class);
@@ -396,11 +415,18 @@ class Product extends CoreModel
         LEFT JOIN `brand` ON `brand`.`id` = `product`.`brand_id`
         LEFT JOIN `category` ON `category`.`id` = `product`.`category_id`
         LEFT JOIN `type` ON `type`.`id` = `product`.`type_id`
-        WHERE `category`.`id`  = ' . $categoryId;
+        WHERE `category`.`id`  = :categoryId';
+        // WHERE `category`.`id`  = ' . $categoryId; //? Interpolation (risque Injection SQL)
 
+        //? Préparer la requête
+        $pdoStatement = $pdo->prepare($queryString);
+
+        //? Lier le paramètre ':categoryId' à la variable $categoryId
+        $pdoStatement->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
 
         // Executer requête
-        $pdoStatement = $pdo->query($queryString);
+        // $pdoStatement = $pdo->query($queryString);
+        $pdoStatement->execute();
 
         // Stocker l'objet de class Product
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Product::class);
@@ -419,10 +445,21 @@ class Product extends CoreModel
     {
         $pdo = Database::getPDO();
 
-        $sql = "SELECT * FROM `product` WHERE type_id = $typeId";
+        // $sql = "SELECT * FROM `product` WHERE `type_id` = $typeId";
+        $queryString = "SELECT * FROM `product` WHERE `type_id` = :typeId";
 
-        $pdoStatement = $pdo->query($sql);
+        //? Préparer la requête
+        $pdoStatement = $pdo->prepare($queryString);
 
+        // Exécuter la requête
+        // $pdoStatement = $pdo->query($queryString);
+        //? Lier le paramètre ':typeId' à la variable $typeId
+        $pdoStatement->execute([':typeId' => $typeId]);
+
+        //TODO ALEC => Faut il utiliser ici bindvalue() ??
+        //TODO?? $pdoStatement->bindValue(':typeId', $typeId, PDO::PARAM_INT);
+        //TODO?? $pdoStatement->execute();
+        
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Product::class);
 
         return $results;
@@ -448,14 +485,21 @@ class Product extends CoreModel
         LEFT JOIN `brand` ON `brand`.`id` = `product`.`brand_id`
         LEFT JOIN `category` ON `category`.`id` = `product`.`category_id`
         LEFT JOIN `type` ON `type`.`id` = `product`.`type_id`
-        WHERE `brand`.`id`  = ' . $brandId;
+        WHERE `brand`.`id`  = :brandId';
+        // WHERE `brand`.`id`  = ' . $brandId; //? Interpolation (risque Injection SQL)
 
+        //? Préparer la requête
+        $pdoStatement = $pdo->prepare($queryString);
 
-        $pdoStatement = $pdo->query($queryString);
+        //? Lier le paramètre ':brandId' à la variable $brandId
+        $pdoStatement->bindValue(':brandId', $brandId, PDO::PARAM_INT);
+
+        // Exécuter la requête
+        // $pdoStatement = $pdo->query($queryString);
+        $pdoStatement->execute();
 
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Product::class);
 
         return $results;
-
     }
 }

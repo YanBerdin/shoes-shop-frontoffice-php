@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Models\Product;
-
 use App\Models\Category;
 
 class MainController extends CoreController
@@ -25,12 +23,8 @@ class MainController extends CoreController
         ]);
         // Visu Test
         // dd($TestObjects);
-
         // $TestObjectId5 = $TestObject->findOne(5);
-
         // dd($TestObjects, $TestObjectId5, $TestObjectId5->getName(), $TestObjectId5->getId());
-
-
     }
 
     public function home()
@@ -51,7 +45,6 @@ class MainController extends CoreController
         $this->show('legal-notices');
     }
 
-
     // Version 2 avant heritage 
     // Commenté => Maintenant c'est CoreModel qui déclare ces Propriétés et Getters/Setters
     /**
@@ -71,7 +64,6 @@ class MainController extends CoreController
     //     require_once __DIR__ . '/../views/footer.tpl.php';
     // }
 }
-
 
 //  -----------------   Version 1 avant connexion à la BDD
 

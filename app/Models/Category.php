@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\Utils\Database;
@@ -35,7 +34,7 @@ class Category extends CoreModel
 
     // Méthodes
 
-    // Commenté => Maintenant c'est le CoreModel qui déclare ces Propriétés et Getters/Setters
+    // Commenté => Maintenant c'est CoreModel qui déclare ces Propriétés et Getters/Setters
     // public function getId()
     // {
     //     return $this->id;
@@ -100,28 +99,38 @@ class Category extends CoreModel
      */
     public function findAll($sort = "")
     {
-        // 1. Connexion à la BDD en utilisant la classe Database
+        // Connexion à la BDD en utilisant la classe Database
         $pdo = Database::getPDO();
 
-        // 2. Préparer notre requête (SQL) sous forme de string
+        // Préparer notre requête (SQL) sous forme de string
         $queryString = 'SELECT * FROM `category`';
 
         // Si un classement est demandé => l'ajouter dans la requete
-        if ($sort !== "") {
-            // $sql = $sql . "ORDER BY $sort";
+
+        //? les requêtes préparées ne sont généralement pas utilisées pour les noms de champs ou de tables
+        //! => validation ou nettoyage
+
+        //? if ($sort !== "") {
+        // $sql = $sql . "ORDER BY $sort";
+        //? $queryString .= " ORDER BY $sort";
+        // Par défaut les résultats sont classés par ordre ascendant
+        //? }
+
+        //! Liste des champs autorisés pour le tri
+        $allowedSortFields = ['id', 'name', 'subtitle', 'picture', 'home_order', 'created_at', 'updated_at'];
+
+        //! => validation
+        if (in_array($sort, $allowedSortFields)) {
             $queryString .= " ORDER BY $sort";
-            // Par défaut les résultats sont classés par ordre ascendant
         }
 
-
-        // 3. Exécuter la requête
+        // Exécuter la requête
         $pdoStatement = $pdo->query($queryString);
 
-        // 4. Récupèrer tous les résultats
+        // Récupèrer tous les résultats
         // On dit explicitement que les résultats récupérés seront de type 'Category'
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Category::class);
 
-        // 5. Retourne les résultats
         return $results;
     }
 
