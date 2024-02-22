@@ -466,9 +466,9 @@ class Product extends CoreModel
     }
 
     /**
-     * Retourne tous les produits liés à un type précis
+     * Retourne tous les produits liés à une marque précise
      *
-     * @param int $typeId
+     * @param int $brandId
      *
      * @return Product[]
      */
