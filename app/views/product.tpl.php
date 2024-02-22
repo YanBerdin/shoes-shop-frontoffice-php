@@ -1,6 +1,4 @@
 <?php
-// var_dump($absoluteURL);
-// var_dump($viewData);
 // dump($viewData);
 
 // Recuperer $product transmis via $viewData par CatalogController
@@ -11,20 +9,7 @@ $product = $viewData['product'];
 // dump($product);
 // var_dump($product->getName());
 // var_dump($product->getCategory_id());
-
-// Récupérer un objet Category de la catégorie du produit sélectionné
-// ------------$curentcategory = $viewData['curentcategory'];
-// var_dump($curentcategory);
 ?>
-
-
-<?php
-// Récupérer le chemin "src" de l'image du produit
-// Maintenant que les images sont hébergées par BenOclock
-// $picture = ($absoluteURL . "/" . $product->getPicture());
-// $picture = $product->getPicture();
-?>
-
 
 <section class="products-grid">
     <div class="container-fluid">
@@ -43,10 +28,7 @@ $product = $viewData['product'];
                 <div class="mb-3">
                     <!-- ajout moi  -->
                     <h1 class="hero-heading"><?= $product->getName() ?></h1>
-                    <!-- <h3 class="h3 text-uppercase mb-1">Produit n°<?php // echo $product->getId() 
-                                                                        ?></h3> -->
-                    <!-- Grâce à triple jointure sur findOne() et propriétés déclarées subséquentes
-                            je peux afficher les noms de marques, type...   -->
+                    <!-- Grâce à triple jointure sur findOne() et propriétés déclarées subséquentes je peux afficher les noms de marques, type...   -->
 
                     <div class="text-muted"> Made by : <a href="<?= $router->generate('catalog-brand', ["id" => $product->getBrand_id()]) ?>"><em><?= $product->getBrand_Name() ?></em></a></div>
                     <h4>Catégorie : <a href="<?= $router->generate('catalog-category', ["id" => $product->getCategory_id()]) ?>"><?= $product->getCategory_name() ?></a></h4>

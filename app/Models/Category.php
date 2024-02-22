@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Utils\Database;
@@ -9,7 +10,6 @@ use PDO;
  */
 class Category extends CoreModel
 {
-    // Commenté => Maintenant c'est CoreModel qui déclare ces Propriétés et Getters/Setters
     /** @var int Identifiant unique de la categorie */
     // private $id;
 
@@ -24,66 +24,90 @@ class Category extends CoreModel
     /** @var int Ordre de placement sur la page Home */
     private $home_order;
 
-    // Commenté => Maintenant c'est CoreModel qui déclare ces Propriétés et Getters/Setters
-    /** @var string Date de création au format Y-m-d H:i:s */
-    // private $created_at;
-
-    // Commenté => Maintenant c'est CoreModel qui déclare ces Propriétés et Getters/Setters
-    /** @var string Date de création au format Y-m-d H:i:s */
-    // private $updated_at;
-
     // Méthodes
 
-    // Commenté => Maintenant c'est CoreModel qui déclare ces Propriétés et Getters/Setters
-    // public function getId()
-    // {
-    //     return $this->id;
-    // }
-
-    // public function setId($id): self
-    // {
-    //     $this->id = $id;
-    //     return $this;
-    // }
-
+    /**
+     * Get the name of the category.
+     *
+     * @return string The name of the category.
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Set the name of the category.
+     *
+     * @param string $name The name of the category.
+     * @return self
+     */
     public function setName($name): self
     {
         $this->name = $name;
         return $this;
     }
 
+    /**
+     * Get the subtitle of the category.
+     *
+     * @return string|null The subtitle of the category, or null if it doesn't have a subtitle.
+     */
     public function getSubtitle()
     {
         return $this->subtitle;
     }
 
+    /**
+     * Set the subtitle of the category.
+     *
+     * @param string $subtitle The subtitle to set.
+     * @return self
+     */
     public function setSubtitle($subtitle): self
     {
         $this->subtitle = $subtitle;
         return $this;
     }
 
+    /**
+     * Get the picture for the category.
+     *
+     * @return string|null The picture URL or null if no picture is set.
+     */
     public function getPicture()
     {
         return $this->picture;
     }
 
+    /**
+     * Set the picture for the category.
+     *
+     * @param string $picture The picture path or URL.
+     * @return self
+     */
     public function setPicture($picture): self
     {
         $this->picture = $picture;
         return $this;
     }
 
+    /**
+     * Get the home order for the category.
+     *
+     * @return int
+     */
     public function getHomeOrder()
     {
         return $this->home_order;
     }
 
+    /**
+     * Set the home order for the category.
+     *
+     * @param int $home_order The home order value.
+     * @return self
+     */
     public function setHomeOrder($home_order): self
     {
         $this->home_order = $home_order;
@@ -99,36 +123,19 @@ class Category extends CoreModel
      */
     public function findAll($sort = "")
     {
-        // Connexion à la BDD en utilisant la classe Database
         $pdo = Database::getPDO();
 
-        // Préparer notre requête (SQL) sous forme de string
         $queryString = 'SELECT * FROM `category`';
 
-        // Si un classement est demandé => l'ajouter dans la requete
-
-        //? les requêtes préparées ne sont généralement pas utilisées pour les noms de champs ou de tables
-        //! => validation ou nettoyage
-
-        //? if ($sort !== "") {
-        // $sql = $sql . "ORDER BY $sort";
-        //? $queryString .= " ORDER BY $sort";
-        // Par défaut les résultats sont classés par ordre ascendant
-        //? }
-
-        //! Liste des champs autorisés pour le tri
+        // Liste des champs autorisés pour le tri
         $allowedSortFields = ['id', 'name', 'subtitle', 'picture', 'home_order', 'created_at', 'updated_at'];
 
-        //! => validation
         if (in_array($sort, $allowedSortFields)) {
             $queryString .= " ORDER BY $sort";
         }
 
-        // Exécuter la requête
         $pdoStatement = $pdo->query($queryString);
 
-        // Récupèrer tous les résultats
-        // On dit explicitement que les résultats récupérés seront de type 'Category'
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, Category::class);
 
         return $results;
@@ -144,31 +151,18 @@ class Category extends CoreModel
      */
     public function findOne($id)  // voir find() vs finfOne()
     {
-        // Connexion à la BDD en utilisant la classe Database
         $pdo = Database::getPDO();
 
-        // Préparer la query string
-        //? Interpolation (risque Injection SQL)
-        // $queryString = 'SELECT * FROM `category` WHERE id = ' . $id;
-        //?       idem  
-        //? $queryString = "SELECT * FROM `category` WHERE id=$id";
         $queryString = "SELECT * FROM `category` WHERE `id` =:id";
 
-        // Préparer la requête
         $pdoStatement = $pdo->prepare($queryString);
 
-        // Exécuter la requête
-        // $pdoStatement = $pdo->query($queryString);
         $pdoStatement->execute([':id' => $id]);
 
-        // Idéalement, ici je devrais vérifier que $pdoStatement n'est pas false
-        // avant de faire le fetch
-
-        // Récupèrer les résultats (Objet de classe Product contenant les données)
-        $result = $pdoStatement->fetchObject(Category::class);
-
-        // Retourne le résultat
-        return $result;
+        if ($pdoStatement !== false) {
+            $result = $pdoStatement->fetchObject(Category::class);
+            return $result;
+        }
     }
 
     /**

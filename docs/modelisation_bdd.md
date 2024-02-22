@@ -1,4 +1,4 @@
-# Modélisation de la base de données oShop
+# Modélisation de la base de données
 
 ## 4 sortes d'objets dans notre projet (Entité)
 - Category : catégories des produits

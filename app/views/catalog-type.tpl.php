@@ -1,11 +1,18 @@
 <?php
-// dump($viewData);
-// Recuperer l'objet $type transmis via $viewData par CatalogController
+
+/**
+ * Récupère l'objet $type transmis via $viewData par CatalogController.
+ *
+ * @var Type 
+ */
 $type = $viewData['type'];
-// dump($type);
-// Recuperer l'objet $products transmis via $viewData par CatalogController
+
+/**
+ * Récupère l'objet $products transmis via $viewData par CatalogController.
+ *
+ * @var Product 
+ */
 $products = $viewData['products'];
-// dump($products);
 ?>
 
 <section class="hero">

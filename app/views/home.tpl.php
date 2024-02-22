@@ -1,4 +1,9 @@
 <?php // var_dump($viewData);
+
+// Récupère l'array $homeCategories transmis via $viewData par HomeController.
+/**
+ * @var Category[]
+ */
 $homeCategories = $viewData['homeCategories'];
 // dump($homeCategories);
 ?>

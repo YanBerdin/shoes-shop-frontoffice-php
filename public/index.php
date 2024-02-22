@@ -1,65 +1,22 @@
 <?php
-// 0. On doit récupérer les dépendances pour les rendre accessibles dans le projet
-// On doit require le fichier autoload.php (autochargement des dependances) pour cela
-// Chargement des dépendances via autoload.php de composer
-require_once __DIR__ . '/../vendor/autoload.php';
 
-// On inclut les dépendances, cad le(s) controllers
-/*
-    - Inclure nos controller
-    - Faire un tableau qui contient les routes possibles
-    - Récupérer la page demandée dans l'url avec $_GET
-    - Faire un if else qui vérifie si la route demandée existe :
-        - Soit on appel la bonne méthode du bon controller correspondant à notre route
-        - Soit on affiche la page d'erreur 404
- */
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Controllers\MainController;
 use App\Controllers\CatalogController;
 use App\Controllers\ErrorController;
 
-// Namespaces => Plus besoin des require pour les controlleurs => Utilisation de "use"
-// require_once __DIR__ . "/../app/controllers/CoreController.php";
-// require_once __DIR__ . "/../app/controllers/MainController.php";
-// require_once __DIR__ . "/../app/controllers/CatalogController.php";
-// require_once __DIR__ . "/../app/controllers/ErrorController.php";
-
-
-// Probleme d'implémenter tous les Require dans l'index 
-// => Sécurité => Accès à tous les fichiers dès le point d'entrée
-// => Augmente le temps de chargement
-// require_once __DIR__ . "/../app/utils/Database.php";
-// require_once __DIR__ . "/../app/models/CoreModel.php";
-// require_once __DIR__ . "/../app/models/Product.php";
-// require_once __DIR__ . "/../app/models/Brand.php";
-// require_once __DIR__ . "/../app/models/Type.php";
-// require_once __DIR__ . "/../app/models/Category.php";
-
-// On utilise AltoRouter
-// 1. On créé une nouvelle instance de la classe AltoRouter
-// (Pas besoin require car installé comme dependance avec Composer)
 $router = new AltoRouter();
 
-// 2. On doit dire à AltoRouter la partie de l'URL //! à ne pas prendre en compte pour le mapping
-// Pour cela, utiliser une variable fournie par le .htaccess
-// dump($_SERVER);
-// $_SERVER['BASE_URI'] contient la partie de l'URL //! à ne pas prendre en compte
-
-// On spéficie d'où on part pour nos routes
-// $_SERVER est une variable spéciale qui contient tout un tas d'informations.
-// Attention, entre 2 machines on ne trouvera pas toujours les mêmes clés dans le tableau.
-// Définition du basepath (partie fixe de l'url)
-//?$router->setBasePath($_SERVER['BASE_URI']);
-// dd($_SERVER['BASE_URI']);
-
-// Version bis
+// Variable fournie par .htaccess
+// $_SERVER['BASE_URI'] contient la partie de l'URL à ne pas prendre en compte
+// Rappel : entre 2 machines on ne trouvera pas toujours les mêmes clés dans le tableau.
+// Définition du basepath (partie fixe de l'url) pour le router
 if (array_key_exists('BASE_URI', $_SERVER)) {
     $router->setBasePath($_SERVER['BASE_URI']);
 } else {
     $_SERVER['BASE_URI'] = '/';
 }
-// dump($_SERVER['BASE_URI']);
-// dump($_SERVER);
 
 // 3. On fait le "mapping" cad la correspondance entre URL demandée et route associée
 // map() prend 4 paramètres :
@@ -71,7 +28,6 @@ if (array_key_exists('BASE_URI', $_SERVER)) {
 
 // La méthode map sur l'objet issu de la classe Altorouter permet de définir
 // nos routes et les informations éventuelles à transmettre
-// Route pour la home
 $router->map(
     'GET', // La méthode HTTP autorisée pour cette route
     '/',   // Partie de l'URL qui correspond à la page demandée (route)
@@ -137,17 +93,6 @@ $router->map(
     'product'
 );
 
-// Route pour les produits
-// $router->map(
-//     'GET',
-//     '/produit/[i:id]',
-//     [
-//         'controller' => 'CatalogController',
-//         'method' => 'product',
-//     ],
-//     'product' // catalog-product
-// );
-
 // Route test
 $router->map(
     'GET',
@@ -158,49 +103,24 @@ $router->map(
     ],
     'test'
 );
-// Gerard
-// Dispatcher
-// On utilise la méthode match() d'AltoRouter
-// var_dump($match);
-// V3 : On récupère le paramètre (id) via $match['params']
 
-// Si $match contient une cible (target) ca signifie que l'URL demandée a bien une route correspondante
-// Sinon, $match retourne "false"
-// Si on a quelque chose dans $match, alors on peut faire la suite du traitement
+// Dispatcher
+// méthode match() d'AltoRouter compare l'URL demandée avec les routes définies
 $match = $router->match();
 // var_dump($match);
 //  dd($match);
-
-// Si on a quelque chose dans $match, alors on peut faire la suite du traitement
 if ($match) {   // équivalent à $match != false
     $controllerToUse = new $match['target']['controller']();
 
-    // On doit récupérer la méthode à appeler
+    // Récupérer la méthode à appeler
     $methodToUse = $match['target']['method'];
 
-
-    // On instancie le controller
-    // $controller = new $controllerToUse();
-
-    // On appelle la méthode
-    // $controller->$methodToUse();
-    // V3 : on appelle à présent la méthode en lui transmettant l'argument $match['params']
-    //  $controller->$methodToUse($match['params']);
-
-
-    // $id = isset($match['params']['id']) ? $match['params']['id'] : null;
-
-    // if (isset($match['params']['id'])) {
-    //     $id = $match['params']['id'];
-    // } else {
-    //     $id = null;
-    // }
-
+    // Récupérer les paramètres de la route
     $id = $match['params']['id'] ?? null;
 
     // Le dispatcher
     // 0 === null -> non
-    //donc : 0 !== null -> oui
+    // donc : 0 !== null -> oui
     if ($id !== null) {
         $controllerToUse->$methodToUse($id);
     } else {

@@ -1,8 +1,8 @@
-# 1. Quand arrive sur un nouveau projet
+# 1. Nouveau projet
 - Git clone
 - composer install
 
-# 2. Quand on commence une nouvelle feature ou une nouvelle correction de bug
+# 2. Nouvelle feature ou une nouvelle correction de bug
 - Crée une nouvelle branche et on se met dessus
 - On code
 - Une fois fini :

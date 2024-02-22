@@ -4,11 +4,10 @@ namespace App\Models;
 
 class CoreModel
 {
-    // Propriétés
-
-    // Pour que les classes enfants puissent hériter des propriétés et méthodes de cette classe parent,
-    // leur visibilité doit être public ou protected
+    // Propriétés 
     
+    //* Rappel: Pour que les classes enfants puissent hériter des propriétés et méthodes de cette classe parent,
+    //* leur visibilité doit être public ou protected
     /** @var int C'est l'identifiant unique de notre objet */
     protected $id;
 

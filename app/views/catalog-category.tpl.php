@@ -1,6 +1,16 @@
             <?php
             // dump($viewData);
+
+            // Recuperer l'objet $category transmis via $viewData par CatalogController
+            /**
+             * @var Category
+             */
             $category = $viewData['category'];
+
+            // Recuperer l'objet $product transmis via $viewData par CatalogController
+            /**
+             * @var Product
+             */
             $products = $viewData['products'];
             // var_dump($products); 
             ?>
@@ -37,10 +47,6 @@
                   <!-- product-->
 
                   <?php foreach ($products as $product) : ?>
-                    <?php
-                    // Nouveau chemin à reconstituer avec images hebergées par BenOclock (Forked)
-                    // Plus besoin de $absoluteURL pour les images 
-                    ?>
                     <div class="product col-xl-3 col-lg-4 col-sm-6">
                       <div class="product-image">
                         <!-- <a href="#" class="product-hover-overlay-link"> -->

@@ -1,7 +1,17 @@
 <?php
 // var_dump($viewData); 
+
+// Recuperer l'objet $brand transmis via $viewData par CatalogController
+/**
+ * @var Brand
+ */
 $brand = $viewData['brand'];
-// var_dump($brand->getName()); 
+// var_dump($brand->getName());
+
+// Récupérer l'objet $products transmis via $viewData par CatalogController.
+/**
+ * @var Product
+ */
 $products = $viewData['products'];
 // dump($products);
 ?>
@@ -10,7 +20,7 @@ $products = $viewData['products'];
   <div class="container">
     <!-- Hero Content-->
     <div class="hero-content pb-5 text-center">
-      <h1 class="hero-heading">Bienvenue dans l'univers de la marque : </br> <?= $brand->getName() ?></h1>
+      <h1 class="hero-heading">Bienvenue dans l'univers de la marque </br> <?= $brand->getName() ?></h1>
       <div class="row">
         <div class="col-xl-8 offset-xl-2">
         </div>
@@ -43,17 +53,6 @@ $products = $viewData['products'];
       <!-- product-->
 
       <?php
-      // Récupérer l'id de la categorie à laquelle 1 produit est associé
-      // $currentCategoryId = $product->getCategory_id();
-
-      // Récupérer la catégorie à laquelle 1 produit est associé
-      // $categoryModel = new Category();
-      //$curentcategory = $categoryModel->findOne($currentCategoryId);
-
-      // Récupérer le chemin absolu "src" de chaque image
-      // $picture = ($absoluteURL . "/" . $product->getPicture());
-      // Nouveau chemin à reconstituer avec images hebergées par BenOclock
-
       foreach ($products as $product) : ?>
         <div class="product col-xl-3 col-lg-4 col-sm-6">
           <div class="product-image">
