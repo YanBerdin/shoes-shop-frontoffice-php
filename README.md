@@ -30,25 +30,6 @@ Le BackOffice/API est dans un autre repository
 - Responsive design
 - Accessibilité
 
-### `Sur toutes les pages`
-
-Navigation principale :
-
-- Retour à l'accueil.
-- Les catégories.
-- Les types de produits.
-- Les marques.
-
-### `Catalogue`
-
-- Une page d'accueil (avec 5 catégories mises en avant).
-- Une page des produits pour chaque catégorie (Détente, En ville, Au travail).
-  - Une pagination sera présente.
-  - La possibilité de filtrer par nom, note, ou prix.
-- Une page produit.
-- Une page des produits pour chaque type de produits (Chaussons, Escarpins, Talons aiguilles).
-- Une page des produits pour chaque marque.
-
 ## 1. Type de projet
 
 - **Type principal** : PHP (architecture MVC personnalisée)
@@ -70,34 +51,86 @@ Navigation principale :
   - Fichiers `.tpl.php` pour chaque vue
   - Modèles et contrôleurs nommés selon l’entité métier
 
-## 3. Visualisation de l’arborescence (Markdown List, profondeur 3)
+## Diagramme d’architecture (Mermaid)
 
-- app/
-  - Controllers/
-    - CatalogController.php
-    - CoreController.php
-    - ...
-  - Models/
-    - Brand.php
-    - Category.php
-    - ...
-  - Utils/
-    - Database.php
-  - views/
-    - catalog-brand.tpl.php
-    - ...
-- public/
-  - index.php
-  - assets/
-    - css/
-    - fonts/
-    - images/
-    - js/
-- docs/
-  - database.sql
-  - ...
-- composer.json
-- README.md
+```mermaid
+flowchart TD
+    User[Utilisateur]
+    Browser[Navigateur]
+    PHP[Serveur PHP MVC]
+    DB[MySQL]
+    User --> Browser
+    Browser --> PHP
+    PHP --> DB
+    PHP -->|Affichage| Browser
+```
+
+## 3. Visualisation de l’arborescence
+
+```md
+├── 📁 app/
+│   ├── 📁 Controllers/
+│   │   ├── 🐘 CatalogController.php
+│   │   ├── 🐘 CoreController.php
+│   │   ├── 🐘 ErrorController.php
+│   │   └── 🐘 MainController.php
+│   ├── 📁 Models/
+│   │   ├── 🐘 Brand.php
+│   │   ├── 🐘 Category.php
+│   │   ├── 🐘 CoreModel.php
+│   │   ├── 🐘 Product.php
+│   │   └── 🐘 Type.php
+│   ├── 📁 Utils/
+│   │   └── 🐘 Database.php
+│   ├── 📁 views/
+│   │   ├── 🐘 catalog-brand.tpl.php
+│   │   ├── 🐘 catalog-category.tpl.php
+│   │   ├── 🐘 catalog-type.tpl.php
+│   │   ├── 🐘 error404.tpl.php
+│   │   ├── 🐘 footer.tpl.php
+│   │   ├── 🐘 header.tpl.php
+│   │   ├── 🐘 home.tpl.php
+│   │   ├── 🐘 legal-notices.tpl.php
+│   │   ├── 🐘 product.tpl.php
+│   │   └── 🐘 test.tpl.php
+│   └── 📄 .htaccess
+├── 📁 docs/
+│   ├── 🗄️ database.sql
+│   ├── 📝 dictionnaire-de-donnees.md
+│   ├── 📝 modelisation_bdd.md
+│   ├── 📝 process-composer.md
+│   ├── 📝 routes.md
+│   └── 📝 user_stories.md
+├── 📁 public/
+│   ├── 📁 assets/
+│   │   ├── 📁 css/
+│   │   │   ├── 🎨 bootstrap.min.css 🚫 (auto-hidden)
+│   │   │   ├── 🎨 font-awesome.min.css 🚫 (auto-hidden)
+│   │   │   └── 🎨 styles.css
+│   │   ├── 📁 fonts/
+│   │   │   ├── 📄 FontAwesome.otf
+│   │   │   ├── 📄 fontawesome-webfont.eot
+│   │   │   ├── 🖼️ fontawesome-webfont.svg
+│   │   │   ├── 📄 fontawesome-webfont.ttf
+│   │   │   ├── 📄 fontawesome-webfont.woff
+│   │   │   └── 📄 fontawesome-webfont.woff2
+│   │   ├── 📁 images/
+│   │   │   ├── 📁 produits/
+│   │   │   │   └── 🖼️ ... .jpg
+│   │   │   └── 🖼️ ... .jpg
+│   │   └── 📁 js/
+│   │       ├── 📄 app.js
+│   │       ├── 📄 bootstrap.min.js 🚫 (auto-hidden)
+│   │       ├── 📄 jquery.min.js 🚫 (auto-hidden)
+│   │       └── 📄 popper.min.js 🚫 (auto-hidden)
+│   ├── 📄 .htaccess
+│   └── 🐘 index.php
+├── 🚫 .gitignore
+├── 📖 README.md
+├── 📄 composer.json
+├── 🔒 composer.lock 🚫 (auto-hidden)
+└── 🐚 import-external-repo.sh 🚫 (auto-hidden)
+```
 
 ## 4. Analyse des dossiers clés
 
@@ -188,4 +221,74 @@ Navigation principale :
 - **Documentation** : Historique et décisions dans `docs/`
 - **Évolution** : Mettre à jour ce blueprint à chaque refonte structurelle
 
+## Exemples de code
+
+### Contrôleur
+
+```php
+class ProductController extends CoreController {
+    public function list() {
+        $products = Product::findAll();
+        require 'app/views/product.tpl.php';
+    }
+}
+```
+
+### Modèle
+
+```php
+class Product extends CoreModel {
+    public static function findAll() {
+        // ... requête SQL et retour des résultats
+    }
+}
+```
+
+### Vue
+
+```php
+<!-- app/views/product.tpl.php -->
+<?php foreach ($products as $product): ?>
+  <div><?= htmlspecialchars($product->name) ?></div>
+<?php endforeach; ?>
+```
+
+## Guide d’extension et d’évolution
+
+- **Ajout d’une entité métier** :
+  - Créer un modèle dans `app/Models/` (ex : `Order.php`)
+  - Créer un contrôleur dans `app/Controllers/` (ex : `OrderController.php`)
+  - Créer une ou plusieurs vues dans `app/views/` (ex : `order-list.tpl.php`, `order-detail.tpl.php`)
+  - Ajouter la route correspondante dans la configuration du routeur
+  - Documenter la nouvelle fonctionnalité dans le Memory Bank et le `README.md`
+
+- **Ajout d’un asset** :
+  - Placer les fichiers CSS dans `public/assets/css/`
+  - Placer les fichiers JS dans `public/assets/js/`
+  - Placer les images dans `public/assets/images/`
+
+- **Ajout d’une dépendance PHP** :
+  - Ajouter la dépendance dans `composer.json`
+  - Exécuter `composer install`
+  - Documenter l’usage de la dépendance dans le Memory Bank
+
+## Bonnes pratiques et pièges à éviter
+
+> [!WARNING]
+>
+> - Ne jamais placer de logique métier dans les vues
+> - Ne pas coupler directement les modèles et les vues
+> - Toujours valider les entrées côté serveur (dans les contrôleurs ou modèles)
+> - Garder une documentation à jour pour chaque évolution
+> - Utiliser le Memory Bank comme source unique de vérité pour l’architecture et les décisions
+
+## FAQ et ressources complémentaires
+
+- **Installation** : Voir le `README.md` pour les prérequis et la procédure d’installation
+- **Modélisation BDD** : Voir `docs/modelisation_bdd.md` pour le schéma conceptuel et logique
+- **User stories** : Voir `docs/user_stories.md`
+- **Intégration HTML/CSS** : Voir `docs/html-css/`
+
 ---
+
+*Pour toute contribution, merci de respecter la structure, les conventions et de documenter vos changements dans le Memory Bank.*
