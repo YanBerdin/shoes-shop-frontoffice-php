@@ -1,55 +1,8 @@
-# `Shoes Shop - Front Office`
+# Project_Folders_Structure_Blueprint.md
 
-## Description du projet
+## 1. Phase d’auto-détection initiale
 
-Site e-commerce : une boutique de chaussures.
-Le BackOffice/API est dans un autre repository
-
-- Affichage catalogue (catégories, types, marques, produits)
-- Filtres, pagination, navigation
-- Intégration HTML/CSS/Bootstrap
-- Connexion à une base de données MySQL
-- Pas de gestion back-office dans ce dépôt (gérée ailleurs)
-
-## Problèmes résolus
-
-- Centralisation de l’offre produits
-- Navigation simple par catégories, types, marques
-- Présentation claire des informations produits
-
-## Fonctionnement attendu
-
-- Accès rapide à l’ensemble du catalogue
-- Filtres efficaces (nom, note, prix)
-- Pages dédiées pour chaque entité (catégorie, type, marque, produit)
-
-## Objectifs UX
-
-- Navigation intuitive
-- Temps de chargement rapide
-- Responsive design
-- Accessibilité
-
-### `Sur toutes les pages`
-
-Navigation principale :
-
-- Retour à l'accueil.
-- Les catégories.
-- Les types de produits.
-- Les marques.
-
-### `Catalogue`
-
-- Une page d'accueil (avec 5 catégories mises en avant).
-- Une page des produits pour chaque catégorie (Détente, En ville, Au travail).
-  - Une pagination sera présente.
-  - La possibilité de filtrer par nom, note, ou prix.
-- Une page produit.
-- Une page des produits pour chaque type de produits (Chaussons, Escarpins, Talons aiguilles).
-- Une page des produits pour chaque marque.
-
-## 1. Type de projet
+### Type de projet détecté
 
 - **Type principal** : PHP (architecture MVC personnalisée)
 - **Front-end** : HTML/CSS/JS statique, pas de framework JS moderne détecté
@@ -57,6 +10,13 @@ Navigation principale :
 - **Gestion de dépendances** : `composer.json` (PHP Composer)
 - **Pas de microservices** : Structure monolithique
 - **Pas de monorepo** : Un seul projet principal
+
+### Indicateurs de structure
+
+- Contrôleurs, modèles, vues séparés dans `app/`
+- Fichiers de configuration et d’entrée dans `public/` et racine
+- Assets frontaux dans `public/assets/` et `docs/html-css/`
+- Documentation dans `docs/`
 
 ## 2. Vue d’ensemble structurelle
 

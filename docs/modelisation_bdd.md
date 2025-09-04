@@ -1,6 +1,7 @@
 # Modélisation de la base de données
 
 ## 4 sortes d'objets dans notre projet (Entité)
+
 - Category : catégories des produits
 - Product : Nos produits
 - Brand : Les marques des produits
@@ -15,7 +16,7 @@ TYPE : type code, name [chaussures de ville, sport, pantoufles, etc]
 
 ## MCD
 
-```
+```sql
 BRAND: brand code, brand name
 made, 0N BRAND, 11 PRODUCT
 PRODUCT: product code, product name, description, picture, price, rate, status
