@@ -1,6 +1,42 @@
 # `Shoes Shop - Front Office`
 
-## Description du projet
+## Table des matières
+
+- [`Shoes Shop - Front Office`](#shoes-shop---front-office)
+  - [Table des matières](#table-des-matières)
+  - [1. Description du projet](#1-description-du-projet)
+  - [2. Problèmes résolus](#2-problèmes-résolus)
+  - [3. Fonctionnement attendu](#3-fonctionnement-attendu)
+  - [4. Objectifs UX](#4-objectifs-ux)
+  - [5. Type de projet](#5-type-de-projet)
+  - [6. Vue d’ensemble structurelle](#6-vue-densemble-structurelle)
+  - [7. Diagramme d’architecture (Mermaid)](#7-diagramme-darchitecture-mermaid)
+  - [8. Visualisation de l’arborescence](#8-visualisation-de-larborescence)
+  - [9. Analyse des dossiers clés](#9-analyse-des-dossiers-clés)
+    - [app/](#app)
+    - [public/](#public)
+    - [docs/](#docs)
+  - [10. Motifs de placement des fichiers](#10-motifs-de-placement-des-fichiers)
+  - [11. Conventions de nommage et d’organisation](#11-conventions-de-nommage-et-dorganisation)
+  - [12. Navigation et workflow de développement](#12-navigation-et-workflow-de-développement)
+  - [13. Organisation du build et des outputs](#13-organisation-du-build-et-des-outputs)
+  - [14. Organisation spécifique PHP](#14-organisation-spécifique-php)
+  - [15. Extension et évolution](#15-extension-et-évolution)
+  - [16. Templates de structure (exemples)](#16-templates-de-structure-exemples)
+    - [Nouveau modèle](#nouveau-modèle)
+    - [Nouveau contrôleur](#nouveau-contrôleur)
+    - [Nouvelle vue](#nouvelle-vue)
+    - [Nouvel asset](#nouvel-asset)
+  - [17. Enforcement de la structure](#17-enforcement-de-la-structure)
+  - [18. Exemples de code](#18-exemples-de-code)
+    - [Contrôleur](#contrôleur)
+    - [Modèle](#modèle)
+    - [Vue](#vue)
+  - [19. Guide d’extension et d’évolution](#19-guide-dextension-et-dévolution)
+  - [20. Bonnes pratiques et pièges à éviter](#20-bonnes-pratiques-et-pièges-à-éviter)
+  - [21. FAQ et ressources complémentaires](#21-faq-et-ressources-complémentaires)
+
+## 1. Description du projet
 
 Site e-commerce : une boutique de chaussures.
 Le BackOffice/API est dans un autre repository
@@ -11,26 +47,26 @@ Le BackOffice/API est dans un autre repository
 - Connexion à une base de données MySQL
 - Pas de gestion back-office dans ce dépôt (gérée ailleurs)
 
-## Problèmes résolus
+## 2. Problèmes résolus
 
 - Centralisation de l’offre produits
 - Navigation simple par catégories, types, marques
 - Présentation claire des informations produits
 
-## Fonctionnement attendu
+## 3. Fonctionnement attendu
 
 - Accès rapide à l’ensemble du catalogue
 - Filtres efficaces (nom, note, prix)
 - Pages dédiées pour chaque entité (catégorie, type, marque, produit)
 
-## Objectifs UX
+## 4. Objectifs UX
 
 - Navigation intuitive
 - Temps de chargement rapide
 - Responsive design
 - Accessibilité
 
-## 1. Type de projet
+## 5. Type de projet
 
 - **Type principal** : PHP (architecture MVC personnalisée)
 - **Front-end** : HTML/CSS/JS statique, pas de framework JS moderne détecté
@@ -39,7 +75,7 @@ Le BackOffice/API est dans un autre repository
 - **Pas de microservices** : Structure monolithique
 - **Pas de monorepo** : Un seul projet principal
 
-## 2. Vue d’ensemble structurelle
+## 6. Vue d’ensemble structurelle
 
 - **Organisation par couche** :
   - Contrôleurs (logique de routage)
@@ -51,7 +87,7 @@ Le BackOffice/API est dans un autre repository
   - Fichiers `.tpl.php` pour chaque vue
   - Modèles et contrôleurs nommés selon l’entité métier
 
-## Diagramme d’architecture (Mermaid)
+## 7. Diagramme d’architecture (Mermaid)
 
 ```mermaid
 flowchart TD
@@ -65,7 +101,7 @@ flowchart TD
     PHP -->|Affichage| Browser
 ```
 
-## 3. Visualisation de l’arborescence
+## 8. Visualisation de l’arborescence
 
 ```md
 ├── 📁 app/
@@ -132,7 +168,7 @@ flowchart TD
 └── 🐚 import-external-repo.sh 🚫 (auto-hidden)
 ```
 
-## 4. Analyse des dossiers clés
+## 9. Analyse des dossiers clés
 
 ### app/
 
@@ -150,7 +186,7 @@ flowchart TD
 
 - Documentation technique, scripts SQL, guides de modélisation
 
-## 5. Motifs de placement des fichiers
+## 10. Motifs de placement des fichiers
 
 - **Fichiers de config** : Racine (`composer.json`), `public/index.php`
 - **Modèles** : `app/Models/`
@@ -160,14 +196,14 @@ flowchart TD
 - **Tests** : Non détecté (à ajouter si besoin)
 - **Documentation** : `docs/`
 
-## 6. Conventions de nommage et d’organisation
+## 11. Conventions de nommage et d’organisation
 
 - **Fichiers** : PascalCase pour classes PHP, kebab-case pour assets statiques
 - **Dossiers** : CamelCase pour dossiers de code, minuscules pour assets
 - **Templates** : Suffixe `.tpl.php` pour les vues
 - **Organisation** : Par couche (MVC), chaque entité a son modèle, contrôleur, vue
 
-## 7. Navigation et workflow de développement
+## 12. Navigation et workflow de développement
 
 - **Point d’entrée** : `public/index.php`
 - **Ajout de fonctionnalités** :
@@ -178,25 +214,25 @@ flowchart TD
 - **Ajout d’assets** : `public/assets/`
 - **Documentation** : Ajouter dans `docs/`
 
-## 8. Organisation du build et des outputs
+## 13. Organisation du build et des outputs
 
 - **Build** : Pas de build automatisé détecté (projet PHP classique)
 - **Sortie** : Fichiers servis depuis `public/`
 - **Différences dev/prod** : Non gérées nativement (à documenter si besoin)
 
-## 9. Organisation spécifique PHP
+## 14. Organisation spécifique PHP
 
 - **Organisation des classes** : Un fichier par classe, nom du fichier = nom de la classe
 - **Gestion des dépendances** : Composer (`composer.json`)
 - **Ressources** : Statique dans `public/assets/`, dynamique via modèles
 
-## 10. Extension et évolution
+## 15. Extension et évolution
 
 - **Extension** : Ajouter de nouveaux modèles/contrôleurs/vues selon la convention existante
 - **Scalabilité** : Possibilité de regrouper par domaine si le projet grandit
 - **Refactoring** : Extraire des utilitaires dans `app/Utils/`, factoriser les vues communes
 
-## 11. Templates de structure (exemples)
+## 16. Templates de structure (exemples)
 
 ### Nouveau modèle
 
@@ -215,13 +251,13 @@ flowchart TD
 - `public/assets/css/nom-style.css`
 - `public/assets/js/nom-script.js`
 
-## 12. Enforcement de la structure
+## 17. Enforcement de la structure
 
 - **Validation** : Convention manuelle, pas d’outil d’enforcement détecté
 - **Documentation** : Historique et décisions dans `docs/`
 - **Évolution** : Mettre à jour ce blueprint à chaque refonte structurelle
 
-## Exemples de code
+## 18. Exemples de code
 
 ### Contrôleur
 
@@ -253,7 +289,7 @@ class Product extends CoreModel {
 <?php endforeach; ?>
 ```
 
-## Guide d’extension et d’évolution
+## 19. Guide d’extension et d’évolution
 
 - **Ajout d’une entité métier** :
   - Créer un modèle dans `app/Models/` (ex : `Order.php`)
@@ -272,7 +308,7 @@ class Product extends CoreModel {
   - Exécuter `composer install`
   - Documenter l’usage de la dépendance dans le Memory Bank
 
-## Bonnes pratiques et pièges à éviter
+## 20. Bonnes pratiques et pièges à éviter
 
 > [!WARNING]
 >
@@ -282,7 +318,7 @@ class Product extends CoreModel {
 > - Garder une documentation à jour pour chaque évolution
 > - Utiliser le Memory Bank comme source unique de vérité pour l’architecture et les décisions
 
-## FAQ et ressources complémentaires
+## 21. FAQ et ressources complémentaires
 
 - **Installation** : Voir le `README.md` pour les prérequis et la procédure d’installation
 - **Modélisation BDD** : Voir `docs/modelisation_bdd.md` pour le schéma conceptuel et logique
